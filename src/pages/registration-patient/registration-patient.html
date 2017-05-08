@@ -1,0 +1,102 @@
+
+<ion-header dir="rtl">
+
+  <ion-navbar>
+    <ion-title>
+      <ion-icon name="person-add" padding></ion-icon>רישום משתמש</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding dir="rtl">
+  <h3 text-center>אנא הכנס את פרטי הלקוח</h3>
+  <form #f="ngForm" (ngSubmit)="onAddPatient(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>מספר זהות</ion-label>
+        <ion-input
+          type="number"
+          name="patientID"
+          placeholder="123456789"
+          ngModel
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>שם פרטי</ion-label>
+        <ion-input
+          type="text"
+          name="patientFirstName"
+          placeholder="ישראל"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>שם משפחה</ion-label>
+        <ion-input
+          type="text"
+          name="patientLastName"
+          placeholder="ישראלי"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>מין</ion-label>
+        <ion-select name="gender">
+          <ion-option
+            *ngFor="let option of selectOptions"
+            [value]="option">{{ option }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>כתובת</ion-label>
+        <ion-input
+          type="text"
+          name="patientAddress"
+          placeholder="הכוכב 15, חיפה"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>טלפון</ion-label>
+        <ion-input
+          type="tel"
+          name="patientPhone"
+          placeholder="0548888888"
+          required
+          ngModel
+          ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>דוא"ל</ion-label>
+        <ion-input
+          type="email"
+          name="patientMail"
+          placeholder="Mail@mail.com"
+          ngModel
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>תאריך לידה</ion-label>
+        <ion-input
+          type="date"
+          name="patientDOB"
+          placeholder="25-10-1980"
+          ngModel
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <button
+      ion-button
+      type="submit"
+      block
+      [disabled]="!f.valid">הוסף משתמש</button>
+  </form>
+  <!--<ion-list>
+    <ion-item *ngFor="let item of listItems; let i = index" (click)="onCheckItem(i)">
+      <h3>{{ item.name }} ({{ item.amount }})</h3>
+    </ion-item>
+  </ion-list>-->
+</ion-content>
