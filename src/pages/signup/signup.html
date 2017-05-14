@@ -1,18 +1,47 @@
-<!--
-  Generated template for the Signup page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+<!--<ion-header dir="rtl">
 
   <ion-navbar>
-    <ion-title>signup</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="login-content">OneBody</ion-title>
   </ion-navbar>
 
-</ion-header>
+</ion-header>-->
 
 
-<ion-content padding>
+<ion-content  class="login-content" padding dir="rtl">
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col >
 
+    </ion-col>
+    <img src="../../assets/img/oneBodyFullLogo.jpg"/>
+    <ion-col></ion-col>
+  </ion-row>
+  <form #f="ngForm" (ngSubmit)="onSignup(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>אימייל</ion-label>
+        <ion-input
+          type="email"
+          ngModel
+          name="email"
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>סיסמא</ion-label>
+        <ion-input
+          type="password"
+          ngModel
+          name="password"
+          required
+          [minlength]="6"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!f.valid">Signup</button>
+  </form>
 </ion-content>

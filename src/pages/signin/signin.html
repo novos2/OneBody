@@ -1,13 +1,38 @@
 
-<ion-header>
+<ion-header dir="rtl">
 
   <ion-navbar>
-    <ion-title>signin</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>התחברות</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding dir="rtl">
+  <form #f="ngForm" (ngSubmit)="onSignin(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Mail</ion-label>
+        <ion-input
+          type="אימייל"
+          ngModel
+          name="email"
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Password</ion-label>
+        <ion-input
+          type="סיסמא"
+          ngModel
+          name="password"
+          required></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!f.valid">התחברות</button>
+  </form>
 </ion-content>

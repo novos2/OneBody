@@ -1,11 +1,14 @@
 page-marketing {
-  .card-background-page {
+  /*background-color: #007aff;*/
+
 
     ion-card {
       position: relative;
       text-align: center;
     }
-
+  .content{
+    background: #56CA96;
+  }
     .card-title {
       position: absolute;
       top: 36%;
@@ -24,4 +27,4 @@ page-marketing {
     }
 
   }
-}
+

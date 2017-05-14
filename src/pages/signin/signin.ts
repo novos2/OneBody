@@ -1,24 +1,37 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NgForm } from "@angular/forms";
+import { LoadingController, AlertController } from "ionic-angular";
 
-/**
- * Generated class for the Signin page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-@IonicPage()
+import { AuthService } from "../../services/auth";
+
 @Component({
   selector: 'page-signin',
-  templateUrl: 'signin.html',
+  templateUrl: 'signin.html'
 })
 export class Signin {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private authService: AuthService,
+              private loadingCtrl: LoadingController,
+              private alertCtrl: AlertController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Signin');
+  onSignin(form: NgForm) {
+    const loading = this.loadingCtrl.create({
+      content: '...מתחבר'
+    });
+    loading.present();
+    this.authService.signin(form.value.email, form.value.password)
+      .then(data => {
+        loading.dismiss();
+      })
+      .catch(error => {
+        loading.dismiss();
+        const alert = this.alertCtrl.create({
+          title: 'התחברות נכשלה!',
+          message: error.message,
+          buttons: ['חזרה']
+        });
+        alert.present();
+      });
   }
-
 }
