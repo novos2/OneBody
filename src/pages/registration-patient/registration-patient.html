@@ -44,12 +44,9 @@
       </ion-item>
       <ion-item>
         <ion-label stacked>מין</ion-label>
-        <ion-select name="gender">
-          <ion-option
-            *ngFor="let option of selectOptions"
-            [value]="option"
-            name="gender"
-          >{{ option }}</ion-option>
+        <ion-select [(ngModel)]="patientGender" name="patientGender">
+          <ion-option value="זכר">זכר</ion-option>
+          <ion-option value="נקבה">נקבה</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>

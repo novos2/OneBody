@@ -4,7 +4,7 @@ export class Patient{
     public patientID: number,
     public patientFirstName: string,
     public patientLastName: string,
-    public gender: string,
+    public patientGender: string,
     public patientAddress: string,
     public patientPhone: number,
     public patientMail: string,

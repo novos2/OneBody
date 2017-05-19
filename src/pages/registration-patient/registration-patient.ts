@@ -11,16 +11,17 @@ export class RegistrationPatient {
 
 
 
-  selectOptions = ["זכר", "נקבה"];
+  /*selectOptions = ["זכר", "נקבה"];*/
 
   constructor(private pService:PatientService) {
   }
   onAddPatient(form: NgForm) {
-    this.pService.addItem(form.value.patientID, form.value.patientFirstName,form.value.patientLastName,form.value.gender,form.value.patientAddress,form.value.patientPhone,
-    form.value.patientMail,form.value.patientDOB);
+    this.pService.addItem(form.value.patientID,form.value.patientFirstName,
+      form.value.patientLastName,form.value.patientGender,form.value.patientAddress,form.value.patientPhone,
+      form.value.patientMail,form.value.patientDOB);
     form.reset();
     /*this.loadItems();*/
   }
-
+  
 
 }
