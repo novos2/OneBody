@@ -26,7 +26,7 @@ export class Signup {
       .catch(error => {
         loading.dismiss();
         const alert = this.alertCtrl.create({
-          title: 'רישום נכשל!',
+          title: '!רישום נכשל',
           message: error.message,
           buttons: ['חזרה']
         });

@@ -14,7 +14,9 @@ export class PatientService{
               private loadingCtrl: LoadingController) {
   }
   ionViewWillEnter() {
-    this.patients = this.getPatients();
+    /*this.patients = this.getPatients();*/
+    console.log("didLoad from PatientService")
+
   }
   addItem(patientID: number,
           patientFirstName: string,
@@ -24,17 +26,19 @@ export class PatientService{
           patientPhone: number,
           patientMail: string,
           patientDOB: Date){
-    const loading = this.loadingCtrl.create({
-      content: 'אנא המתן...'
-    });
-    loading.present();
+    /*const loading = this.loadingCtrl.create({
+      content: '...אנא המתן'
+    });*/
+    //loading.present();
+    //Puts list of patients from server to local
+    //this.loadPatientsFromServer();
     this.auth.getActiveUser().getToken()
       .then(
         (token: string) => {
           this.fetchList(token)
             .subscribe(
               (list: Patient[]) => {
-                loading.dismiss();
+                //loading.dismiss();
                 if (list) {
                   this.patients = list;
                 } else {
@@ -42,7 +46,7 @@ export class PatientService{
                 }
               },
               error => {
-                loading.dismiss();
+                //loading.dismiss();
                 this.handleError(error.json().error);
               }
             );
@@ -51,24 +55,33 @@ export class PatientService{
     //Check if there's already patient with same id
     if(!this.checkIfExists(this.patients,patientID)){
       this.patients.push(new Patient(patientID,patientFirstName,patientLastName,patientGender,patientAddress,patientPhone,patientMail,patientDOB));
+      //saving to server
       this.auth.getActiveUser().getToken()
         .then(
           (token: string) => {
             this.storeList(token)
               .subscribe(
-                () => loading.dismiss(),
+                () => {
+                 // loading.dismiss();
+                console.log(this.patients);
+                  this.successWindow("!מטופל נוסף בהצלחה");
+                },
                 error => {
-                  loading.dismiss();
+                  //console.log("error in storeList");
+                 // loading.dismiss();
+                  console.log(this.patients);
                   this.handleError(error.json().error);
                 }
               );
           }
         );
-      console.log(this.patients);
+      //console.log(this.patients);
     }
     else {
-      /*this.handleError("קיים מטופל בעל ת.ז זהה");
-      console.log("LetscheckSomething");*/
+      //loading.dismiss();
+      console.log(this.patients);
+      this.handleError("קיים מטופל בעל ת.ז זהה");
+      //console.log("LetscheckSomething");
     }
   }
 
@@ -96,12 +109,42 @@ export class PatientService{
   }
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
-      title: 'שגיאה!',
+      title: '!שגיאה',
       message: errorMessage,
       buttons: ['חזרה']
     });
     alert.present();
 
+  }
+   /*loadPatientsFromServer(){
+    this.auth.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.fetchList(token)
+            .subscribe(
+              (list: Patient[]) => {
+                //loading.dismiss();
+                if (list) {
+                  this.patients = list;
+                } else {
+                  this.patients = [];
+                }
+              },
+              error => {
+                //loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+    console.log(this.patients);
+  }*/
+  private successWindow(success:string){
+    const alert = this.alertCtrl.create({
+      message: success,
+      buttons: ['חזרה']
+    });
+    alert.present();
   }
 
   private checkIfExists(list:Patient[],x:number){
@@ -114,5 +157,6 @@ export class PatientService{
   getPatients() {
     return this.patients.slice();
   }
+
 }
 

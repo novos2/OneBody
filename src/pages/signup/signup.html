@@ -19,10 +19,10 @@
     <ion-col >
 
     </ion-col>
-    <img src="../../assets/img/oneBodyFullLogo.jpg"/>
+    <img src="gs://onebody-356cf.appspot.com/Photos/logo_1410.png"/>
     <ion-col></ion-col>
   </ion-row>
-  <form #f="ngForm" (ngSubmit)="onSignup(f)">
+  <form #f="ngForm" class = "login-box"(ngSubmit)="onSignup(f)">
     <ion-list>
       <ion-item>
         <ion-label fixed>אימייל</ion-label>
@@ -42,6 +42,11 @@
           [minlength]="6"></ion-input>
       </ion-item>
     </ion-list>
-    <button ion-button block type="submit" [disabled]="!f.valid">Signup</button>
+    <ion-row>
+      <ion-col class="signup-col">
+        <button ion-button block class="submit-btn" type="submit" [disabled]="!f.valid">Signup</button>
+      </ion-col>
+    </ion-row>
+
   </form>
 </ion-content>

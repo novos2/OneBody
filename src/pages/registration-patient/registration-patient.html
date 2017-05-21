@@ -11,8 +11,8 @@
 
 
 <ion-content class = "content" padding dir="rtl">
-  <h3 text-center>אנא הכנס פרטי לקוח</h3>
-  <form #f="ngForm" (ngSubmit)="onAddPatient(f)">
+
+  <form #f="ngForm" (ngSubmit)="onAddPatient(f)" >
     <ion-list>
       <ion-item>
         <ion-label stacked>מספר זהות</ion-label>
@@ -22,6 +22,7 @@
           placeholder="123456789"
           ngModel
           required
+
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -43,10 +44,10 @@
           required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>מין</ion-label>
+        <ion-label stacked >מין</ion-label>
         <ion-select [(ngModel)]="patientGender" name="patientGender">
-          <ion-option value="זכר">זכר</ion-option>
-          <ion-option value="נקבה">נקבה</ion-option>
+          <ion-option value="זכר"  >זכר</ion-option>
+          <ion-option value="נקבה" >נקבה</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>

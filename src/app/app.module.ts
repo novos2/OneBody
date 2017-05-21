@@ -13,6 +13,8 @@ import {Signin} from '../pages/signin/signin';
 import { AuthService } from "../services/auth";
 import  {PatientService} from "../services/patient";
 import {Signup} from '../pages/signup/signup';
+import {RegistrationEmployee} from "../pages/registration-employee/registration-employee";
+import {EmployeeService} from "../services/employee";
 
 
 
@@ -20,6 +22,7 @@ import {Signup} from '../pages/signup/signup';
   declarations: [
     MyApp,
     RegistrationPatient,
+    RegistrationEmployee,
     Tabs,
     Marketing,
     Employees,
@@ -36,7 +39,7 @@ import {Signup} from '../pages/signup/signup';
     MyApp,
 
     RegistrationPatient,
-
+    RegistrationEmployee,
     Tabs,
     Marketing,
     Employees,
@@ -49,6 +52,7 @@ import {Signup} from '../pages/signup/signup';
     SplashScreen,
     AuthService,
     PatientService,
+    EmployeeService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

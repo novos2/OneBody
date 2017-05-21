@@ -15,13 +15,22 @@ export class RegistrationPatient {
 
   constructor(private pService:PatientService) {
   }
+  ionViewDidLoad(){
+    console.log(" didLoad clicked successfully from registrationPatient.ts");
+    //this.pService.ionViewWillEnter();
+    //this.pService.loadPatientsFromServer();
+  }
   onAddPatient(form: NgForm) {
+    /*console.log("clicked successfully");
+    this.pService.loadPatientsFromServer();*/
     this.pService.addItem(form.value.patientID,form.value.patientFirstName,
       form.value.patientLastName,form.value.patientGender,form.value.patientAddress,form.value.patientPhone,
       form.value.patientMail,form.value.patientDOB);
     form.reset();
     /*this.loadItems();*/
   }
-  
+
+
+
 
 }
