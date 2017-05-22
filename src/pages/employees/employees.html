@@ -1,14 +1,47 @@
 
 <ion-header dir="rtl">
 
-  <ion-navbar>
+   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      <ion-icon name="people" padding></ion-icon>עובדים</ion-title>
+      <ion-icon name="people" padding></ion-icon>עובד</ion-title>
+
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="content">
-
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h2>{{ employee.employeeFirstName}} &nbsp; {{employee.employeeLastName}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-list padding>
+      <ion-col>
+        <ion-row>
+          <ion-item>
+            תעודת זהות: {{employee.employeeID}}
+          </ion-item>
+          <ion-item>
+            מס' טלפון:{{employee.employeePhone}}
+          </ion-item>
+          <ion-item>
+            מין:{{employee.employeeGender}}
+          </ion-item>
+          <ion-item>
+            כתובת מייל:{{employee.employeeMail}}
+          </ion-item>
+          <ion-item>
+            תאריך לידה:{{employee.employeeDOB}}
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-list>
+  </ion-grid>
 </ion-content>

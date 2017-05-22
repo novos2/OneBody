@@ -19,18 +19,30 @@ export class Signup {
       content: '...נרשם'
     });
     loading.present();
-    this.authService.signup(form.value.email, form.value.password)
-      .then(data => {
-        loading.dismiss();
-      })
-      .catch(error => {
-        loading.dismiss();
-        const alert = this.alertCtrl.create({
-          title: '!רישום נכשל',
-          message: error.message,
-          buttons: ['חזרה']
-        });
-        alert.present();
+    if(form.value.password!==form.value.passwordConfirmation){
+      const alert = this.alertCtrl.create({
+        title: '!רישום נכשל',
+        message: 'סיסמאות לא תואמות',
+        buttons: ['חזרה']
       });
+      loading.dismiss();
+      alert.present();
+      form.reset();
+    }
+    else {
+      this.authService.signup(form.value.email, form.value.password)
+        .then(data => {
+          loading.dismiss();
+        })
+        .catch(error => {
+          loading.dismiss();
+          const alert = this.alertCtrl.create({
+            title: '!רישום נכשל',
+            message: error.message,
+            buttons: ['חזרה']
+          });
+          alert.present();
+        });
+    }
   }
 }

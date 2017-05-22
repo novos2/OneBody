@@ -15,6 +15,7 @@ import  {PatientService} from "../services/patient";
 import {Signup} from '../pages/signup/signup';
 import {RegistrationEmployee} from "../pages/registration-employee/registration-employee";
 import {EmployeeService} from "../services/employee";
+import {Patients} from "../pages/patients/patients";
 
 
 
@@ -26,13 +27,16 @@ import {EmployeeService} from "../services/employee";
     Tabs,
     Marketing,
     Employees,
+    Patients,
     Signin,
     Signup
   ],
   imports: [
     HttpModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      backButtonText: 'חזרה'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +47,7 @@ import {EmployeeService} from "../services/employee";
     Tabs,
     Marketing,
     Employees,
-
+    Patients,
     Signin,
     Signup
   ],

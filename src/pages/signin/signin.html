@@ -1,5 +1,59 @@
 
-<ion-header dir="rtl">
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  class="login-content" padding dir="rtl">
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col></ion-col>
+    <img src="https://firebasestorage.googleapis.com/v0/b/onebody-356cf.appspot.com/o/Photos%2Flogo_1410.png?alt=media&token=c0c69402-89b6-44a7-8ea3-48b26526addf"/>
+    <ion-col></ion-col>
+  </ion-row>
+  <form #f="ngForm" class = "login-box"(ngSubmit)="onSignin(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>אימייל</ion-label>
+        <ion-input
+          type="email"
+          ngModel
+          name="email"
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>סיסמא</ion-label>
+        <ion-input
+          type="password"
+          ngModel
+          name="password"
+          required
+          [minlength]="6"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-row>
+      <ion-col class="signup-col">
+        <button ion-button block class="submit-btn" type="submit" [disabled]="!f.valid">התחברות</button>
+        <button ion-button block clear class="register-btn" type="button" (click)="createAccount()">יצירת חשבון חדש</button>
+      </ion-col>
+    </ion-row>
+
+
+  </form>
+
+
+</ion-content>
+
+<!--<ion-header dir="rtl">
 
   <ion-navbar>
     <ion-buttons start>
@@ -35,4 +89,4 @@
     </ion-list>
     <button ion-button block type="submit" [disabled]="!f.valid">התחברות</button>
   </form>
-</ion-content>
+</ion-content>-->

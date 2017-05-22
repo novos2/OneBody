@@ -1,1 +1,76 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="nav" >
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>תפריט</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <!--<button
+        ion-item
+        icon-left
+        (click)="onLoad(rootPage)"
+        *ngIf="isAuthenticated">
+        <ion-icon name="book"></ion-icon>
+        Recipe Book
+      </button>-->
+      <button
+        ion-item
+        icon-left
+        (click)="onLoad(signinPage)"
+        *ngIf="!isAuthenticated">
+        <ion-icon name="log-in"></ion-icon>
+        התחברות
+      </button>
+      <button
+        ion-item
+        icon-left
+        (click)="onLoad(signupPage)"
+        *ngIf="!isAuthenticated">
+        <ion-icon name="person"></ion-icon>
+        רישום
+      </button>
+      <button
+        ion-item
+        icon-left
+        (click)="onLoad(patientPage)"
+        *ngIf="isAuthenticated">
+        <ion-icon name="person"></ion-icon>
+        לקוחות
+      </button>
+      <button
+        ion-item
+        icon-left
+        (click)="onLoad(marketingPage)"
+        *ngIf="isAuthenticated">
+        <ion-icon name="mail"></ion-icon>
+        הודעות
+      </button>
+      <button
+        ion-item
+        icon-left
+        (click)="onLoad(employeesPage)"
+        *ngIf="isAuthenticated">
+        <ion-icon name="people"></ion-icon>
+        עובדים
+      </button>
+      <button
+        ion-item
+        icon-left
+        *ngIf="isAuthenticated">
+        <ion-icon name="information-circle"></ion-icon>
+        אודות
+      </button>
+      <button
+        ion-item
+        icon-left
+        (click)="onLogout()"
+        *ngIf="isAuthenticated">
+        <ion-icon name="log-out"></ion-icon>
+        התנתקות
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #nav></ion-nav>

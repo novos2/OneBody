@@ -10,6 +10,11 @@ import { Signin } from "../pages/signin/signin";
 import { Signup } from "../pages/signup/signup";
 import { AuthService } from "../services/auth";
 import firebase from 'firebase';
+import {RegistrationPatient} from "../pages/registration-patient/registration-patient";
+import {Marketing} from "../pages/marketing/marketing";
+import {RegistrationEmployee} from "../pages/registration-employee/registration-employee";
+
+
 
 @Component({
   templateUrl: 'app.html'
@@ -18,6 +23,9 @@ export class MyApp {
   rootPage: any = Tabs;
   signinPage = Signin;
   signupPage = Signup;
+  patientPage=RegistrationPatient;
+  marketingPage=Marketing;
+  employeesPage=RegistrationEmployee;
   isAuthenticated = false;
   @ViewChild('nav') nav: NavController;
 
@@ -35,7 +43,7 @@ export class MyApp {
         this.rootPage = Tabs;
       } else {
         this.isAuthenticated = false;
-        this.rootPage = Signup;
+        this.rootPage = Signin;
       }
     });
     platform.ready().then(() => {

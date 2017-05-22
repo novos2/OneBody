@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { LoadingController, AlertController } from "ionic-angular";
+import {LoadingController, AlertController, NavController} from "ionic-angular";
 
 import { AuthService } from "../../services/auth";
+import {Signup} from "../signup/signup";
 
 @Component({
   selector: 'page-signin',
@@ -12,7 +13,8 @@ export class Signin {
 
   constructor(private authService: AuthService,
               private loadingCtrl: LoadingController,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,
+              public navCtrl: NavController) {
   }
 
   onSignin(form: NgForm) {
@@ -33,5 +35,9 @@ export class Signin {
         });
         alert.present();
       });
+  }
+
+  createAccount(){
+    this.navCtrl.push(Signup);
   }
 }
