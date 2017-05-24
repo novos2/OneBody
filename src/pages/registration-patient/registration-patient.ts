@@ -48,10 +48,10 @@ export class RegistrationPatient {
  ionViewWillEnter() {
     this.loadItems();
   }
-  ionViewDidLoad(){
+  /*ionViewDidLoad(){
     this.loadList();
     console.log("console is:"+this.listItems);
-  }
+  }*/
 
   onAddPatient(form: NgForm) {
     //this.loadList();
@@ -118,7 +118,7 @@ export class RegistrationPatient {
                 }
               },
               error => {
-                //loading.dismiss();
+
                 this.handleError(error.json().error);
               }
             );
