@@ -105,7 +105,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-buttons start>
+    <ion-buttons end>
       <button ion-button icon-only menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
@@ -128,7 +128,7 @@
     <div class="showPatient" *ngIf="showHidePatientList==true">
       <ion-item-sliding *ngFor="let item of listItems; let i = index" (click)="onLoadPatient(item, i)">
         <ion-item>
-          {{item.employeeFirstName}} {{item.employeeLastName}}
+          {{item.patientFirstName}} {{item.patientLastName}}
         </ion-item>
         <ion-item-options side="right" style="direction:ltr">
           <button

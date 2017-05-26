@@ -16,8 +16,7 @@ import {Signup} from '../pages/signup/signup';
 import {RegistrationEmployee} from "../pages/registration-employee/registration-employee";
 import {EmployeeService} from "../services/employee";
 import {Patients} from "../pages/patients/patients";
-
-
+import {CallNumber} from "@ionic-native/call-number";
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import {Patients} from "../pages/patients/patients";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-
     RegistrationPatient,
     RegistrationEmployee,
     Tabs,
@@ -57,6 +55,7 @@ import {Patients} from "../pages/patients/patients";
     AuthService,
     PatientService,
     EmployeeService,
+    CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

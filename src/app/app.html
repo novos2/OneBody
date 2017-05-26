@@ -38,6 +38,22 @@
         <ion-icon name="person"></ion-icon>
         לקוחות
       </button>
+
+      <button
+        ion-item
+        icon-left
+        (click)="onLoad(employeesPage)"
+        *ngIf="isAuthenticated">
+        <ion-icon name="people"></ion-icon>
+        עובדים
+      </button>
+      <button
+        ion-item
+        icon-left
+        *ngIf="isAuthenticated">
+        <ion-icon name="flower"></ion-icon>
+        טיפולים
+      </button>
       <button
         ion-item
         icon-left
@@ -49,10 +65,9 @@
       <button
         ion-item
         icon-left
-        (click)="onLoad(employeesPage)"
         *ngIf="isAuthenticated">
-        <ion-icon name="people"></ion-icon>
-        עובדים
+        <ion-icon name="create"></ion-icon>
+        דו"חות
       </button>
       <button
         ion-item
