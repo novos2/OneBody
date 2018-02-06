@@ -14,7 +14,9 @@ export class Homescreen implements OnInit{
   myDate= moment().format();
   notes:boolean;
   calendarItems:boolean;
+  filterTreatmentFlag=false;
   listTreatments:Treatment[];
+  filteredTreatmentList: Treatment[];
   constructor(private calendar: Calendar,private alertCtrl: AlertController,private treatmentService:TreatmentService) {
     this.notes=false;
     this.calendarItems=false;
@@ -43,7 +45,13 @@ export class Homescreen implements OnInit{
 
     this.loadTreatments();
   }
-
+  selectData(date: string){
+    let modifiedDate = date.slice(0,10);
+    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.treatmentStartDate.slice(0,10)==modifiedDate);
+    this.filterTreatmentFlag=true;
+    console.log(this.listTreatments);
+    console.log(this.filteredTreatmentList);
+  }
   private loadTreatments(){
     /*const loading = this.loadingCtrl.create({
       content: '...אנא המתן'

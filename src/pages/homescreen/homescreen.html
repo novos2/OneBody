@@ -18,11 +18,24 @@
 <ion-content padding>
   <div class="title">
     <ion-label>
-    <ion-datetime type="datetime-local" displayFormat="DD-MM-YYYY" max="2099-12-31" [(ngModel)]="myDate" class="align"></ion-datetime>
-    <h3>שלום עמית</h3>
+    <ion-datetime type="datetime-local" displayFormat="MMMM-DD-YYYY"  [(ngModel)]="myDate" class="align" (ionChange)="selectData(myDate)" pickerFormat="YYYY MMMM DD"></ion-datetime>
+    <!--<h3>שלום עמית</h3>-->
     </ion-label>
   </div>
-  <ion-list>
+  <div class="showFilteredTreatment" *ngIf="filterTreatmentFlag==true">
+    <ion-list>
+      <ion-list-header>
+       <h1>טיפולים</h1>
+      </ion-list-header>
+      <ion-item *ngFor="let item of filteredTreatmentList; let i = index">
+        <h2> שם עובד: {{item.patientID}}</h2>
+        <h2>שם מטופל: {{item.employeeID}}</h2>
+        <h3>   שעת טיפול: {{item.treatmentEndDate.slice(11,16)}} - {{item.treatmentStartDate.slice(11,16)}} </h3>
+        <p> מס' חדר: {{item.treatmentRoom}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
+ <!-- <ion-list>
     <ion-list-header>
       <ion-icon name="calendar" item-left (click)="showCalendar()"></ion-icon>
 
@@ -61,5 +74,5 @@
         <h3>לדבר עם משה עוד יומיים</h3>
       </ion-item>
     </div>
-  </ion-list>
+  </ion-list>-->
 </ion-content>
