@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertController, IonicPage} from 'ionic-angular';
 import * as moment from 'moment';
-import {Calendar} from '@ionic-native/calendar';
-import {Employee} from "../../models/employee";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
 @IonicPage()
@@ -12,16 +10,18 @@ import {TreatmentService} from "../../services/treatment";
 })
 export class Homescreen implements OnInit{
   myDate= moment().format();
+  today:string;
   notes:boolean;
-  calendarItems:boolean;
-  filterTreatmentFlag=false;
+
+  filterTreatmentFlag:boolean;
   listTreatments:Treatment[];
   filteredTreatmentList: Treatment[];
-  constructor(private calendar: Calendar,private alertCtrl: AlertController,private treatmentService:TreatmentService) {
+  constructor(private alertCtrl: AlertController,private treatmentService:TreatmentService) {
     this.notes=false;
-    this.calendarItems=false;
+    this.filterTreatmentFlag=false;
+    this.today=moment().format();
   }
-  showCalendar(){
+/*  showCalendar(){
     this.calendarItems = !this.calendarItems;
     console.log("myDate: "+this.myDate.toString());
     if(this.notes)
@@ -29,24 +29,31 @@ export class Homescreen implements OnInit{
     this.calendar.createCalendar('MyCalendar').then((msg)=>{console.log(msg);},(err)=>{console.log(err);})
 
 
-  }
-  showNotes(){
+  }*/
+ /* showNotes(){
     this.notes = !this.notes;
     if(this.calendarItems)
       this.calendarItems=false;
 
-  }
+  }*/
   ngOnInit() {
-    /*console.log("test");
-    this.loadTreatments();*/
+   // console.log("test");
+    //this.loadTreatments();
   }
-
-  ionViewDidLoad(){
-
+  /*ionViewDidEnter(){
+    console.log("test");
     this.loadTreatments();
+
+  }*/
+  ionViewDidLoad(){
+    this.loadTreatments();
+    console.log("date is: "+this.today);
+    //this.selectData(this.today);
   }
+
   selectData(date: string){
     let modifiedDate = date.slice(0,10);
+    console.log("modified date is: "+modifiedDate);
     this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.treatmentStartDate.slice(0,10)==modifiedDate);
     this.filterTreatmentFlag=true;
     console.log(this.listTreatments);
@@ -66,6 +73,7 @@ export class Homescreen implements OnInit{
                 //loading.dismiss();
                 if (list) {
                   this.listTreatments = list;
+                  this.selectData(this.today);
                 } else {
                   this.listTreatments = [];
                 }
