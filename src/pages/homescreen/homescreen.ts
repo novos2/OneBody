@@ -35,7 +35,7 @@ export class Homescreen implements OnInit{
   }
   ngOnInit() {
     console.log("test");
-    this.loadTreatments();
+    //this.loadTreatments();
   }
 
   ionViewDidLoad(){
