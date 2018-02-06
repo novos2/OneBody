@@ -20,7 +20,7 @@ import {RegistrationEmployee} from "../pages/registration-employee/registration-
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = Tabs;
+  rootPage: any ;//= Tabs;
   signinPage = Signin;
   signupPage = Signup;
   patientPage=RegistrationPatient;

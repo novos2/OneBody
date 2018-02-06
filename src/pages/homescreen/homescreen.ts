@@ -21,6 +21,7 @@ export class Homescreen implements OnInit{
   }
   showCalendar(){
     this.calendarItems = !this.calendarItems;
+    console.log("myDate: "+this.myDate.toString());
     if(this.notes)
       this.notes=false;
     this.calendar.createCalendar('MyCalendar').then((msg)=>{console.log(msg);},(err)=>{console.log(err);})
@@ -34,13 +35,13 @@ export class Homescreen implements OnInit{
 
   }
   ngOnInit() {
-    //console.log("test");
-    //this.loadTreatments();
+    /*console.log("test");
+    this.loadTreatments();*/
   }
 
   ionViewDidLoad(){
 
-    //this.loadTreatments();
+    this.loadTreatments();
   }
 
   private loadTreatments(){
