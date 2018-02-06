@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage} from 'ionic-angular';
 import {RegistrationPatient} from '../registration-patient/registration-patient';
-import {Marketing} from "../marketing/marketing";
+
 import {RegistrationEmployee} from "../registration-employee/registration-employee";
+import {Homescreen} from "../homescreen/homescreen";
 
 
 @IonicPage()
@@ -13,7 +14,7 @@ import {RegistrationEmployee} from "../registration-employee/registration-employ
 export class Tabs {
 
   patientPage = RegistrationPatient;
-  marketingPage = Marketing;
+  homePage = Homescreen;
   employeesPage = RegistrationEmployee;
 
 

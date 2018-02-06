@@ -111,7 +111,7 @@
       </button>
     </ion-buttons>
     <ion-title>
-      <ion-icon name="person-add" padding></ion-icon>רישום משתמש</ion-title>
+      <ion-icon name="person" padding></ion-icon>מטופלים</ion-title>
 
   </ion-navbar>
 
@@ -121,8 +121,8 @@
 
   <ion-list>
     <ion-list-header>
-      <ion-icon name="book" item-left (click)="changeShowStatusEmpList()"></ion-icon>
-      <h1 class="listHeader" (click)="changeShowStatusEmpList()">רשימת מטופלים</h1>
+      <ion-icon name="book" item-left (click)="changeShowStatusPatientList()"></ion-icon>
+      <h1 class="listHeader" (click)="changeShowStatusPatientList()">רשימת מטופלים</h1>
     </ion-list-header>
 
     <div class="showPatient" *ngIf="showHidePatientList==true">
@@ -131,19 +131,9 @@
           {{item.patientFirstName}} {{item.patientLastName}}
         </ion-item>
         <ion-item-options side="right" style="direction:ltr">
-          <button
-            ion-button
-            color="danger">
-            <ion-icon name="trash"></ion-icon>
-            מחיקה
-          </button>
+
           <ion-buttons>
-            <button
-              ion-button
-              color="secondary">
-              <ion-icon name="chatboxes" ></ion-icon>
-              שליחת הודעה
-            </button>
+
 
             <button
               ion-button
@@ -159,11 +149,11 @@
 
   <ion-list>
     <ion-list-header>
-      <ion-icon name="add" item-left (click)="changeShowStatusForm()"></ion-icon>
-      <h1 class="listHeader" (click)="changeShowStatusForm()">הוספת מטופל</h1>
+      <ion-icon name="add" item-left (click)="changeShowStatusPatientForm()"></ion-icon>
+      <h1 class="listHeader" (click)="changeShowStatusPatientForm()">הוספת מטופל</h1>
     </ion-list-header>
 
-    <div class = "showForm" *ngIf="showHideForm==true">
+    <div class = "showForm" *ngIf="showHidePatientForm==true">
       <form #f="ngForm" (ngSubmit)="onAddPatient(f)" >
         <ion-list>
           <ion-item>

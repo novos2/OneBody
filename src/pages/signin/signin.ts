@@ -29,7 +29,7 @@ export class Signin {
       .catch(error => {
         loading.dismiss();
         const alert = this.alertCtrl.create({
-          title: 'התחברות נכשלה!',
+          title: '!התחברות נכשלה',
           message: error.message,
           buttons: ['חזרה']
         });
@@ -40,4 +40,67 @@ export class Signin {
   createAccount(){
     this.navCtrl.push(Signup);
   }
+  forgotPassCtrl(){
+    const alert=this.alertCtrl.create({
+      title:'שכחתי סיסמא',
+      message:'אנא הכנס כתובת מייל לאיפוס סיסמא',
+      inputs:[{name:'mail',placeholder:'הכנס כאן'}],
+      buttons:[{
+        text:'ביטול'
+      },
+        {text:'שליחה',
+          handler:data=>{
+          this.authService.forgotPass(data.mail).then(data=>{
+            const alert=this.alertCtrl.create({
+              title:'מייל נשלח בהצלחה',
+              message:'הנחיות לאיפוס סיסמא נשלחו לכתובת המייל שהוזנה',
+              buttons:['חזרה']
+            });
+            alert.present();
+          })
+            .catch(error=>{
+            const alert=this.alertCtrl.create({
+              title:'!שגיאה',
+              message:error.message,
+              buttons:['חזרה']
+            });
+            alert.present();
+          });
+          }
+
+        }]
+    });
+    alert.present();
+  }
+
+  /*forgotPassCtrl(){
+    const alert=this.alertCtrl.create(({
+      title:'שכחתי סיסמא',
+      message:'הכנס כתובת מייל לאיפוס סיסמא',
+      inputs:[{name:'mail',placeholder:'הכנס כאן'}],
+      buttons:[{
+        text:'ביטול'
+      },
+        {text:'שליחה',
+          handler:data=>{
+            if(this.authService.forgotPass(data.mail)){
+              const alert= this.alertCtrl.create({
+                title:'מייל נשלח בהצלחה',
+                message:'הנחיות לאיפוס סיסמא נשלחו לכתובת המייל שהוזנה',
+                buttons:['חזרה']
+              });
+              alert.present();
+            }
+            else{
+              const alert=this.alertCtrl.create({
+                title:'!שגיאה',
+                message:'כתובת מייל שהוזנה אינה חוקית או אינה קיימת במערכת',
+                buttons:['חזרה']
+              });
+              alert.present();
+            }
+          }}]
+    }));
+    alert.present();
+  }*/
 }

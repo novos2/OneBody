@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {AlertController, IonicPage, LoadingController, NavController,NavParams} from 'ionic-angular';
 import {PatientService} from "../../services/patient";
 import { NgForm } from "@angular/forms";
 import {Patient} from "../../models/patient";
@@ -10,7 +10,7 @@ import {Patients} from "../patients/patients";
   selector: 'page-registration-patient',
   templateUrl: 'registration-patient.html',
 })
-export class RegistrationPatient {
+export class RegistrationPatient implements OnInit{
 
 
 
@@ -33,26 +33,31 @@ export class RegistrationPatient {
     /!*this.loadItems();*!/
   }*/
   listItems: Patient[];
-  showHideEmpList :boolean;
-  showHideForm:boolean;
+  showHidePatientList :boolean;
+  showHidePatientForm:boolean;
+  index: number;
   constructor(private patientService: PatientService,
               private authService: AuthService,
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController,
-              private navCtrl:NavController) {
-    this.showHideEmpList=false;
-    this.showHideForm=false;
+              private navCtrl:NavController,
+              public navParams: NavParams) {
+    this.showHidePatientList=false;
+    this.showHidePatientForm=false;
 
   }
 
  ionViewWillEnter() {
     this.loadItems();
   }
-  /*ionViewDidLoad(){
+  ionViewDidLoad(){
     this.loadList();
     console.log("console is:"+this.listItems);
-  }*/
+  }
+  ngOnInit() {
 
+    this.index = this.navParams.get('index');
+  }
   onAddPatient(form: NgForm) {
     //this.loadList();
     if(!this.patientService.checkIfExists(this.listItems,form.value.patientID)) {
@@ -62,20 +67,17 @@ export class RegistrationPatient {
       this.loadItems();
       this.saveList();
       this.successWindow("מטופל נוסף בהצלחה");
+      this.changeShowStatusPatientForm();
     }
     else{
       this.handleError("קיים מטופל בעל ת.ז זהה");
     }
   }
-  changeShowStatusEmpList(){
-    this.showHideEmpList = !this.showHideEmpList;
-    if(this.showHideForm)
-      this.showHideForm=false;
+  changeShowStatusPatientList(){
+    this.showHidePatientList = !this.showHidePatientList;
   }
-  changeShowStatusForm(){
-    this.showHideForm = !this.showHideForm;
-    if(this.showHideEmpList)
-      this.showHideEmpList=false;
+  changeShowStatusPatientForm(){
+    this.showHidePatientForm = !this.showHidePatientForm;
   }
 
   onCheckItem(index: number) {

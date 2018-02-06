@@ -17,6 +17,9 @@ import {RegistrationEmployee} from "../pages/registration-employee/registration-
 import {EmployeeService} from "../services/employee";
 import {Patients} from "../pages/patients/patients";
 import {CallNumber} from "@ionic-native/call-number";
+import {Homescreen} from "../pages/homescreen/homescreen";
+import {Calendar} from "@ionic-native/calendar";
+import {TreatmentService} from "../services/treatment";
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import {CallNumber} from "@ionic-native/call-number";
     Marketing,
     Employees,
     Patients,
+    Homescreen,
     Signin,
     Signup
   ],
@@ -46,6 +50,7 @@ import {CallNumber} from "@ionic-native/call-number";
     Marketing,
     Employees,
     Patients,
+    Homescreen,
     Signin,
     Signup
   ],
@@ -55,7 +60,9 @@ import {CallNumber} from "@ionic-native/call-number";
     AuthService,
     PatientService,
     EmployeeService,
+    TreatmentService,
     CallNumber,
+    Calendar,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

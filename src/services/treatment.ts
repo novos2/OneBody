@@ -165,37 +165,40 @@ import 'rxjs/Rx';
 import {Patient} from "../models/patient";
 import { AuthService } from "./auth";
 import {Employee} from "../models/employee";
+import {Treatment} from "../models/treatment";
+import firebase from "firebase";
 
 @Injectable()
-export class PatientService {
-  private patients: Patient[] = [];
+export class TreatmentService {
+  private treatments: Treatment[] = [];
 
   constructor(private http: Http, private authService: AuthService) {
   }
 
-  addItem(patientID: number,patientFirstName: string,patientLastName: string,patientGender: string,patientAddress:string,patientPhone: number,patientMail: string,patientDOB:Date) {
-    this.patients.push(new Patient(patientID,patientFirstName,patientLastName,patientGender,patientAddress,patientPhone,patientMail,patientDOB));
-    console.log(this.patients);
-
+  addItem(employeeID: number,patientID: number,treatmentStartDate: string, treatmentEndDate: string,treatmentRoom: string,notes:string) {
+    this.treatments.push(new Treatment(employeeID,patientID,treatmentStartDate,treatmentEndDate,treatmentRoom,notes));
+    console.log(this.treatments);
   }
 
-  addItems(items: Patient[]) {
-    this.patients.push(...items);
+  addItems(items: Treatment[]) {
+    this.treatments.push(...items);
   }
-
+  getActiveUser() {
+    return firebase.auth().currentUser;
+  }
   getItems() {
 
-    return this.patients.slice();
+    return this.treatments.slice();
   }
 
   removeItem(index: number) {
-    this.patients.splice(index, 1);
+    this.treatments.splice(index, 1);
   }
 
   storeList(token: string) {
     const userId = this.authService.getActiveUser().uid;
     return this.http
-      .put('https://onebody-356cf.firebaseio.com/patient.json?auth=' + token, this.patients)
+      .put('https://onebody-356cf.firebaseio.com/treatment.json?auth=' + token, this.treatments)
       .map((response: Response) => {
         return response.json();
       });
@@ -203,26 +206,26 @@ export class PatientService {
 
   fetchList(token: string) {
     const userId = this.authService.getActiveUser().uid;
-    return this.http.get('https://onebody-356cf.firebaseio.com/patient.json?auth=' + token)
+    return this.http.get('https://onebody-356cf.firebaseio.com/treatment.json?auth=' + token)
       .map((response: Response) => {
         return response.json();
       })
-      .do((patients: Patient[]) => {
-        if (patients) {
-          this.patients = patients;
+      .do((treatments: Treatment[]) => {
+        if (treatments) {
+          this.treatments = treatments;
         } else {
-          this.patients = [];
+          this.treatments = [];
         }
       });
   }
 
-  checkIfExists(list:Patient[],x:number){
+  /*checkIfExists(list:Treatment[],x:number){
     for(let n of list){
       if(x==n.patientID)
         return true;
     }
     return false;
-  }
+  }*/
 
 }
 

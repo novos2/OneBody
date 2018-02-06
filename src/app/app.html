@@ -1,4 +1,4 @@
-<ion-menu [content]="nav" >
+<ion-menu [content]="nav"   >
   <ion-header>
     <ion-toolbar>
       <ion-title>תפריט</ion-title>
@@ -6,14 +6,6 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <!--<button
-        ion-item
-        icon-left
-        (click)="onLoad(rootPage)"
-        *ngIf="isAuthenticated">
-        <ion-icon name="book"></ion-icon>
-        Recipe Book
-      </button>-->
       <button
         ion-item
         icon-left
@@ -30,30 +22,13 @@
         <ion-icon name="person"></ion-icon>
         רישום
       </button>
-      <button
-        ion-item
-        icon-left
-        (click)="onLoad(patientPage)"
-        *ngIf="isAuthenticated">
-        <ion-icon name="person"></ion-icon>
-        לקוחות
-      </button>
-
-      <button
-        ion-item
-        icon-left
-        (click)="onLoad(employeesPage)"
-        *ngIf="isAuthenticated">
-        <ion-icon name="people"></ion-icon>
-        עובדים
-      </button>
-      <button
+      <!--<button
         ion-item
         icon-left
         *ngIf="isAuthenticated">
         <ion-icon name="flower"></ion-icon>
         טיפולים
-      </button>
+      </button>-->
       <button
         ion-item
         icon-left
@@ -66,7 +41,7 @@
         ion-item
         icon-left
         *ngIf="isAuthenticated">
-        <ion-icon name="create"></ion-icon>
+        <ion-icon name="paper"></ion-icon>
         דו"חות
       </button>
       <button
