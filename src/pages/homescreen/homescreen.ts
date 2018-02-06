@@ -34,7 +34,7 @@ export class Homescreen implements OnInit{
 
   }
   ngOnInit() {
-    console.log("test");
+    //console.log("test");
     //this.loadTreatments();
   }
 
