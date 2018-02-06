@@ -1,0 +1,297 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="person-add" padding></ion-icon>עובדים ולקוחות
+    </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class = "content" padding dir="rtl">
+  <ion-list>
+    <ion-list-header>
+      <ion-icon name="add" item-left (click)="changeShowTreatmentForm()"></ion-icon>
+      <h1 (click)="changeShowTreatmentForm()">הוספת טיפול</h1>
+    </ion-list-header>
+    <div class = "showTreatmentForm" *ngIf="showHideTreatmentForm==true">
+      <form #d="ngForm" (ngSubmit)="onAddTreatment(d)" >
+        <ion-item><ion-label>בחר מטפל</ion-label>
+          <ion-select [(ngModel)]="employeeID" multiple="false"  required name="employeeID" >
+            <ion-option *ngFor="let e of listEmployees" [value]="e.employeeID">
+              {{ e.employeeFirstName}} {{e.employeeLastName}}
+            </ion-option>
+          </ion-select></ion-item>
+        <ion-item><ion-label>בחר לקוח</ion-label>
+          <ion-select [(ngModel)]="patientID" multiple="false"  required name="patientID">
+            <ion-option *ngFor="let p of listPatients" [value]="p.patientID">
+              {{ p.patientFirstName}} {{p.patientLastName}}
+            </ion-option>
+          </ion-select></ion-item>
+        <ion-item>
+          <ion-label>בחר תאריך ושעת התחלת טיפול</ion-label>
+          <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentStartDate"   name="treatmentStartDate" ></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>בחר תאריך ושעת סיום טיפול</ion-label>
+          <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentEndDate"   name="treatmentEndDate" ></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label >מס' חדר</ion-label>
+          <ion-select [(ngModel)]="treatmentRoom" name="treatmentRoom" >
+            <ion-option value="1" >1</ion-option>
+            <ion-option value="2" >2</ion-option>
+            <ion-option value="3" >3</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label >הערות</ion-label>
+          <ion-textarea
+            type="text"
+            name="notes"
+            ngModel
+          ></ion-textarea>
+        </ion-item>
+        <button
+          ion-button
+          type="submit"
+          block
+          [disabled]="!d.valid">הוסף טיפול</button>
+      </form>
+    </div>
+  </ion-list>
+  <br>
+  <ion-list>
+    <ion-list-header>
+      <ion-icon name="add" item-left (click)="changeShowStatusPatientForm()"></ion-icon>
+      <h1 class="listHeader" (click)="changeShowStatusPatientForm()">הוספת מטופל</h1>
+    </ion-list-header>
+
+    <div class = "showForm" *ngIf="showHidePatientForm==true">
+      <form #f="ngForm" (ngSubmit)="onAddPatient(f)" >
+        <ion-list>
+          <ion-item>
+            <ion-label stacked>מספר זהות</ion-label>
+            <ion-input
+              type="tel"
+              name="patientID"
+              placeholder="123456789"
+              ngModel
+              required
+
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>שם פרטי</ion-label>
+            <ion-input
+              type="text"
+              name="patientFirstName"
+              placeholder="ישראל"
+              ngModel
+              required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>שם משפחה</ion-label>
+            <ion-input
+              type="text"
+              name="patientLastName"
+              placeholder="ישראלי"
+              ngModel
+              required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked >מין</ion-label>
+            <ion-select [(ngModel)]="patientGender" name="patientGender">
+              <ion-option value="זכר"  >זכר</ion-option>
+              <ion-option value="נקבה" >נקבה</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>כתובת</ion-label>
+            <ion-input
+              type="text"
+              name="patientAddress"
+              placeholder="הכוכב 15, חיפה"
+              ngModel
+              required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>טלפון</ion-label>
+            <ion-input
+              type="tel"
+              name="patientPhone"
+              placeholder="0548888888"
+              required
+              ngModel
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>דוא"ל</ion-label>
+            <ion-input
+              type="email"
+              name="patientMail"
+              placeholder="Mail@mail.com"
+              ngModel
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>תאריך לידה</ion-label>
+            <ion-input
+              type="date"
+              name="patientDOB"
+              placeholder="25-10-1980"
+              ngModel
+            ></ion-input>
+          </ion-item>
+        </ion-list>
+        <button
+          ion-button
+          type="submit"
+          block
+          [disabled]="!f.valid">הוסף משתמש</button>
+      </form></div>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <ion-icon name="book" item-left (click)="changeShowStatusPatientList()"></ion-icon>
+      <h1 class="listHeader" (click)="changeShowStatusPatientList()">רשימת מטופלים</h1>
+    </ion-list-header>
+    <div class="showPatient" *ngIf="showHidePatientList==true">
+      <ion-searchbar (ionInput)="searchPatients($event)" animated="true"></ion-searchbar>
+      <ion-item-sliding *ngFor="let item of listPatients; let i = index" (click)="onLoadPatient(item, i)">
+        <ion-item>
+          {{item.patientFirstName}} {{item.patientLastName}}
+        </ion-item>
+        <ion-item-options side="right" style="direction:ltr">
+
+          <ion-buttons>
+
+
+            <button
+              ion-button
+              color="background">
+              <ion-icon name="call"></ion-icon>
+              התקשר
+            </button>
+          </ion-buttons>
+        </ion-item-options>
+      </ion-item-sliding>
+    </div>
+  </ion-list>
+  <br>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-icon name="add" item-left (click)="changeShowStatusForm()"></ion-icon>
+      <h1 class="listHeader" (click)="changeShowStatusForm()">הוספת עובד</h1>
+    </ion-list-header>
+
+    <div class = "showForm" *ngIf="showHideEmpForm==true">
+      <form #f="ngForm" (ngSubmit)="onAddEmployee(f)" >
+        <ion-list>
+          <ion-item>
+            <ion-label stacked>מספר זהות</ion-label>
+            <ion-input
+              type="tel"
+              name="employeeID"
+              placeholder="123456789"
+              ngModel
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>שם פרטי</ion-label>
+            <ion-input
+              type="text"
+              name="employeeFirstName"
+              placeholder="ישראל"
+              ngModel
+              required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>שם משפחה</ion-label>
+            <ion-input
+              type="text"
+              name="employeeLastName"
+              placeholder="ישראלי"
+              ngModel
+              required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>טלפון</ion-label>
+            <ion-input
+              type="tel"
+              name="employeePhone"
+              placeholder="0548888888"
+              required
+              ngModel
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked >מין</ion-label>
+            <ion-select [(ngModel)]="employeeGender" name="employeeGender">
+              <ion-option value="זכר"  >זכר</ion-option>
+              <ion-option value="נקבה" >נקבה</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>דוא"ל</ion-label>
+            <ion-input
+              type="email"
+              name="employeeMail"
+              placeholder="Mail@mail.com"
+              ngModel
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>תאריך לידה</ion-label>
+            <ion-input
+              type="date"
+              name="employeeDOB"
+              placeholder="25-10-1980"
+              ngModel
+            ></ion-input>
+          </ion-item>
+        </ion-list>
+        <button
+          ion-button
+          type="submit"
+          block
+          [disabled]="!f.valid">הוסף עובד</button>
+      </form></div>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-icon name="book" item-left (click)="changeShowStatusEmpList()"></ion-icon>
+      <h1 class="listHeader" (click)="changeShowStatusEmpList()">רשימת עובדים</h1>
+    </ion-list-header>
+    <div class="showEmployee" *ngIf="showHideEmpList==true">
+      <ion-searchbar (ionInput)="searchEmployees($event)" animated="true"></ion-searchbar>
+      <ion-item-sliding *ngFor="let item of listEmployees; let i = index"(click)="onLoadEmployee(item, i)">
+        <ion-item>
+          {{item.employeeFirstName}} {{item.employeeLastName}}
+        </ion-item>
+        <ion-item-options side="right" style="direction:ltr">
+
+          <ion-buttons>
+            <button
+              ion-button
+              color="background" (click)="onCallNumber(item)">
+              <ion-icon name="call"></ion-icon>
+              התקשר
+            </button>
+          </ion-buttons>
+        </ion-item-options>
+      </ion-item-sliding>
+    </div>
+  </ion-list>
+</ion-content>

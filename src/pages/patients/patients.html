@@ -1,0 +1,65 @@
+
+<ion-header dir="rtl">
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="people" padding></ion-icon>מטופל</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="content">
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h2>{{ patient.patientFirstName}} &nbsp; {{patient.patientLastName}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-list padding>
+      <ion-col>
+        <ion-row>
+          <ion-item>
+            תעודת זהות: {{patient.patientID}}
+          </ion-item>
+          <ion-item>
+            מס' טלפון:{{patient.patientPhone}}
+          </ion-item>
+          <ion-item>
+            מין:{{patient.patientGender}}
+          </ion-item>
+          <ion-item>
+            כתובת מייל:{{patient.patientMail}}
+          </ion-item>
+          <ion-item>
+            תאריך לידה:{{patient.patientDOB}}
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-list>
+  </ion-grid>
+  <ion-buttons class="editButtons">
+    <button *ngIf="isAdmin()"
+            ion-button
+            icon-right
+            color="secondary">
+      <ion-icon name="create" ></ion-icon>
+      עריכה
+    </button>
+
+    <button
+      ion-button
+      icon-right
+      color="danger"
+      (click)="onDeletePatient()">
+      <ion-icon name="trash"></ion-icon>
+      מחיקה
+    </button>
+  </ion-buttons>
+</ion-content>
