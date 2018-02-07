@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage} from 'ionic-angular';
+import {AlertController, IonicPage,NavController} from 'ionic-angular';
 import * as moment from 'moment';
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
+import {Employee} from "../../models/employee";
+import {Employees} from "../employees/employees";
+import {Treatments} from "../treatments/treatments";
 @IonicPage()
 @Component({
   selector: 'page-homescreen',
@@ -16,7 +19,7 @@ export class Homescreen implements OnInit{
   filterTreatmentFlag:boolean;
   listTreatments:Treatment[];
   filteredTreatmentList: Treatment[];
-  constructor(private alertCtrl: AlertController,private treatmentService:TreatmentService) {
+  constructor(private alertCtrl: AlertController,private treatmentService:TreatmentService,private navCtrl:NavController,) {
     this.notes=false;
     this.filterTreatmentFlag=false;
     this.today=moment().format();
@@ -80,6 +83,9 @@ export class Homescreen implements OnInit{
   zeroDay(){
     this.myDate= moment().format();
     this.loadTreatments();
+  }
+  onLoadTreatment(treatment: Treatment, index: number) {
+    this.navCtrl.push(Treatments, {treatment: treatment, index: index});
   }
   private loadTreatments(){
     /*const loading = this.loadingCtrl.create({

@@ -24,6 +24,15 @@
     </ion-list-header>
     <div class = "showTreatmentForm" *ngIf="showHideTreatmentForm==true">
       <form #d="ngForm" (ngSubmit)="onAddTreatment(d)" >
+        <ion-item>
+          <ion-label >הכנס סוג טיפול</ion-label>
+          <ion-textarea
+            type="text"
+            name="treatmentType"
+            ngModel
+            required
+          ></ion-textarea>
+        </ion-item>
         <ion-item><ion-label>בחר מטפל</ion-label>
           <ion-select [(ngModel)]="employeeID" multiple="false"  required name="employeeID" >
             <ion-option *ngFor="let e of listEmployees" [value]="e.employeeID">
@@ -46,7 +55,7 @@
         </ion-item>
         <ion-item>
           <ion-label >מס' חדר</ion-label>
-          <ion-select [(ngModel)]="treatmentRoom" name="treatmentRoom" >
+          <ion-select [(ngModel)]="treatmentRoom" name="treatmentRoom" required >
             <ion-option value="1" >1</ion-option>
             <ion-option value="2" >2</ion-option>
             <ion-option value="3" >3</ion-option>

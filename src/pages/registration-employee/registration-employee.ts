@@ -83,7 +83,7 @@ export class RegistrationEmployee implements OnInit{
       if(this.treatmentService.checkIfHourDateEarierIsValid(this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
         if(this.treatmentService.checkIfEmployeeIsntOccupiedDuringThisTime(this.listTreatments,this.employeeID.toString(),this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
           if(this.treatmentService.checkIfRoomIsAvailableDuringThisTime(this.listTreatments,this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16),form.value.treatmentRoom)) {
-            this.treatmentService.addItem(this.employeeID, this.patientID, this.treatmentStartDate, this.treatmentEndDate, form.value.treatmentRoom, form.value.notes);
+            this.treatmentService.addItem(form.value.treatmentType,this.employeeID, this.patientID, this.treatmentStartDate, this.treatmentEndDate, form.value.treatmentRoom, form.value.notes);
             form.reset();
             this.loadItems();
             this.saveTreatments();

@@ -175,8 +175,8 @@ export class TreatmentService {
   constructor(private http: Http, private authService: AuthService) {
   }
 
-  addItem(employeeID: number,patientID: number,treatmentStartDate: string, treatmentEndDate: string,treatmentRoom: string,notes:string) {
-    this.treatments.push(new Treatment(employeeID,patientID,treatmentStartDate,treatmentEndDate,treatmentRoom,notes));
+  addItem(treatmentType:string,employeeID: number,patientID: number,treatmentStartDate: string, treatmentEndDate: string,treatmentRoom: string,notes:string) {
+    this.treatments.push(new Treatment(treatmentType,employeeID,patientID,treatmentStartDate,treatmentEndDate,treatmentRoom,notes));
     console.log(this.treatments);
   }
 

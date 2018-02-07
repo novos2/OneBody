@@ -9,6 +9,7 @@ import {RegistrationPatient} from '../pages/registration-patient/registration-pa
 import {Tabs} from '../pages/tabs/tabs';
 import {Marketing} from '../pages/marketing/marketing';
 import {Employees} from '../pages/employees/employees';
+import {Treatments} from '../pages/treatments/treatments';
 import {Signin} from '../pages/signin/signin';
 import { AuthService } from "../services/auth";
 import  {PatientService} from "../services/patient";
@@ -31,6 +32,7 @@ import {TreatmentService} from "../services/treatment";
     Employees,
     Patients,
     Homescreen,
+    Treatments,
     Signin,
     Signup
   ],
@@ -49,6 +51,7 @@ import {TreatmentService} from "../services/treatment";
     Tabs,
     Marketing,
     Employees,
+    Treatments,
     Patients,
     Homescreen,
     Signin,
