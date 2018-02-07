@@ -3,6 +3,9 @@ import {AlertController, IonicPage, LoadingController, NavParams,NavController} 
 import {Employee} from "../../models/employee";
 import {EmployeeService} from "../../services/employee";
 import {AuthService} from "../../services/auth";
+import {Response} from "@angular/http";
+import {Treatment} from "../../models/treatment";
+import {TreatmentService} from "../../services/treatment";
 
 
 @IonicPage()
@@ -12,7 +15,9 @@ import {AuthService} from "../../services/auth";
 })
 export class Employees implements OnInit {
   flag:boolean;
-  listItems: Employee[];
+  listItems: Employee[]
+  listTreatments:Treatment[];
+  filteredTreatmentList:Treatment[];
   employee: Employee;
   index: number;
   constructor(public navParams: NavParams,
@@ -20,12 +25,14 @@ export class Employees implements OnInit {
               private authService: AuthService,
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController,
-              private navCtrl:NavController) {
+              private navCtrl:NavController,
+              private treatmentService:TreatmentService) {
     this.flag=false;
   }
   ngOnInit() {
     this.employee = this.navParams.get('employee');
     this.index = this.navParams.get('index');
+    this.loadTreatments();
     /*var user = this.authService.getActiveUser().email;
     if(user=='test@test.com'){
       this.flag=true;
@@ -92,7 +99,36 @@ export class Employees implements OnInit {
         }
       );
   }
-
+  private loadTreatments(){
+    /*const loading = this.loadingCtrl.create({
+      content: '...אנא המתן'
+    });
+    loading.present();*/
+    this.treatmentService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.treatmentService.fetchList(token)
+            .subscribe(
+              (list: Treatment[]) => {
+                //loading.dismiss();
+                if (list) {
+                  this.listTreatments = list;
+                  this.selectData(this.employee.employeeID);
+                } else {
+                  this.listTreatments = [];
+                }
+              },
+              error => {
+                //loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+  }
+  selectData(empID:number){
+    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.employeeID.toString()==empID.toString());
+  }
   private saveList(){
     const loading = this.loadingCtrl.create({
       content: '...אנא המתן'

@@ -44,7 +44,24 @@
       </ion-col>
     </ion-list>
   </ion-grid>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h2>טיפולים</h2>
+      </ion-col>
+    </ion-row>
+    <ion-list padding>
+      <ion-col>
+        <ion-row>
+          <ion-item *ngFor="let item of filteredTreatmentList; let i = index">
+            <h2>{{item.treatmentType}}</h2>
+            <h2>{{item.patientID}}</h2>
+            <h2>{{item.treatmentStartDate.slice(0,10)}}</h2>
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-list>
+  </ion-grid>
   <ion-buttons class="editButtons">
     <button *ngIf="isAdmin()"
       ion-button
