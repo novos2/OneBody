@@ -44,6 +44,7 @@
       </ion-col>
     </ion-list>
   </ion-grid>
+  <div class="showFilteredTreatment" *ngIf="filterTreatmentFlag==true">
   <ion-grid>
     <ion-row>
       <ion-col text-center>
@@ -62,6 +63,7 @@
       </ion-col>
     </ion-list>
   </ion-grid>
+  </div>
   <ion-buttons class="editButtons">
     <button *ngIf="isAdmin()"
       ion-button

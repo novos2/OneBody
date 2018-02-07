@@ -32,6 +32,7 @@ export class Patients implements OnInit {
   patient: Patient;
   listTreatments:Treatment[];
   filteredTreatmentList:Treatment[];
+  filterTreatmentFlag:boolean;
   index: number;
   constructor(public navParams: NavParams,
               private patientService: PatientService,
@@ -141,6 +142,9 @@ export class Patients implements OnInit {
   }
   selectData(patientID:number){
     this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.patientID.toString()==patientID.toString());
+    if(this.filteredTreatmentList.length>0){
+      this.filterTreatmentFlag=true;
+    }
   }
   private saveList(){
     const loading = this.loadingCtrl.create({

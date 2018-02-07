@@ -19,7 +19,7 @@
 <ion-content class = "content" padding dir="rtl">
   <ion-list>
     <ion-list-header>
-      <ion-icon name="add" item-left (click)="changeShowTreatmentForm()"></ion-icon>
+      <ion-icon name="add" class="iconClass" item-left (click)="changeShowTreatmentForm()"></ion-icon>
       <h1 (click)="changeShowTreatmentForm()">הוספת טיפול</h1>
     </ion-list-header>
     <div class = "showTreatmentForm" *ngIf="showHideTreatmentForm==true">
@@ -80,7 +80,7 @@
   <br>
   <ion-list>
     <ion-list-header>
-      <ion-icon name="add" item-left (click)="changeShowStatusPatientForm()"></ion-icon>
+      <ion-icon name="person-add" class="iconClass" item-left (click)="changeShowStatusPatientForm()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusPatientForm()">הוספת מטופל</h1>
     </ion-list-header>
 
@@ -170,7 +170,7 @@
   </ion-list>
   <ion-list>
     <ion-list-header>
-      <ion-icon name="book" item-left (click)="changeShowStatusPatientList()"></ion-icon>
+      <ion-icon name="contact" class="iconListClass" item-left (click)="changeShowStatusPatientList()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusPatientList()">רשימת מטופלים</h1>
     </ion-list-header>
     <div class="showPatient" *ngIf="showHidePatientList==true">
@@ -196,10 +196,9 @@
     </div>
   </ion-list>
   <br>
-
   <ion-list>
     <ion-list-header>
-      <ion-icon name="add" item-left (click)="changeShowStatusForm()"></ion-icon>
+      <ion-icon name="person-add" class="iconClass" item-left (click)="changeShowStatusForm()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusForm()">הוספת עובד</h1>
     </ion-list-header>
 
@@ -280,7 +279,7 @@
 
   <ion-list>
     <ion-list-header>
-      <ion-icon name="book" item-left (click)="changeShowStatusEmpList()"></ion-icon>
+      <ion-icon name="contacts" class="iconListClass" item-left (click)="changeShowStatusEmpList()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusEmpList()">רשימת עובדים</h1>
     </ion-list-header>
     <div class="showEmployee" *ngIf="showHideEmpList==true">

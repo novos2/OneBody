@@ -19,6 +19,7 @@ export class Employees implements OnInit {
   listTreatments:Treatment[];
   filteredTreatmentList:Treatment[];
   employee: Employee;
+  filterTreatmentFlag:boolean;
   index: number;
   constructor(public navParams: NavParams,
               private empService: EmployeeService,
@@ -128,6 +129,9 @@ export class Employees implements OnInit {
   }
   selectData(empID:number){
     this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.employeeID.toString()==empID.toString());
+    if(this.filteredTreatmentList.length>0){
+      this.filterTreatmentFlag=true;
+    }
   }
   private saveList(){
     const loading = this.loadingCtrl.create({
