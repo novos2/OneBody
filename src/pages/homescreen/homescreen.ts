@@ -54,7 +54,7 @@ export class Homescreen implements OnInit{
     this.loadTreatments();
     setTimeout(() => {
       refresher.complete();
-    }, 1500);
+    }, 500);
   }
   selectData(date: string){
     let modifiedDate = date.slice(0,10);
@@ -76,6 +76,10 @@ export class Homescreen implements OnInit{
     this.filterTreatmentFlag=true;
 /*    console.log(this.listTreatments);
     console.log(this.filteredTreatmentList);*/
+  }
+  zeroDay(){
+    this.myDate= moment().format();
+    this.loadTreatments();
   }
   private loadTreatments(){
     /*const loading = this.loadingCtrl.create({
