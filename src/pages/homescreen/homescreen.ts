@@ -47,14 +47,14 @@ export class Homescreen implements OnInit{
   }*/
   ionViewDidLoad(){
     this.loadTreatments();
-    console.log("date is: "+this.today);
+    //console.log("date is: "+this.today);
     //this.selectData(this.today);
   }
   doRefresh(refresher) {
     this.loadTreatments();
     setTimeout(() => {
       refresher.complete();
-    }, 1799);
+    }, 1500);
   }
   selectData(date: string){
     let modifiedDate = date.slice(0,10);
@@ -91,7 +91,7 @@ export class Homescreen implements OnInit{
                 //loading.dismiss();
                 if (list) {
                   this.listTreatments = list;
-                  this.selectData(this.today);
+                  this.selectData(this.myDate);
                 } else {
                   this.listTreatments = [];
                 }
