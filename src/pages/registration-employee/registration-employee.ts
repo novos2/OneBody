@@ -19,6 +19,7 @@ export class RegistrationEmployee implements OnInit{
   listEmployees: Employee[];
   listPatients:Patient[];
   listTreatments:Treatment[];
+  filteredTreatments:Treatment[];
   showHideEmpList :boolean;
   showHideEmpForm:boolean;
   showHideTreatmentForm:boolean;
@@ -78,12 +79,32 @@ export class RegistrationEmployee implements OnInit{
   }
 
   onAddTreatment(form:NgForm){
-    this.treatmentService.addItem(this.employeeID,this.patientID,this.treatmentStartDate,this.treatmentEndDate,form.value.treatmentRoom,form.value.notes);
-    form.reset();
-    this.loadItems();
-    this.saveTreatments();
-    this.successWindow("טיפול נוסף בהצלחה");
-    this.changeShowTreatmentForm();
+    if(this.treatmentService.checkIfStartDateEarlierThanEndDate(this.treatmentStartDate.slice(0,10),this.treatmentEndDate.slice(0,10))){
+      if(this.treatmentService.checkIfHourDateEarierIsValid(this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
+        if(this.treatmentService.checkIfEmployeeIsntOccupiedDuringThisTime(this.listTreatments,this.employeeID.toString(),this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
+          if(this.treatmentService.checkIfRoomIsAvailableDuringThisTime(this.listTreatments,this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16),form.value.treatmentRoom)) {
+            this.treatmentService.addItem(this.employeeID, this.patientID, this.treatmentStartDate, this.treatmentEndDate, form.value.treatmentRoom, form.value.notes);
+            form.reset();
+            this.loadItems();
+            this.saveTreatments();
+            this.successWindow("טיפול נוסף בהצלחה");
+            this.changeShowTreatmentForm();
+          }
+          else{
+            this.handleError("חדר זה תפוס בשעות אלו");
+          }
+        }
+        else{
+          this.handleError("עובד זה נמצא בטיפול בשעות אלו");
+        }
+      }
+      else{
+        this.handleError("שעת תחילת טיפול גדולה משעת סיום טיפול");
+      }
+    }
+    else{
+      this.handleError("תאריך תחילת טיפול שונה מתאריך סיום טיפול");
+    }
   }
 
   onAddPatient(form: NgForm) {
@@ -110,7 +131,6 @@ export class RegistrationEmployee implements OnInit{
   }
   changeShowStatusPatientList(){
     this.showHidePatientList = !this.showHidePatientList;
-    console.log("clicked "+this.showHidePatientList);
   }
   changeShowStatusPatientForm(){
     this.showHidePatientForm = !this.showHidePatientForm;

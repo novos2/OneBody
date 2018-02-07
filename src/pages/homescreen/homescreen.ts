@@ -12,7 +12,7 @@ export class Homescreen implements OnInit{
   myDate= moment().format();
   today:string;
   notes:boolean;
-
+  listEmpty:boolean;
   filterTreatmentFlag:boolean;
   listTreatments:Treatment[];
   filteredTreatmentList: Treatment[];
@@ -55,6 +55,9 @@ export class Homescreen implements OnInit{
     let modifiedDate = date.slice(0,10);
     console.log("modified date is: "+modifiedDate);
     this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.treatmentStartDate.slice(0,10)==modifiedDate);
+    if(this.filteredTreatmentList.length==0){
+      this.listEmpty=true;
+    }
     this.filterTreatmentFlag=true;
     console.log(this.listTreatments);
     console.log(this.filteredTreatmentList);

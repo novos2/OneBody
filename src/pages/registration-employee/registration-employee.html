@@ -38,11 +38,11 @@
           </ion-select></ion-item>
         <ion-item>
           <ion-label>בחר תאריך ושעת התחלת טיפול</ion-label>
-          <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentStartDate"   name="treatmentStartDate" ></ion-datetime>
+          <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentStartDate"   required name="treatmentStartDate" ></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label>בחר תאריך ושעת סיום טיפול</ion-label>
-          <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentEndDate"   name="treatmentEndDate" ></ion-datetime>
+          <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentEndDate"    required name="treatmentEndDate" ></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label >מס' חדר</ion-label>

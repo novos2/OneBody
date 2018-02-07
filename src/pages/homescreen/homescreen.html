@@ -25,7 +25,7 @@
   <div class="showFilteredTreatment" *ngIf="filterTreatmentFlag==true">
     <ion-list>
       <ion-list-header>
-       <h1>טיפולים</h1>
+       <h1>לו"ז יומי</h1>
       </ion-list-header>
       <ion-item *ngFor="let item of filteredTreatmentList; let i = index">
         <h2> שם עובד: {{item.patientID}}</h2>
@@ -35,6 +35,16 @@
       </ion-item>
     </ion-list>
   </div>
+  <br>
+  <br>
+ <!-- <div *ngIf="filterTreatmentFlag==false">
+    <ion-list>
+      <ion-item>
+        <h2>אין טיפולים ביום זה</h2>
+      </ion-item>
+    </ion-list>
+  </div>
+  -->
  <!-- <ion-list>
     <ion-list-header>
       <ion-icon name="calendar" item-left (click)="showCalendar()"></ion-icon>

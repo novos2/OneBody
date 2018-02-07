@@ -218,7 +218,38 @@ export class TreatmentService {
         }
       });
   }
-
+  checkIfStartDateEarlierThanEndDate(startDate:string, endDate:string){
+    return startDate == endDate;
+  }
+  checkIfHourDateEarierIsValid(h1:string, h2:string){
+    return h1<h2;
+  }
+  checkIfEmployeeIsntOccupiedDuringThisTime(list:Treatment[],empID:string,startDate:string,h1:string,h2:string){
+    //change logics
+    for(let n of list){
+      if(n.treatmentStartDate.slice(0,10)==startDate){
+        if(n.employeeID.toString()==empID){
+          console.log("n.treatmentEndDate is: "+n.treatmentEndDate.slice(11,16)+" start date of current treatment is "+h1+" end date of current treatment is: "+h2);
+          if(!((h1<n.treatmentStartDate.slice(11,16)&&h2<=n.treatmentStartDate.slice(11,16))||(h1>=n.treatmentEndDate.slice(11,16)&&h2>n.treatmentEndDate.slice(11,16)))){
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+  checkIfRoomIsAvailableDuringThisTime(list:Treatment[],startDate:string,h1:string,h2:string,roomNumber:string){
+    for(let n of list){
+      if(n.treatmentStartDate.slice(0,10)==startDate){
+        if(!((h1<n.treatmentStartDate.slice(11,16)&&h2<=n.treatmentStartDate.slice(11,16))||(h1>=n.treatmentEndDate.slice(11,16)&&h2>n.treatmentEndDate.slice(11,16)))){
+          if(n.treatmentRoom==roomNumber){
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
   /*checkIfExists(list:Treatment[],x:number){
     for(let n of list){
       if(x==n.patientID)
