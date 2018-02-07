@@ -50,17 +50,32 @@ export class Homescreen implements OnInit{
     console.log("date is: "+this.today);
     //this.selectData(this.today);
   }
-
+  doRefresh(refresher) {
+    this.loadTreatments();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1799);
+  }
   selectData(date: string){
     let modifiedDate = date.slice(0,10);
-    console.log("modified date is: "+modifiedDate);
-    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.treatmentStartDate.slice(0,10)==modifiedDate);
+    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.treatmentStartDate.slice(0,10)==modifiedDate).sort((tr1,tr2)=>{
+      let date1=tr1.treatmentStartDate.slice(11,16);
+      let date2 = tr2.treatmentStartDate.slice(11,16);
+      if(date1<date2)
+        return -1;
+      else if(date1==date2){
+        return 0;
+      }
+      else{
+        return 1;
+      }
+    });
     if(this.filteredTreatmentList.length==0){
       this.listEmpty=true;
     }
     this.filterTreatmentFlag=true;
-    console.log(this.listTreatments);
-    console.log(this.filteredTreatmentList);
+/*    console.log(this.listTreatments);
+    console.log(this.filteredTreatmentList);*/
   }
   private loadTreatments(){
     /*const loading = this.loadingCtrl.create({

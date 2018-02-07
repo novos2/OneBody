@@ -16,6 +16,14 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="מעדכן...">
+    </ion-refresher-content>
+  </ion-refresher>
   <div class="title">
     <ion-label>
     <ion-datetime type="datetime-local" displayFormat="MMMM-DD-YYYY"  [(ngModel)]="myDate" class="align" (ionChange)="selectData(myDate)" pickerFormat="YYYY MMMM DD"></ion-datetime>
