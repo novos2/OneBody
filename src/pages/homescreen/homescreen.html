@@ -37,8 +37,8 @@
       </ion-list-header>
       <ion-item *ngFor="let item of filteredTreatmentList; let i = index" (click)="onLoadTreatment(item, i)">
         <h2>{{item.treatmentType}} </h2>
-        <h2> שם עובד: {{item.patientID}}</h2>
-        <h2>שם מטופל: {{item.employeeID}}</h2>
+        <h2> שם עובד: {{item.employeeID}}</h2>
+        <h2>שם מטופל: {{item.patientID}}</h2>
         <h3>   שעת טיפול: {{item.treatmentEndDate.slice(11,16)}} - {{item.treatmentStartDate.slice(11,16)}}</h3>
         <p> מס' חדר: {{item.treatmentRoom}}</p>
       </ion-item>

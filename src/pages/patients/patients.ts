@@ -3,7 +3,8 @@ import {AlertController, IonicPage, LoadingController, NavController, NavParams}
 import {AuthService} from "../../services/auth";
 import {PatientService} from "../../services/patient";
 import {Patient} from "../../models/patient";
-
+import {Treatment} from "../../models/treatment";
+import {TreatmentService} from "../../services/treatment";
 /**
  * Generated class for the Patients page.
  *
@@ -29,18 +30,22 @@ export class Patients implements OnInit {
   flag:boolean;
   listItems: Patient[];
   patient: Patient;
+  listTreatments:Treatment[];
+  filteredTreatmentList:Treatment[];
   index: number;
   constructor(public navParams: NavParams,
               private patientService: PatientService,
               private authService: AuthService,
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController,
-              private navCtrl:NavController) {
+              private navCtrl:NavController,
+              private treatmentService:TreatmentService) {
     this.flag=false;
   }
   ngOnInit() {
     this.patient = this.navParams.get('patient');
     this.index = this.navParams.get('index');
+    this.loadTreatments();
     /*var user = this.authService.getActiveUser().email;
     if(user=='test@test.com'){
       this.flag=true;
@@ -107,7 +112,36 @@ export class Patients implements OnInit {
         }
       );
   }
-
+  private loadTreatments(){
+    /*const loading = this.loadingCtrl.create({
+      content: '...אנא המתן'
+    });
+    loading.present();*/
+    this.treatmentService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.treatmentService.fetchList(token)
+            .subscribe(
+              (list: Treatment[]) => {
+                //loading.dismiss();
+                if (list) {
+                  this.listTreatments = list;
+                  this.selectData(this.patient.patientID);
+                } else {
+                  this.listTreatments = [];
+                }
+              },
+              error => {
+                //loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+  }
+  selectData(patientID:number){
+    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.patientID.toString()==patientID.toString());
+  }
   private saveList(){
     const loading = this.loadingCtrl.create({
       content: '...אנא המתן'
