@@ -61,7 +61,7 @@ export class RegistrationPatient implements OnInit{
   onAddPatient(form: NgForm) {
     //this.loadList();
     if(!this.patientService.checkIfExists(this.listItems,form.value.patientID)) {
-      this.patientService.addItem(form.value.patientID, form.value.patientFirstName, form.value.patientLastName,
+      this.patientService.addItem(form.value.patientID, form.value.patientName,
         form.value.patientGender,form.value.patientAddress, form.value.patientPhone, form.value.patientMail,form.value.patientDOB);
       form.reset();
       this.loadItems();

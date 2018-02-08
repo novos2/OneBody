@@ -110,7 +110,7 @@ export class RegistrationEmployee implements OnInit{
   onAddPatient(form: NgForm) {
     //this.loadList();
     if(!this.patientService.checkIfExists(this.listPatients,form.value.patientID)) {
-      this.patientService.addItem(form.value.patientID, form.value.patientFirstName, form.value.patientLastName,
+      this.patientService.addItem(form.value.patientID, form.value.patientName,
         form.value.patientGender,form.value.patientAddress, form.value.patientPhone, form.value.patientMail,form.value.patientDOB);
       form.reset();
       this.loadItems();
@@ -242,7 +242,7 @@ export class RegistrationEmployee implements OnInit{
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.listPatients = this.listPatients.filter((item) => {
-        return (item.patientFirstName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.patientName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }

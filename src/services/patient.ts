@@ -173,8 +173,8 @@ export class PatientService {
   constructor(private http: Http, private authService: AuthService) {
   }
 
-  addItem(patientID: number,patientFirstName: string,patientLastName: string,patientGender: string,patientAddress:string,patientPhone: number,patientMail: string,patientDOB:Date) {
-    this.patients.push(new Patient(patientID,patientFirstName,patientLastName,patientGender,patientAddress,patientPhone,patientMail,patientDOB));
+  addItem(patientID: number,patientName: string,patientGender: string,patientAddress:string,patientPhone: number,patientMail: string,patientDOB:Date) {
+    this.patients.push(new Patient(patientID,patientName,patientGender,patientAddress,patientPhone,patientMail,patientDOB));
     console.log(this.patients);
 
   }

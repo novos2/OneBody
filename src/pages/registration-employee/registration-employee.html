@@ -99,20 +99,11 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked>שם פרטי</ion-label>
+            <ion-label stacked>שם פרטי ושם משפחה</ion-label>
             <ion-input
               type="text"
-              name="patientFirstName"
-              placeholder="ישראל"
-              ngModel
-              required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label stacked>שם משפחה</ion-label>
-            <ion-input
-              type="text"
-              name="patientLastName"
-              placeholder="ישראלי"
+              name="patientName"
+              placeholder="ישראל ישראלי"
               ngModel
               required></ion-input>
           </ion-item>
@@ -177,7 +168,7 @@
       <ion-searchbar (ionInput)="searchPatients($event)" animated="true"></ion-searchbar>
       <ion-item-sliding *ngFor="let item of listPatients; let i = index" (click)="onLoadPatient(item, i)">
         <ion-item>
-          {{item.patientFirstName}} {{item.patientLastName}}
+          {{item.patientName}}
         </ion-item>
         <ion-item-options side="right" style="direction:ltr">
 
