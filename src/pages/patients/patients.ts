@@ -5,6 +5,7 @@ import {PatientService} from "../../services/patient";
 import {Patient} from "../../models/patient";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
+import {Treatments} from "../treatments/treatments";
 /**
  * Generated class for the Patients page.
  *
@@ -59,7 +60,12 @@ export class Patients implements OnInit {
     else this.flag=false;*/
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Patients');
+  }
+  doRefresh(refresher) {
+    this.loadTreatments();
+    setTimeout(() => {
+      refresher.complete();
+    }, 500);
   }
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
@@ -145,6 +151,9 @@ export class Patients implements OnInit {
     if(this.filteredTreatmentList.length>0){
       this.filterTreatmentFlag=true;
     }
+  }
+  onLoadTreatment(treatment: Treatment, index: number) {
+    this.navCtrl.push(Treatments, {treatment: treatment, index: index});
   }
   private saveList(){
     const loading = this.loadingCtrl.create({

@@ -46,7 +46,12 @@ export class Employees implements OnInit {
     else this.flag=false;*/
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Employees');
+  }
+  doRefresh(refresher) {
+    this.loadTreatments();
+    setTimeout(() => {
+      refresher.complete();
+    }, 500);
   }
    private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({

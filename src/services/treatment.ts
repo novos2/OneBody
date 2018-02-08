@@ -168,12 +168,13 @@ import {Employee} from "../models/employee";
 import {Treatment} from "../models/treatment";
 import firebase from "firebase";
 import {EmployeeService} from "./employee";
+import {AlertController} from "ionic-angular";
 
 @Injectable()
 export class TreatmentService {
   private treatments: Treatment[] = [];
 
-  constructor(private http: Http, private authService: AuthService,private empService:EmployeeService) {
+  constructor(private http: Http, private authService: AuthService,private empService:EmployeeService,private alertCtrl:AlertController) {
   }
 
   addItem(treatmentType:string,employeeName: string,patientName: string,treatmentStartDate: string, treatmentEndDate: string,treatmentRoom: string,notes:string) {
@@ -204,7 +205,32 @@ export class TreatmentService {
         return response.json();
       });
   }
-
+  private loadList(){
+    /*const loading = this.loadingCtrl.create({
+     content: '...אנא המתן'
+     });
+     loading.present();*/
+    this.authService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.fetchList(token)
+            .subscribe(
+              (list: Treatment[]) => {
+                //loading.dismiss();
+                if (list) {
+                  this.treatments = list;
+                } else {
+                  this.treatments = [];
+                }
+              },
+              error => {
+                //loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+  }
   fetchList(token: string) {
     const userId = this.authService.getActiveUser().uid;
     return this.http.get('https://onebody-356cf.firebaseio.com/treatment.json?auth=' + token)
@@ -251,8 +277,24 @@ export class TreatmentService {
     }
     return true;
   }
-
-
+  getIndexByName(empName:string,patientName:string,dateOfTreatment:string){
+    this.loadList();
+    let count=0;
+    for(let n of this.treatments){
+      if(n.employeeName==empName&&n.patientName==patientName&&n.treatmentStartDate==dateOfTreatment){
+        return count;
+      }
+      count++;
+    }
+  }
+  private handleError(errorMessage: string) {
+    const alert = this.alertCtrl.create({
+      title: '!שגיאה',
+      message: errorMessage,
+      buttons: ['חזרה']
+    });
+    alert.present();
+  }
   /*checkIfExists(list:Treatment[],x:number){
     for(let n of list){
       if(x==n.patientID)

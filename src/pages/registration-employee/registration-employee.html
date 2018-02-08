@@ -17,6 +17,14 @@
 
 
 <ion-content class = "content" padding dir="rtl">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="גלול מטה לעדכון"
+      refreshingSpinner="circles"
+      refreshingText="מעדכן...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <ion-list-header>
       <ion-icon name="add" class="iconClass" item-left (click)="changeShowTreatmentForm()"></ion-icon>

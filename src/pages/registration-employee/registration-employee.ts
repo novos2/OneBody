@@ -76,7 +76,14 @@ export class RegistrationEmployee implements OnInit{
       this.handleError("קיים עובד בעל ת.ז זהה");
     }
   }
-
+  doRefresh(refresher) {
+    this.loadPatient();
+    this.loadEmployees();
+    this.loadItems();
+    setTimeout(() => {
+      refresher.complete();
+    }, 500);
+  }
   onAddTreatment(form:NgForm){
     if(this.treatmentService.checkIfStartDateEarlierThanEndDate(this.treatmentStartDate.slice(0,10),this.treatmentEndDate.slice(0,10))){
       if(this.treatmentService.checkIfHourDateEarierIsValid(this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
