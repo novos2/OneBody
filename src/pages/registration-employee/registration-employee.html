@@ -36,7 +36,7 @@
         <ion-item><ion-label>בחר מטפל</ion-label>
           <ion-select [(ngModel)]="employeeID" multiple="false"  required name="employeeID" >
             <ion-option *ngFor="let e of listEmployees" [value]="e.employeeID">
-              {{ e.employeeFirstName}} {{e.employeeLastName}}
+              {{ e.employeeName}}
             </ion-option>
           </ion-select></ion-item>
         <ion-item><ion-label>בחר לקוח</ion-label>
@@ -216,20 +216,11 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked>שם פרטי</ion-label>
+            <ion-label stacked>שם פרטי ושם משפחה</ion-label>
             <ion-input
               type="text"
-              name="employeeFirstName"
-              placeholder="ישראל"
-              ngModel
-              required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label stacked>שם משפחה</ion-label>
-            <ion-input
-              type="text"
-              name="employeeLastName"
-              placeholder="ישראלי"
+              name="employeeName"
+              placeholder="ישראל ישראלי"
               ngModel
               required></ion-input>
           </ion-item>
@@ -286,7 +277,7 @@
       <ion-searchbar (ionInput)="searchEmployees($event)" animated="true"></ion-searchbar>
       <ion-item-sliding *ngFor="let item of listEmployees; let i = index"(click)="onLoadEmployee(item, i)">
         <ion-item>
-          {{item.employeeFirstName}} {{item.employeeLastName}}
+          {{item.employeeName}}
         </ion-item>
         <ion-item-options side="right" style="direction:ltr">
 

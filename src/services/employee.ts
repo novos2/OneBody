@@ -11,8 +11,8 @@ export class EmployeeService {
   constructor(private http: Http, private authService: AuthService) {
   }
 
-  addItem(employeeID: number,employeeFirstName: string,employeeLastName: string,employeePhone: string,employeeGender:string,employeeMail: string,employeeDOB: Date) {
-    this.employees.push(new Employee(employeeID,employeeFirstName,employeeLastName,employeePhone,employeeGender,employeeMail,employeeDOB));
+  addItem(employeeID: number,employeeName: string,employeePhone: string,employeeGender:string,employeeMail: string,employeeDOB: Date) {
+    this.employees.push(new Employee(employeeID,employeeName,employeePhone,employeeGender,employeeMail,employeeDOB));
     console.log(this.employees);
   }
 
