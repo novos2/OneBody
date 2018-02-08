@@ -34,15 +34,15 @@
           ></ion-textarea>
         </ion-item>
         <ion-item><ion-label>בחר מטפל</ion-label>
-          <ion-select [(ngModel)]="employeeID" multiple="false"  required name="employeeID" >
-            <ion-option *ngFor="let e of listEmployees" [value]="e.employeeID">
+          <ion-select [(ngModel)]="employeeName" multiple="false"  required name="employeeName" >
+            <ion-option *ngFor="let e of listEmployees" [value]="e.employeeName">
               {{ e.employeeName}}
             </ion-option>
           </ion-select></ion-item>
         <ion-item><ion-label>בחר לקוח</ion-label>
-          <ion-select [(ngModel)]="patientID" multiple="false"  required name="patientID">
-            <ion-option *ngFor="let p of listPatients" [value]="p.patientID">
-              {{ p.patientFirstName}} {{p.patientLastName}}
+          <ion-select [(ngModel)]="patientName" multiple="false"  required name="patientName">
+            <ion-option *ngFor="let p of listPatients" [value]="p.patientName">
+              {{ p.patientName}}
             </ion-option>
           </ion-select></ion-item>
         <ion-item>

@@ -28,8 +28,8 @@ export class RegistrationEmployee implements OnInit{
   index: number;
   treatmentStartDate: string;
   treatmentEndDate: string;
-  employeeID:number;
-  patientID:number;
+  employeeName:string;
+  patientName:string;
   searchQuery: string = '';
   constructor(private empService: EmployeeService,
               private authService: AuthService,
@@ -57,7 +57,6 @@ export class RegistrationEmployee implements OnInit{
   ionViewDidLoad(){
     this.loadEmployees();
     this.loadPatient();
-    console.log("console is:"+this.listEmployees);
   }
   onCallNumber(item:Employee){
     this.call.callNumber(item.employeePhone,true);
@@ -81,9 +80,9 @@ export class RegistrationEmployee implements OnInit{
   onAddTreatment(form:NgForm){
     if(this.treatmentService.checkIfStartDateEarlierThanEndDate(this.treatmentStartDate.slice(0,10),this.treatmentEndDate.slice(0,10))){
       if(this.treatmentService.checkIfHourDateEarierIsValid(this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
-        if(this.treatmentService.checkIfEmployeeIsntOccupiedDuringThisTime(this.listTreatments,this.employeeID.toString(),this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
+        if(this.treatmentService.checkIfEmployeeIsntOccupiedDuringThisTime(this.listTreatments,this.employeeName,this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
           if(this.treatmentService.checkIfRoomIsAvailableDuringThisTime(this.listTreatments,this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16),form.value.treatmentRoom)) {
-            this.treatmentService.addItem(form.value.treatmentType,this.employeeID, this.patientID, this.treatmentStartDate, this.treatmentEndDate, form.value.treatmentRoom, form.value.notes);
+            this.treatmentService.addItem(form.value.treatmentType,this.employeeName, this.patientName, this.treatmentStartDate, this.treatmentEndDate, form.value.treatmentRoom, form.value.notes);
             form.reset();
             this.loadItems();
             this.saveTreatments();

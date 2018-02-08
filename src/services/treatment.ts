@@ -167,16 +167,17 @@ import { AuthService } from "./auth";
 import {Employee} from "../models/employee";
 import {Treatment} from "../models/treatment";
 import firebase from "firebase";
+import {EmployeeService} from "./employee";
 
 @Injectable()
 export class TreatmentService {
   private treatments: Treatment[] = [];
 
-  constructor(private http: Http, private authService: AuthService) {
+  constructor(private http: Http, private authService: AuthService,private empService:EmployeeService) {
   }
 
-  addItem(treatmentType:string,employeeID: number,patientID: number,treatmentStartDate: string, treatmentEndDate: string,treatmentRoom: string,notes:string) {
-    this.treatments.push(new Treatment(treatmentType,employeeID,patientID,treatmentStartDate,treatmentEndDate,treatmentRoom,notes));
+  addItem(treatmentType:string,employeeName: string,patientName: string,treatmentStartDate: string, treatmentEndDate: string,treatmentRoom: string,notes:string) {
+    this.treatments.push(new Treatment(treatmentType,employeeName,patientName,treatmentStartDate,treatmentEndDate,treatmentRoom,notes));
     console.log(this.treatments);
   }
 
@@ -224,11 +225,11 @@ export class TreatmentService {
   checkIfHourDateEarierIsValid(h1:string, h2:string){
     return h1<h2;
   }
-  checkIfEmployeeIsntOccupiedDuringThisTime(list:Treatment[],empID:string,startDate:string,h1:string,h2:string){
+  checkIfEmployeeIsntOccupiedDuringThisTime(list:Treatment[],empName:string,startDate:string,h1:string,h2:string){
     //change logics
     for(let n of list){
       if(n.treatmentStartDate.slice(0,10)==startDate){
-        if(n.employeeID.toString()==empID){
+        if(n.employeeName==empName){
           console.log("n.treatmentEndDate is: "+n.treatmentEndDate.slice(11,16)+" start date of current treatment is "+h1+" end date of current treatment is: "+h2);
           if(!((h1<n.treatmentStartDate.slice(11,16)&&h2<=n.treatmentStartDate.slice(11,16))||(h1>=n.treatmentEndDate.slice(11,16)&&h2>n.treatmentEndDate.slice(11,16)))){
             return false;
@@ -250,6 +251,8 @@ export class TreatmentService {
     }
     return true;
   }
+
+
   /*checkIfExists(list:Treatment[],x:number){
     for(let n of list){
       if(x==n.patientID)

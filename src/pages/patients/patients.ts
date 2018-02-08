@@ -127,7 +127,7 @@ export class Patients implements OnInit {
                 //loading.dismiss();
                 if (list) {
                   this.listTreatments = list;
-                  this.selectData(this.patient.patientID);
+                  this.selectData(this.patient.patientName);
                 } else {
                   this.listTreatments = [];
                 }
@@ -140,8 +140,8 @@ export class Patients implements OnInit {
         }
       );
   }
-  selectData(patientID:number){
-    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.patientID.toString()==patientID.toString());
+  selectData(patientName:string){
+    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.patientName==patientName);
     if(this.filteredTreatmentList.length>0){
       this.filterTreatmentFlag=true;
     }

@@ -3,12 +3,14 @@ import { Http, Response } from "@angular/http";
 import 'rxjs/Rx';
 import {Employee} from "../models/employee";
 import { AuthService } from "./auth";
+import {AlertController} from "ionic-angular";
 
 @Injectable()
 export class EmployeeService {
   private employees: Employee[] = [];
+   listItems: Employee[];
 
-  constructor(private http: Http, private authService: AuthService) {
+  constructor(private http: Http, private authService: AuthService,private alertCtrl:AlertController) {
   }
 
   addItem(employeeID: number,employeeName: string,employeePhone: string,employeeGender:string,employeeMail: string,employeeDOB: Date) {
@@ -52,12 +54,73 @@ export class EmployeeService {
         }
       });
   }
-
+    getEmpIDByName(empName:string){
+      this.authService.getActiveUser().getToken()
+        .then(
+          (token: string) => {
+            this.fetchList(token)
+              .subscribe(
+                (list: Employee[]) => {
+                  //loading.dismiss();
+                  if (list) {
+                    this.listItems = list;
+                  } else {
+                    this.listItems = [];
+                  }
+                },
+                error => {
+                  //loading.dismiss();
+                  this.handleError(error.json().error);
+                }
+              );
+          }
+        );
+      for(let n of this.listItems){
+        if(empName==n.employeeName){
+          return n.employeeID;
+        }
+      }
+    }
+    getEmpNameByID(empID:string){
+      this.authService.getActiveUser().getToken()
+        .then(
+          (token: string) => {
+            this.fetchList(token)
+              .subscribe(
+                (list: Employee[]) => {
+                  //loading.dismiss();
+                  if (list) {
+                    this.listItems = list;
+                  } else {
+                    this.listItems = [];
+                  }
+                },
+                error => {
+                  //loading.dismiss();
+                  this.handleError(error.json().error);
+                }
+              );
+          }
+        );
+      for(let n of this.listItems){
+        if(empID.toString()==n.employeeID.toString()){
+          return n.employeeName;
+        }
+      }
+    }
    checkIfExists(list:Employee[],x:number){
     for(let n of list){
       if(x==n.employeeID)
         return true;
     }
     return false;
+  }
+  private handleError(errorMessage: string) {
+    const alert = this.alertCtrl.create({
+      title: '!שגיאה',
+      message: errorMessage,
+      buttons: ['חזרה']
+    });
+    alert.present();
   }
 }

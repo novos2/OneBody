@@ -4,8 +4,8 @@ import {Patient} from "./patient";
 export class Treatment{
   constructor(
     public treatmentType:string,
-    public employeeID: number,
-    public patientID: number,
+    public employeeName: string,
+    public patientName: string,
     public treatmentStartDate: string,
     public treatmentEndDate: string,
     public treatmentRoom: string,

@@ -15,7 +15,7 @@ import {TreatmentService} from "../../services/treatment";
 })
 export class Employees implements OnInit {
   flag:boolean;
-  listItems: Employee[]
+  listItems: Employee[];
   listTreatments:Treatment[];
   filteredTreatmentList:Treatment[];
   employee: Employee;
@@ -114,7 +114,7 @@ export class Employees implements OnInit {
                 //loading.dismiss();
                 if (list) {
                   this.listTreatments = list;
-                  this.selectData(this.employee.employeeID);
+                  this.selectData(this.employee.employeeName);
                 } else {
                   this.listTreatments = [];
                 }
@@ -127,8 +127,8 @@ export class Employees implements OnInit {
         }
       );
   }
-  selectData(empID:number){
-    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.employeeID.toString()==empID.toString());
+  selectData(empName:string){
+    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.employeeName==empName);
     if(this.filteredTreatmentList.length>0){
       this.filterTreatmentFlag=true;
     }

@@ -165,12 +165,13 @@ import 'rxjs/Rx';
 import {Patient} from "../models/patient";
 import { AuthService } from "./auth";
 import {Employee} from "../models/employee";
+import {AlertController} from "ionic-angular";
 
 @Injectable()
 export class PatientService {
   private patients: Patient[] = [];
-
-  constructor(private http: Http, private authService: AuthService) {
+  listItems:Patient[];
+  constructor(private http: Http, private authService: AuthService,private alertCtrl:AlertController) {
   }
 
   addItem(patientID: number,patientName: string,patientGender: string,patientAddress:string,patientPhone: number,patientMail: string,patientDOB:Date) {
@@ -215,7 +216,60 @@ export class PatientService {
         }
       });
   }
-
+  getPatientIDByName(patientName:string){
+    this.authService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.fetchList(token)
+            .subscribe(
+              (list: Patient[]) => {
+                //loading.dismiss();
+                if (list) {
+                  this.listItems = list;
+                } else {
+                  this.listItems = [];
+                }
+              },
+              error => {
+                //loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+    for(let n of this.listItems){
+      if(patientName==n.patientName){
+        return n.patientID;
+      }
+    }
+  }
+  getPatientNameByID(patientID:string){
+    this.authService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.fetchList(token)
+            .subscribe(
+              (list: Patient[]) => {
+                //loading.dismiss();
+                if (list) {
+                  this.listItems = list;
+                } else {
+                  this.listItems = [];
+                }
+              },
+              error => {
+                //loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+    for(let n of this.listItems){
+      if(patientID.toString()==n.patientID.toString()){
+        return n.patientName;
+      }
+    }
+  }
   checkIfExists(list:Patient[],x:number){
     for(let n of list){
       if(x==n.patientID)
@@ -223,6 +277,13 @@ export class PatientService {
     }
     return false;
   }
-
+  private handleError(errorMessage: string) {
+    const alert = this.alertCtrl.create({
+      title: '!שגיאה',
+      message: errorMessage,
+      buttons: ['חזרה']
+    });
+    alert.present();
+  }
 }
 
