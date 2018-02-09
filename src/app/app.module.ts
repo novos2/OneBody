@@ -10,6 +10,7 @@ import {Tabs} from '../pages/tabs/tabs';
 import {Marketing} from '../pages/marketing/marketing';
 import {Employees} from '../pages/employees/employees';
 import {Treatments} from '../pages/treatments/treatments';
+import {Repadmin} from "../pages/repadmin/repadmin";
 import {Signin} from '../pages/signin/signin';
 import { AuthService } from "../services/auth";
 import  {PatientService} from "../services/patient";
@@ -21,6 +22,8 @@ import {CallNumber} from "@ionic-native/call-number";
 import {Homescreen} from "../pages/homescreen/homescreen";
 import {Calendar} from "@ionic-native/calendar";
 import {TreatmentService} from "../services/treatment";
+import { EmailComposer } from '@ionic-native/email-composer';
+import { SMS } from '@ionic-native/sms';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import {TreatmentService} from "../services/treatment";
     Marketing,
     Employees,
     Patients,
+    Repadmin,
     Homescreen,
     Treatments,
     Signin,
@@ -51,6 +55,7 @@ import {TreatmentService} from "../services/treatment";
     Tabs,
     Marketing,
     Employees,
+    Repadmin,
     Treatments,
     Patients,
     Homescreen,
@@ -65,6 +70,8 @@ import {TreatmentService} from "../services/treatment";
     EmployeeService,
     TreatmentService,
     CallNumber,
+    EmailComposer,
+    SMS,
     Calendar,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

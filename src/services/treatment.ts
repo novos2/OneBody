@@ -169,12 +169,13 @@ import {Treatment} from "../models/treatment";
 import firebase from "firebase";
 import {EmployeeService} from "./employee";
 import {AlertController} from "ionic-angular";
+import {PatientService} from "./patient";
 
 @Injectable()
 export class TreatmentService {
   private treatments: Treatment[] = [];
-
-  constructor(private http: Http, private authService: AuthService,private empService:EmployeeService,private alertCtrl:AlertController) {
+  private patients:Patient[];
+  constructor(private http: Http, private authService: AuthService,private empService:EmployeeService,private alertCtrl:AlertController,private patientService:PatientService) {
   }
 
   addItem(treatmentType:string,employeeName: string,patientName: string,treatmentStartDate: string, treatmentEndDate: string,treatmentRoom: string,notes:string) {
@@ -276,6 +277,15 @@ export class TreatmentService {
       }
     }
     return true;
+  }
+  getPhoneByName(patientName:string):string{
+  this.patients=this.patientService.getItems();
+  for(let n of this.patients){
+    if(n.patientName==patientName){
+      return n.patientPhone.toString();
+    }
+  }
+  return patientName;
   }
   getIndexByName(empName:string,patientName:string,dateOfTreatment:string){
     this.loadList();

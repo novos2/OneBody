@@ -11,6 +11,8 @@ import {PatientService} from "../../services/patient";
 import {Patients} from "../patients/patients";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
+//import { EmailComposer } from '@ionic-native/email-composer';
+import { SMS } from '@ionic-native/sms';
 @Component({
   selector: 'page-registration-employee',
   templateUrl: 'registration-employee.html'
@@ -39,7 +41,9 @@ export class RegistrationEmployee implements OnInit{
               public navParams: NavParams,
               private call:CallNumber,
               private patientService: PatientService,
-              private treatmentService:TreatmentService
+              private treatmentService:TreatmentService,
+              /*private emailComposer: EmailComposer*/
+              private sms: SMS
               ) {
     this.showHideEmpList=false;
     this.showHideEmpForm=false;
@@ -60,6 +64,60 @@ export class RegistrationEmployee implements OnInit{
   }
   onCallNumber(item:Employee){
     this.call.callNumber(item.employeePhone,true);
+  }
+  onSendSMSPatient(item:Patient){
+    let alert = this.alertCtrl.create({
+      title: 'שליחת הודעה',
+      inputs: [
+        {
+          name: 'smsText',
+          placeholder: 'הודעה'
+        }
+      ],
+      buttons: [
+        {
+          text: 'ביטול',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'שליחה',
+          handler: data => {
+            this.sms.send(item.patientPhone.toString(),data.smsText);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  onSendSMSEmployee(item:Employee){
+    let alert = this.alertCtrl.create({
+      title: 'שליחת הודעה',
+      inputs: [
+        {
+          name: 'smsText',
+          placeholder: 'הודעה'
+        }
+      ],
+      buttons: [
+        {
+          text: 'ביטול',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'שליחה',
+          handler: data => {
+            this.sms.send(item.employeePhone,data.smsText);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
   onAddEmployee(form: NgForm) {
     //this.loadList();
@@ -90,11 +148,27 @@ export class RegistrationEmployee implements OnInit{
         if(this.treatmentService.checkIfEmployeeIsntOccupiedDuringThisTime(this.listTreatments,this.employeeName,this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16))) {
           if(this.treatmentService.checkIfRoomIsAvailableDuringThisTime(this.listTreatments,this.treatmentStartDate.slice(0,10),this.treatmentStartDate.slice(11,16),this.treatmentEndDate.slice(11,16),form.value.treatmentRoom)) {
             this.treatmentService.addItem(form.value.treatmentType,this.employeeName, this.patientName, this.treatmentStartDate, this.treatmentEndDate, form.value.treatmentRoom, form.value.notes);
-            form.reset();
-            this.loadItems();
-            this.saveTreatments();
-            this.successWindow("טיפול נוסף בהצלחה");
-            this.changeShowTreatmentForm();
+            let phone = this.treatmentService.getPhoneByName(this.patientName);
+            this.sms.send(phone,             "שלום,"+"\nטיפול נקבע עבורך בתאריך: "+this.treatmentStartDate.slice(0,10)+"\nבין השעות: "+this.treatmentStartDate.slice(11,16)+"-"+this.treatmentEndDate.slice(11,16)+"\nנשמח לראותך,"+"\nהמכון לטיפולי רפואה משלימה - One Body");
+              form.reset();
+              this.loadItems();
+              this.saveTreatments();
+              this.successWindow("טיפול נוסף בהצלחה");
+              this.showHideTreatmentForm=false;
+/*            let mail= this.treatmentService.getMailByName(this.patientName);
+            let email = {
+              to: mail,
+              subject: 'טיפול נקבע עבורך',
+              body: 'How are you? Nice greetings from Leipzig',
+              isHtml: true
+            };
+            this.emailComposer.isAvailable().then((available: boolean) =>{
+              if(available) {
+                //Now we know we can send
+                this.emailComposer.open(email);
+              }
+            });*/
+
           }
           else{
             this.handleError("חדר זה תפוס בשעות אלו");
@@ -169,6 +243,7 @@ export class RegistrationEmployee implements OnInit{
   onLoadPatient(patient: Patient, index: number) {
     this.navCtrl.push(Patients, {patient: patient, index: index});
   }
+
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: '!שגיאה',

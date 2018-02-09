@@ -8,7 +8,7 @@
       </button>
     </ion-buttons>
     <ion-title>
-      <ion-icon name="person-add" padding></ion-icon>עובדים ולקוחות
+      <ion-icon name="people" padding></ion-icon>מטופלים ועובדים
     </ion-title>
 
   </ion-navbar>
@@ -81,7 +81,7 @@
           ion-button
           type="submit"
           block
-          [disabled]="!d.valid">הוסף טיפול</button>
+          [disabled]="!d.valid">הוסף טיפול</button><br>
       </form>
     </div>
   </ion-list>
@@ -164,7 +164,7 @@
           ion-button
           type="submit"
           block
-          [disabled]="!f.valid">הוסף משתמש</button>
+          [disabled]="!f.valid">הוסף מטופל</button><br>
       </form></div>
   </ion-list>
   <ion-list>
@@ -181,11 +181,16 @@
         <ion-item-options side="right" style="direction:ltr">
 
           <ion-buttons>
-
-
             <button
               ion-button
-              color="background">
+              class="iconClass"
+              (click)="onSendSMSPatient(item)"><ion-icon name="mail"></ion-icon>
+              שליחת הודעה
+            </button>
+            <button
+              ion-button
+              class="otherIconClass"
+               (click)="onCallNumber(item)">
               <ion-icon name="call"></ion-icon>
               התקשר
             </button>
@@ -263,7 +268,7 @@
           ion-button
           type="submit"
           block
-          [disabled]="!f.valid">הוסף עובד</button>
+          [disabled]="!f.valid">הוסף עובד</button><br>
       </form></div>
   </ion-list>
 
@@ -282,8 +287,16 @@
 
           <ion-buttons>
             <button
+            ion-button
+            class="iconClass"
+            (click)="onSendSMSEmployee(item)"><ion-icon name="mail"></ion-icon>
+              שליחת הודעה
+            </button>
+
+            <button
               ion-button
-              color="background" (click)="onCallNumber(item)">
+              class="otherIconClass"
+               (click)="onCallNumber(item)">
               <ion-icon name="call"></ion-icon>
               התקשר
             </button>
