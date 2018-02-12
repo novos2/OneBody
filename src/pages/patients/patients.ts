@@ -6,6 +6,8 @@ import {Patient} from "../../models/patient";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
 import {Treatments} from "../treatments/treatments";
+import {EditemployeePage} from "../editemployee/editemployee";
+import {EditpatientPage} from "../editpatient/editpatient";
 /**
  * Generated class for the Patients page.
  *
@@ -67,6 +69,10 @@ export class Patients implements OnInit {
       refresher.complete();
     }, 500);
   }
+  onEditPatient(){
+    this.navCtrl.push(EditpatientPage, { patient: this.patient, index: this.index});
+  }
+
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: '!שגיאה',

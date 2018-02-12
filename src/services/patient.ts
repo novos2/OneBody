@@ -192,7 +192,9 @@ export class PatientService {
   removeItem(index: number) {
     this.patients.splice(index, 1);
   }
-
+  updatePatient(index:number, patientID:number, patientName:string, patientPhone:number, patientAddress:string,patientGender:string,patientMail:string, patientDOB: Date){
+    this.patients[index] = new Patient(patientID,patientName,patientGender,patientAddress,patientPhone,patientMail,patientDOB);
+  }
   storeList(token: string) {
     const userId = this.authService.getActiveUser().uid;
     return this.http

@@ -76,7 +76,8 @@
     <button *ngIf="isAdmin()"
             ion-button
             icon-right
-            color="secondary">
+            color="secondary"
+            (click)="onEditPatient()">
       <ion-icon name="create" ></ion-icon>
       עריכה
     </button>

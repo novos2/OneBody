@@ -25,6 +25,7 @@ import {TreatmentService} from "../services/treatment";
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
 import { EditemployeePage} from "../pages/editemployee/editemployee";
+import {EditpatientPage} from "../pages/editpatient/editpatient";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EditemployeePage} from "../pages/editemployee/editemployee";
     RegistrationEmployee,
     Tabs,
     EditemployeePage,
+    EditpatientPage,
     Marketing,
     Employees,
     Patients,
@@ -56,6 +58,7 @@ import { EditemployeePage} from "../pages/editemployee/editemployee";
     RegistrationEmployee,
     Tabs,
     EditemployeePage,
+    EditpatientPage,
     Marketing,
     Employees,
     Repadmin,
