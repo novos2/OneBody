@@ -17,7 +17,9 @@ export class EmployeeService {
     this.employees.push(new Employee(employeeID,employeeName,employeePhone,employeeGender,employeeMail,employeeDOB));
     console.log(this.employees);
   }
-
+  updateEmployee(index:number, employeeID:number, employeeName:string, employeePhone:string, employeeGender:string,employeeMail:string, employeeDOB: Date){
+    this.employees[index] = new Employee(employeeID,employeeName,employeePhone,employeeGender,employeeMail,employeeDOB);
+  }
   addItems(items: Employee[]) {
     this.employees.push(...items);
   }

@@ -6,6 +6,7 @@ import {AuthService} from "../../services/auth";
 import {Response} from "@angular/http";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
+import {EditemployeePage} from "../editemployee/editemployee";
 
 
 @IonicPage()
@@ -60,6 +61,9 @@ export class Employees implements OnInit {
       buttons: ['חזרה']
     });
     alert.present();
+  }
+  onEditEmployee(){
+    this.navCtrl.push(EditemployeePage, { employee: this.employee, index: this.index});
   }
   onDeleteEmployee() {
     const alert=this.alertCtrl.create({
