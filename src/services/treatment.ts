@@ -174,21 +174,28 @@ import {PatientService} from "./patient";
 @Injectable()
 export class TreatmentService {
   private treatments: Treatment[] = [];
-  private patients:Patient[];
-  constructor(private http: Http, private authService: AuthService,private empService:EmployeeService,private alertCtrl:AlertController,private patientService:PatientService) {
+  private patients: Patient[];
+
+  constructor(private http: Http, private authService: AuthService, private empService: EmployeeService, private alertCtrl: AlertController, private patientService: PatientService) {
   }
 
-  addItem(treatmentType:string,employeeName: string,patientName: string,treatmentStartDate: string, treatmentEndDate: string,treatmentRoom: string,notes:string) {
-    this.treatments.push(new Treatment(treatmentType,employeeName,patientName,treatmentStartDate,treatmentEndDate,treatmentRoom,notes));
+  addItem(treatmentType: string, employeeName: string, patientName: string, treatmentStartDate: string, treatmentEndDate: string, treatmentRoom: string, notes: string) {
+    this.treatments.push(new Treatment(treatmentType, employeeName, patientName, treatmentStartDate, treatmentEndDate, treatmentRoom, notes));
     console.log(this.treatments);
+  }
+
+  updateTreatment(index: number, treatmentType: string, employeeName: string, patientName: string, treatmentStartDate: string, treatmentEndDate: string, treatmentRoom: string, notes: string) {
+    this.treatments[index] = new Treatment(treatmentType, employeeName, patientName, treatmentStartDate, treatmentEndDate, treatmentRoom, notes);
   }
 
   addItems(items: Treatment[]) {
     this.treatments.push(...items);
   }
+
   getActiveUser() {
     return firebase.auth().currentUser;
   }
+
   getItems() {
 
     return this.treatments.slice();
@@ -206,7 +213,8 @@ export class TreatmentService {
         return response.json();
       });
   }
-  private loadList(){
+
+  private loadList() {
     /*const loading = this.loadingCtrl.create({
      content: '...אנא המתן'
      });
@@ -232,6 +240,7 @@ export class TreatmentService {
         }
       );
   }
+
   fetchList(token: string) {
     const userId = this.authService.getActiveUser().uid;
     return this.http.get('https://onebody-356cf.firebaseio.com/treatment.json?auth=' + token)
@@ -246,19 +255,37 @@ export class TreatmentService {
         }
       });
   }
-  checkIfStartDateEarlierThanEndDate(startDate:string, endDate:string){
+
+  checkIfStartDateEarlierThanEndDate(startDate: string, endDate: string) {
     return startDate == endDate;
   }
-  checkIfHourDateEarierIsValid(h1:string, h2:string){
-    return h1<h2;
+
+  checkIfHourDateEarierIsValid(h1: string, h2: string) {
+    return h1 < h2;
   }
-  checkIfEmployeeIsntOccupiedDuringThisTime(list:Treatment[],empName:string,startDate:string,h1:string,h2:string){
-    //change logics
-    for(let n of list){
-      if(n.treatmentStartDate.slice(0,10)==startDate){
-        if(n.employeeName==empName){
-          console.log("n.treatmentEndDate is: "+n.treatmentEndDate.slice(11,16)+" start date of current treatment is "+h1+" end date of current treatment is: "+h2);
-          if(!((h1<n.treatmentStartDate.slice(11,16)&&h2<=n.treatmentStartDate.slice(11,16))||(h1>=n.treatmentEndDate.slice(11,16)&&h2>n.treatmentEndDate.slice(11,16)))){
+
+  checkIfEmployeeIsntOccupiedDuringThisTime(list: Treatment[], empName: string, startDate: string, h1: string, h2: string) {
+    for (let n of list) {
+      if (n.treatmentStartDate.slice(0, 10) == startDate) {
+        if (n.employeeName == empName) {
+          console.log("n.treatmentEndDate is: " + n.treatmentEndDate.slice(11, 16) + " start date of current treatment is " + h1 + " end date of current treatment is: " + h2);
+          if (!((h1 < n.treatmentStartDate.slice(11, 16) && h2 <= n.treatmentStartDate.slice(11, 16)) || (h1 >= n.treatmentEndDate.slice(11, 16) && h2 > n.treatmentEndDate.slice(11, 16)))) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  checkForEditTreatmentIfEmployeeIsntOccupiedDuringThisTime(list:Treatment[],empName:string,patientName:string,startDate:string,h1:string,h2:string) {
+    for (let n of list) {
+      if (n.treatmentStartDate.slice(0, 10) == startDate) {
+        if (n.employeeName == empName) {
+          if(n.patientName==patientName){
+            return true;
+          }
+          if (!((h1 < n.treatmentStartDate.slice(11, 16) && h2 <= n.treatmentStartDate.slice(11, 16)) || (h1 >= n.treatmentEndDate.slice(11, 16) && h2 > n.treatmentEndDate.slice(11, 16)))) {
             return false;
           }
         }
@@ -278,14 +305,31 @@ export class TreatmentService {
     }
     return true;
   }
-  getPhoneByName(patientName:string):string{
-  this.patients=this.patientService.getItems();
-  for(let n of this.patients){
-    if(n.patientName==patientName){
-      return n.patientPhone.toString();
+  checkForEditIfRoomIsAvailableDuringThisTime(list:Treatment[],empName:string,patientName:string,startDate:string,h1:string,h2:string,roomNumber:string){
+    for(let n of list){
+      if(n.treatmentStartDate.slice(0,10)==startDate){
+        if(!((h1<n.treatmentStartDate.slice(11,16)&&h2<=n.treatmentStartDate.slice(11,16))||(h1>=n.treatmentEndDate.slice(11,16)&&h2>n.treatmentEndDate.slice(11,16)))){
+          if(n.treatmentRoom==roomNumber){
+            if(n.employeeName==empName&&n.patientName==patientName){
+              return true;
+            }
+            else {
+              return false;
+            }
+          }
+        }
+      }
     }
+    return true;
   }
-  return patientName;
+  getPhoneByName(patientName:string):string{
+    this.patients=this.patientService.getItems();
+    for(let n of this.patients){
+      if(n.patientName==patientName){
+        return n.patientPhone.toString();
+      }
+    }
+    return patientName;
   }
   getIndexByName(empName:string,patientName:string,dateOfTreatment:string){
     this.loadList();
