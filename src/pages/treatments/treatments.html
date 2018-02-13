@@ -1,0 +1,72 @@
+
+<ion-header dir="rtl">
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="people" padding></ion-icon>טיפול</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+<!--סוג טיפול, מטפל, לקוח, תאריך תחילת טיפול, תאריך סיום טיפול, מס' חדר, הערות
+-->
+<ion-content padding class="content">
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h2>{{ treatment.patientName}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-list padding>
+      <ion-col>
+        <ion-row>
+          <ion-item>
+            סוג טיפול: {{treatment.treatmentType}}
+          </ion-item>
+          <ion-item>
+            מטפל: {{treatment.employeeName}}
+          </ion-item>
+          <ion-item>
+            תאריך טיפול:  {{treatment.treatmentStartDate.slice(0,10)}}
+          </ion-item>
+          <ion-item>
+            שעות טיפול: {{treatment.treatmentEndDate.slice(11,16)}} -  {{treatment.treatmentStartDate.slice(11,16)}}
+          </ion-item>
+          <ion-item>
+            מס' חדר:{{treatment.treatmentRoom}}
+          </ion-item>
+          <ion-item>
+            הערות:{{treatment.notes}}
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-list>
+  </ion-grid>
+
+  <ion-buttons class="editButtons">
+    <button *ngIf="isAdmin()"
+            ion-button
+            icon-right
+            color="secondary"
+            (click)="onLoadEditTreatment()">
+      <ion-icon name="create" ></ion-icon>
+      עריכה
+    </button>
+
+    <button
+      ion-button
+      icon-right
+      color="danger"
+      (click)="onDeleteTreatment()">
+      <ion-icon name="trash"></ion-icon>
+      מחיקה
+    </button>
+
+  </ion-buttons>
+</ion-content>

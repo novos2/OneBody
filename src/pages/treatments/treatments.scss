@@ -1,0 +1,15 @@
+page-treatments {
+
+    .content{
+      background: #56CA96;
+    }
+    .editButtons{
+      margin-right: 130px;
+    }
+    .alertDanger{
+      $alert-md-box-shadow-color:red;
+      $alert-md-background-color:red;
+      $alert-input-placeholder-color:red;
+    }
+
+}

@@ -1,0 +1,61 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>עריכת עובד</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class = "content">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>מספר זהות</ion-label>
+        <ion-input
+          type="tel"
+          formControlName="employeeID"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>שם פרטי ושם משפחה</ion-label>
+        <ion-input
+          type="text"
+          formControlName="employeeName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>טלפון</ion-label>
+        <ion-input
+          type="tel"
+          formControlName="employeePhone"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked >מין</ion-label>
+        <ion-select formControlName="employeeGender">
+          <ion-option value="זכר"  >זכר</ion-option>
+          <ion-option value="נקבה" >נקבה</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>דוא"ל</ion-label>
+        <ion-input
+          type="email"
+          formControlName="employeeMail"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>תאריך לידה</ion-label>
+        <ion-input
+          type="date"
+          formControlName="employeeDOB"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <button
+      type="submit"
+      ion-button
+      block
+      [disabled]="!employeeForm.valid">עריכת עובד</button>
+  </form>
+</ion-content>
