@@ -65,8 +65,21 @@
     </ion-list>
     <button
       type="submit"
+      round
       ion-button
       block
       [disabled]="!patientForm.valid">עריכת מטופל</button>
   </form>
+  <ion-buttons class="editButtons">
+    <button
+      ion-button
+      round
+      icon-right
+      color="danger"
+      margin-left
+      (click)="onDeletePatient()">
+      <ion-icon name="trash"></ion-icon>
+      מחיקה
+    </button>
+  </ion-buttons>
 </ion-content>

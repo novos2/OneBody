@@ -331,6 +331,32 @@ export class TreatmentService {
     }
     return patientName;
   }
+  private amountTreatmentPerEmployee(treatmentList:Treatment[],emp:string,wantedDate:string){
+    let count=0;
+    let dateOfMonth=wantedDate.slice(0,7);
+    for(let n of treatmentList){
+      if(n.employeeName==emp){
+        if(n.treatmentStartDate.slice(0,7)==dateOfMonth){
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+  
+  private amountTreatmentPerPatient(treatmentList:Treatment[],patient:string,wantedDate:string){
+    let count=0;
+    let dateOfMonth=wantedDate.slice(0,7);
+    for(let n of treatmentList){
+      if(n.patientName==patient){
+        if(n.treatmentStartDate.slice(0,7)==dateOfMonth){
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
   getIndexByName(empName:string,patientName:string,dateOfTreatment:string){
     this.loadList();
     let count=0;

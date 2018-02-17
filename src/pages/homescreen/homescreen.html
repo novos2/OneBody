@@ -27,7 +27,7 @@
   <div class="title">
     <ion-label>
     <ion-datetime  float-left type="datetime-local" displayFormat="MMMM-DD-YYYY"  [(ngModel)]="myDate" class="align" (ionChange)="selectData(myDate)" pickerFormat="YYYY MMMM DD"></ion-datetime>
-      <button ion-button float-right round icon-only color="primary" clear class="zeroButton"(click)="zeroDay()"><ion-icon md="md-refresh-circle"></ion-icon></button>
+      <button ion-button round float-right round icon-only color="primary" clear class="zeroButton"(click)="zeroDay()"><ion-icon md="md-refresh-circle"></ion-icon></button>
     </ion-label>
   </div>
   <div class="showFilteredTreatment" *ngIf="filterTreatmentFlag==true">
@@ -46,52 +46,4 @@
   </div>
   <br>
   <br>
- <!-- <div *ngIf="filterTreatmentFlag==false">
-    <ion-list>
-      <ion-item>
-        <h2>אין טיפולים ביום זה</h2>
-      </ion-item>
-    </ion-list>
-  </div>
-  -->
- <!-- <ion-list>
-    <ion-list-header>
-      <ion-icon name="calendar" item-left (click)="showCalendar()"></ion-icon>
-
-      <h1 (click)="showCalendar()">לו"ז יומי</h1>
-
-    </ion-list-header>
-    <div class="showNotes" *ngIf="calendarItems==true">
-      <ion-item>
-        <h2>12:00-13:00</h2>
-        <h3>טיפול שבדי לאורי</h3>
-      </ion-item>
-      <ion-item>
-        <h2>13:30-14:30</h2>
-        <h3>רקמות עמוקות לליאור</h3>
-      </ion-item>
-      <ion-item>
-        <h2>15:00-17:00</h2>
-        <h3>שיחת צוות</h3>
-      </ion-item>
-
-    </div>
-    </ion-list>
-  <ion-list>
-    <ion-list-header>
-      <ion-icon name="list-box" item-left (click)="showNotes()"></ion-icon>
-      <h1 (click)="showNotes()">הערות</h1>
-    </ion-list-header>
-    <div class="showNotes" *ngIf="notes==true">
-      <ion-item>
-        <h3>לבדוק מלאי מגבות</h3>
-      </ion-item>
-      <ion-item>
-        <h3>לדבר עם אורלי</h3>
-      </ion-item>
-      <ion-item>
-        <h3>לדבר עם משה עוד יומיים</h3>
-      </ion-item>
-    </div>
-  </ion-list>-->
-</ion-content>
+ </ion-content>

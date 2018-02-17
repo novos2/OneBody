@@ -27,8 +27,19 @@
   <ion-grid>
     <ion-row>
       <ion-col text-center>
-        <h2>{{ employee.employeeName}}</h2>
+        <h1>{{ employee.employeeName}}</h1>
       </ion-col>
+      <ion-buttons class="editButtons">
+        <button *ngIf="isAdmin()"
+                ion-button
+                icon-right
+                round
+                color="secondary"
+                (click)="onEditEmployee()">
+          <ion-icon name="create" ></ion-icon>
+          עריכה
+        </button>
+      </ion-buttons>
     </ion-row>
     <ion-list padding>
       <ion-col>
@@ -49,46 +60,68 @@
             תאריך לידה:{{employee.employeeDOB}}
           </ion-item>
         </ion-row>
+        <ion-buttons align-items-end>
+          <button
+            ion-button
+            round
+            side="right"
+            class="iconClass"
+            (click)="onSendSMSEmployee()"><ion-icon name="mail"></ion-icon>
+          </button>
+          <button
+            ion-button
+            round
+            class="otherIconClass"
+            (click)="onCallNumber()">
+            <ion-icon name="call"></ion-icon>
+          </button>
+        </ion-buttons>
       </ion-col>
     </ion-list>
   </ion-grid>
-  <div class="showFilteredTreatment" *ngIf="filterTreatmentFlag==true">
+  <div class="showFilteredTreatment" *ngIf="filterFutureTreatmentFlag==true">
   <ion-grid>
     <ion-row>
       <ion-col text-center>
-        <h2>טיפולים</h2>
+        <h2>טיפולים עתידיים</h2>
       </ion-col>
     </ion-row>
     <ion-list padding>
+      <ion-searchbar (ionInput)="searchFuturePatients($event)" animated="true"></ion-searchbar>
       <ion-col>
         <ion-row>
-          <ion-item *ngFor="let item of filteredTreatmentList; let i = index">
+          <ion-item *ngFor="let item of filteredFutureTreatmentList; let i = index" (click)="onLoadTreatment(item, i)">
             <h2>{{item.treatmentType}}</h2>
             <h2>{{item.patientName}}</h2>
-            <h2>{{item.treatmentStartDate.slice(0,10)}}</h2>
+            <h2>{{item.treatmentEndDate.slice(11,16)}} - {{item.treatmentStartDate.slice(11,16)}} , {{item.treatmentStartDate.slice(0,10)}}</h2>
+            <h2>חדר {{item.treatmentRoom}}</h2>
           </ion-item>
         </ion-row>
       </ion-col>
     </ion-list>
   </ion-grid>
   </div>
-  <ion-buttons class="editButtons">
-    <button *ngIf="isAdmin()"
-      ion-button
-      icon-right
-      color="secondary"
-    (click)="onEditEmployee()">
-      <ion-icon name="create" ></ion-icon>
-      עריכה
-    </button>
+  <div class="showFilteredTreatment" *ngIf="filterPastTreatmentFlag==true">
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          <h2>טיפולי עבר</h2>
+        </ion-col>
+      </ion-row>
+      <ion-list padding>
+        <ion-searchbar (ionInput)="searchPastPatients($event)" animated="true"></ion-searchbar>
+        <ion-col>
+          <ion-row>
+            <ion-item *ngFor="let item of filteredPastTreatmentList; let i = index" (click)="onLoadTreatment(item, i)">
+              <h2>{{item.treatmentType}}</h2>
+              <h2>{{item.patientName}}</h2>
+              <h2>{{item.treatmentEndDate.slice(11,16)}} - {{item.treatmentStartDate.slice(11,16)}} , {{item.treatmentStartDate.slice(0,10)}}</h2>
+              <h2>חדר {{item.treatmentRoom}}</h2>
+            </ion-item>
+          </ion-row>
+        </ion-col>
+      </ion-list>
+    </ion-grid>
+  </div>
 
-    <button
-      ion-button
-      icon-right
-      color="danger"
-      (click)="onDeleteEmployee()">
-      <ion-icon name="trash"></ion-icon>
-      מחיקה
-    </button>
-  </ion-buttons>
 </ion-content>

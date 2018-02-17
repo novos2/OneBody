@@ -147,5 +147,22 @@ export class EditpatientPage implements OnInit{
     });
     alert.present();
   }
-
+  onDeletePatient() {
+    const alert=this.alertCtrl.create({
+      title:'!אזהרה',
+      message:'?האם הינך בטוח שברצונך למחוק',
+      buttons:[{text:'ביטול'},{
+        text:'אישור',
+        handler:data=>{
+          this.patientService.removeItem(this.index);
+          this.savePatient();
+          this.ionViewDidLoad();
+          this.successWindow("מטופל נמחק בהצלחה");
+          this.navCtrl.popToRoot();
+        }
+      }],
+      cssClass:"alertDanger"
+    });
+    alert.present();
+  }
 }

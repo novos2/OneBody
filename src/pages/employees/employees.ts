@@ -7,7 +7,10 @@ import {Response} from "@angular/http";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
 import {EditemployeePage} from "../editemployee/editemployee";
-
+import * as moment from 'moment';
+import {Treatments} from "../treatments/treatments";
+import {SMS} from "@ionic-native/sms";
+import {CallNumber} from "@ionic-native/call-number";
 
 @IonicPage()
 @Component({
@@ -18,9 +21,12 @@ export class Employees implements OnInit {
   flag:boolean;
   listItems: Employee[];
   listTreatments:Treatment[];
-  filteredTreatmentList:Treatment[];
+  filteredFutureTreatmentList:Treatment[];
+  filteredPastTreatmentList:Treatment[];
   employee: Employee;
-  filterTreatmentFlag:boolean;
+  filterFutureTreatmentFlag:boolean;
+  filterPastTreatmentFlag:boolean;
+  myDate= moment().format();
   index: number;
   constructor(public navParams: NavParams,
               private empService: EmployeeService,
@@ -28,7 +34,9 @@ export class Employees implements OnInit {
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController,
               private navCtrl:NavController,
-              private treatmentService:TreatmentService) {
+              private treatmentService:TreatmentService,
+              private sms: SMS,
+              private call:CallNumber) {
     this.flag=false;
   }
   ngOnInit() {
@@ -65,23 +73,35 @@ export class Employees implements OnInit {
   onEditEmployee(){
     this.navCtrl.push(EditemployeePage, { employee: this.employee, index: this.index});
   }
-  onDeleteEmployee() {
-    const alert=this.alertCtrl.create({
-      title:'!אזהרה',
-      message:'?האם הינך בטוח שברצונך למחוק',
-      buttons:[{text:'ביטול'},{
-        text:'אישור',
-        handler:data=>{
-          this.empService.removeItem(this.index);
-          this.saveList();
-          this.ionViewDidLoad();
-          this.successWindow("עובד נמחק בהצלחה");
-          this.navCtrl.popToRoot();
+  onSendSMSEmployee(){
+    let alert = this.alertCtrl.create({
+      title: 'שליחת הודעה',
+      inputs: [
+        {
+          name: 'smsText',
+          placeholder: 'הודעה'
         }
-      }],
-      cssClass:"alertDanger"
+      ],
+      buttons: [
+        {
+          text: 'ביטול',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'שליחה',
+          handler: data => {
+            this.sms.send(this.employee.employeePhone,data.smsText);
+          }
+        }
+      ]
     });
     alert.present();
+  }
+  onCallNumber(){
+    this.call.callNumber(this.employee.employeePhone,true);
   }
   private loadList(){
     /*const loading = this.loadingCtrl.create({
@@ -124,6 +144,7 @@ export class Employees implements OnInit {
                 if (list) {
                   this.listTreatments = list;
                   this.selectData(this.employee.employeeName);
+                  this.selectPastData(this.employee.employeeName);
                 } else {
                   this.listTreatments = [];
                 }
@@ -136,10 +157,73 @@ export class Employees implements OnInit {
         }
       );
   }
+  searchPastPatients(ev: any) {
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+    // Reset items back to all of the items
+    if(val.trim()=='') {
+      this.loadTreatments();
+      this.selectPastData(this.employee.employeeName);
+    }
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.filteredPastTreatmentList = this.filteredPastTreatmentList.filter((item) => {
+        return (item.patientName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+  onLoadTreatment(treatment: Treatment, index: number) {
+    this.navCtrl.push(Treatments, {treatment: treatment, index: index});
+  }
+  searchFuturePatients(ev: any) {
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+    // Reset items back to all of the items
+    if(val.trim()=='') {
+      this.loadTreatments();
+      this.selectData(this.employee.employeeName);
+    }
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.filteredFutureTreatmentList = this.filteredFutureTreatmentList.filter((item) => {
+        return (item.patientName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
   selectData(empName:string){
-    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.employeeName==empName);
-    if(this.filteredTreatmentList.length>0){
-      this.filterTreatmentFlag=true;
+    this.filteredFutureTreatmentList=this.listTreatments.filter(obj=> obj.employeeName==empName&&obj.treatmentStartDate.slice(0,10)>=this.myDate.slice(0,10)).sort((tr1,tr2)=>{
+      let date1=tr1.treatmentStartDate.slice(0,16);
+      let date2 = tr2.treatmentStartDate.slice(0,16);
+      if(date1<date2)
+        return -1;
+      else if(date1==date2){
+        return 0;
+      }
+      else{
+        return 1;
+      }
+    });
+    if(this.filteredFutureTreatmentList.length>0){
+      this.filterFutureTreatmentFlag=true;
+    }
+  }
+  selectPastData(empName:string){
+    this.filteredPastTreatmentList=this.listTreatments.filter(obj=> obj.employeeName==empName&&obj.treatmentStartDate.slice(0,10)<this.myDate.slice(0,10)).sort((tr1,tr2)=>{
+      let date1=tr1.treatmentStartDate.slice(0,16);
+      let date2 = tr2.treatmentStartDate.slice(0,16);
+      if(date1<date2)
+        return 1;
+      else if(date1==date2){
+        return 0;
+      }
+      else{
+        return -1;
+      }
+    });
+    if(this.filteredPastTreatmentList.length>0){
+      this.filterPastTreatmentFlag=true;
     }
   }
   private saveList(){

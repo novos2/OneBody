@@ -20,9 +20,9 @@ import {EmployeeService} from "../services/employee";
 import {Patients} from "../pages/patients/patients";
 import {CallNumber} from "@ionic-native/call-number";
 import {Homescreen} from "../pages/homescreen/homescreen";
-import {Calendar} from "@ionic-native/calendar";
+//import {Calendar} from "@ionic-native/calendar";
 import {TreatmentService} from "../services/treatment";
-import { EmailComposer } from '@ionic-native/email-composer';
+//import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
 import { EditemployeePage} from "../pages/editemployee/editemployee";
 import {EditpatientPage} from "../pages/editpatient/editpatient";
@@ -79,9 +79,7 @@ import {EdittreatmentPage} from "../pages/edittreatment/edittreatment";
     EmployeeService,
     TreatmentService,
     CallNumber,
-    EmailComposer,
     SMS,
-    Calendar,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

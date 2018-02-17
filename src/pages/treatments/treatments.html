@@ -52,6 +52,7 @@
   <ion-buttons class="editButtons">
     <button *ngIf="isAdmin()"
             ion-button
+            round
             icon-right
             color="secondary"
             (click)="onLoadEditTreatment()">
@@ -61,6 +62,7 @@
 
     <button
       ion-button
+      round
       icon-right
       color="danger"
       (click)="onDeleteTreatment()">

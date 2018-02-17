@@ -117,6 +117,24 @@ export class EditemployeePage implements OnInit{
     alert.present();
 
   }
+  onDeleteEmployee() {
+    const alert=this.alertCtrl.create({
+      title:'!אזהרה',
+      message:'?האם הינך בטוח שברצונך למחוק',
+      buttons:[{text:'ביטול'},{
+        text:'אישור',
+        handler:data=>{
+          this.empService.removeItem(this.index);
+          this.saveEmployees();
+          this.ionViewDidLoad();
+          this.successWindow("עובד נמחק בהצלחה");
+          this.navCtrl.popToRoot();
+        }
+      }],
+      cssClass:"alertDanger"
+    });
+    alert.present();
+  }
   private saveEmployees(){
     const loading = this.loadingCtrl.create({
       content: '...אנא המתן'

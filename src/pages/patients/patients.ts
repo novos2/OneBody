@@ -8,6 +8,9 @@ import {TreatmentService} from "../../services/treatment";
 import {Treatments} from "../treatments/treatments";
 import {EditemployeePage} from "../editemployee/editemployee";
 import {EditpatientPage} from "../editpatient/editpatient";
+import * as moment from "moment";
+import {CallNumber} from "@ionic-native/call-number";
+import {SMS} from "@ionic-native/sms";
 /**
  * Generated class for the Patients page.
  *
@@ -33,9 +36,13 @@ export class Patients implements OnInit {
   flag:boolean;
   listItems: Patient[];
   patient: Patient;
+
   listTreatments:Treatment[];
-  filteredTreatmentList:Treatment[];
-  filterTreatmentFlag:boolean;
+  filteredFutureTreatmentList:Treatment[];
+  filterFutureTreatmentFlag:boolean;
+  filteredPastTreatmentList:Treatment[];
+  filterPastTreatmentFlag:boolean;
+  myDate= moment().format();
   index: number;
   constructor(public navParams: NavParams,
               private patientService: PatientService,
@@ -43,7 +50,9 @@ export class Patients implements OnInit {
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController,
               private navCtrl:NavController,
-              private treatmentService:TreatmentService) {
+              private treatmentService:TreatmentService,
+              private call:CallNumber,
+              private sms: SMS) {
     this.flag=false;
   }
   ngOnInit() {
@@ -140,6 +149,7 @@ export class Patients implements OnInit {
                 if (list) {
                   this.listTreatments = list;
                   this.selectData(this.patient.patientName);
+                  this.selectPastData(this.patient.patientName);
                 } else {
                   this.listTreatments = [];
                 }
@@ -152,10 +162,71 @@ export class Patients implements OnInit {
         }
       );
   }
+  searchFutureEmployees(ev: any) {
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+    // Reset items back to all of the items
+    if(val.trim()=='') {
+      this.loadTreatments();
+      this.selectData(this.patient.patientName);
+    }
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.filteredFutureTreatmentList = this.filteredFutureTreatmentList.filter((item) => {
+        return (item.employeeName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+  searchPastEmployees(ev: any) {
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+    // Reset items back to all of the items
+    if(val.trim()=='') {
+      this.loadTreatments();
+      this.selectPastData(this.patient.patientName);
+    }
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.filteredPastTreatmentList = this.filteredPastTreatmentList.filter((item) => {
+        return (item.employeeName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
   selectData(patientName:string){
-    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.patientName==patientName);
-    if(this.filteredTreatmentList.length>0){
-      this.filterTreatmentFlag=true;
+    this.filteredFutureTreatmentList=this.listTreatments.filter(obj=> obj.patientName==patientName&&obj.treatmentStartDate.slice(0,10)>=this.myDate.slice(0,10)).sort((tr1,tr2)=>{
+      let date1=tr1.treatmentStartDate.slice(0,16);
+      let date2 = tr2.treatmentStartDate.slice(0,16);
+      if(date1<date2)
+        return -1;
+      else if(date1==date2){
+        return 0;
+      }
+      else{
+        return 1;
+      }
+    });
+    if(this.filteredFutureTreatmentList.length>0){
+      this.filterFutureTreatmentFlag=true;
+    }
+  }
+
+  selectPastData(patientName:string){
+    this.filteredPastTreatmentList=this.listTreatments.filter(obj=> obj.patientName==patientName&&obj.treatmentStartDate.slice(0,10)<this.myDate.slice(0,10)).sort((tr1,tr2)=>{
+      let date1=tr1.treatmentStartDate.slice(0,16);
+      let date2 = tr2.treatmentStartDate.slice(0,16);
+      if(date1<date2)
+        return 1;
+      else if(date1==date2){
+        return 0;
+      }
+      else{
+        return -1;
+      }
+    });
+    if(this.filteredPastTreatmentList.length>0){
+      this.filterPastTreatmentFlag=true;
     }
   }
   onLoadTreatment(treatment: Treatment, index: number) {
@@ -189,6 +260,36 @@ export class Patients implements OnInit {
   }
   private isAdmin(){
     return this.authService.isAdmin;
+  }
+  onSendSMSPatient(){
+    let alert = this.alertCtrl.create({
+      title: 'שליחת הודעה',
+      inputs: [
+        {
+          name: 'smsText',
+          placeholder: 'הודעה'
+        }
+      ],
+      buttons: [
+        {
+          text: 'ביטול',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'שליחה',
+          handler: data => {
+            this.sms.send(this.patient.patientPhone.toString(),data.smsText);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  onCallNumber(){
+    this.call.callNumber(this.patient.patientPhone.toString(),true);
   }
 }
 

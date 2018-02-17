@@ -7,14 +7,10 @@ import {AuthService} from "../../services/auth";
 import { SMS } from '@ionic-native/sms';
 import {EmployeeService} from "../../services/employee";
 import {Employee} from "../../models/employee";
+import {Treatment} from "../../models/treatment";
+import {TreatmentService} from "../../services/treatment";
 
 
-/**
- * Generated class for the RepadminPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-repadmin',
@@ -25,13 +21,15 @@ export class Repadmin {
   showHideEmpSMS:boolean;
   listPatients: Patient[];
   listEmployees: Employee[];
+  listTreatments:Treatment[];
   constructor(private navCtrl: NavController,
               private navParams: NavParams,
               private alertCtrl:AlertController,
               private patientService:PatientService,
               private authService:AuthService,
               private sms:SMS,
-              private empService:EmployeeService) {
+              private empService:EmployeeService,
+              private treatmentService:TreatmentService) {
     this.showHidePatientSMS=false;
     this.showHideEmpSMS=false;
   }
@@ -39,6 +37,7 @@ export class Repadmin {
   ionViewDidLoad() {
     this.loadPatient();
     this.loadEmployees();
+    this.loadTreatments();
   }
   changeShowStatusPatientForm(){
     this.showHidePatientSMS = !this.showHidePatientSMS;
@@ -119,6 +118,33 @@ export class Repadmin {
                   this.listEmployees = list;
                 } else {
                   this.listEmployees = [];
+                }
+              },
+              error => {
+                //loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+  }
+
+  private loadTreatments(){
+    /*const loading = this.loadingCtrl.create({
+     content: '...אנא המתן'
+     });
+     loading.present();*/
+    this.authService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.treatmentService.fetchList(token)
+            .subscribe(
+              (list: Treatment[]) => {
+                //loading.dismiss();
+                if (list) {
+                  this.listTreatments = list;
+                } else {
+                  this.listTreatments = [];
                 }
               },
               error => {

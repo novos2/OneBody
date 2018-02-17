@@ -49,7 +49,7 @@ export class EdittreatmentPage implements OnInit{
           if(this.treatmentService.checkForEditIfRoomIsAvailableDuringThisTime(this.listTreatments,this.treatment.employeeName,this.treatment.patientName,value.treatmentStartDate.slice(0,10),value.treatmentStartDate.slice(11,16),value.treatmentEndDate.slice(11,16),value.treatmentRoom)) {
             this.treatmentService.updateTreatment(this.index, value.treatmentType, this.treatment.employeeName, this.treatment.patientName, value.treatmentStartDate, value.treatmentEndDate, value.treatmentRoom, value.notes);
             let phone = this.treatmentService.getPhoneByName(value.patientName);
-            this.sms.send(phone,             "שלום,"+"\nהטיפול שנקבע עבורך בתאריך: "+this.treatment.treatmentStartDate.slice(0,10)+"\nבין השעות: "+this.treatment.treatmentStartDate.slice(11,16)+"-"+this.treatment.treatmentEndDate.slice(11,16)+"שונה לתאריך: "+value.treatmentStartDate.slice(0,10)+"\nבין השעות: "+value.treatmentStartDate.slice(11,16)+"-"+value.treatmentEndDate.slice(11,16)+"\nנשמח לראותך,"+"\nהמכון לטיפולי רפואה משלימה - One Body");
+            //this.sms.send(phone,             "שלום,"+"\nטיפול שונה עבורך לתאריך: "+value.treatmentStartDate.slice(0,10)+"\nבין השעות: "+value.treatmentStartDate.slice(11,16)+"-"+value.treatmentEndDate.slice(11,16)+"\nנשמח לראותך,"+"\nהמכון לטיפולי רפואה משלימה - One Body");
             this.loadItems();
             this.saveTreatments();
             this.successWindow("טיפול נערך בהצלחה");

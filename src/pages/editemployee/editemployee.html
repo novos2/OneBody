@@ -54,8 +54,20 @@
     </ion-list>
     <button
       type="submit"
+      round
       ion-button
       block
       [disabled]="!employeeForm.valid">עריכת עובד</button>
   </form>
+  <ion-buttons class="editButtons">
+  <button
+    ion-button
+    icon-right
+    round
+    color="danger"
+    (click)="onDeleteEmployee()">
+    <ion-icon name="trash"></ion-icon>
+    מחיקה
+  </button>
+  </ion-buttons>
 </ion-content>

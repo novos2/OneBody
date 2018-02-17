@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header >
 
   <ion-navbar>
     <ion-buttons end>
@@ -22,7 +22,7 @@
 
 <ion-content padding>
 
-  <ion-list>
+  <ion-list >
     <ion-list-header>
       <ion-icon name="mail" class="iconClass" item-left (click)="changeShowStatusPatientForm()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusPatientForm()">שליחת הודעה למטופלים</h1>
@@ -30,7 +30,7 @@
 
     <div class = "showForm" *ngIf="showHidePatientSMS==true">
       <form #f="ngForm" (ngSubmit)="sendSMSToAllPatients(f)" >
-        <ion-list>
+        <ion-list >
           <ion-item>
             <ion-label stacked>הכנס טקסט</ion-label>
             <ion-input
@@ -43,13 +43,14 @@
         </ion-list>
         <button
           ion-button
+          round
           type="submit"
           name="mail"
           block
           [disabled]="!f.valid">שליחה</button><br>
       </form></div>
   </ion-list>
-  <ion-list>
+  <ion-list >
     <ion-list-header>
       <ion-icon name="mail" class="iconClass" item-left (click)="changeShowStatusEmployeeForm()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusEmployeeForm()">שליחת הודעה לעובדים</h1>
@@ -70,10 +71,14 @@
         </ion-list>
         <button
           ion-button
+          round
           type="submit"
           name="mail"
           block
           [disabled]="!f.valid">שליחה</button><br>
       </form></div>
   </ion-list>
+  <br>
+  <h1>דוחות</h1>
+
 </ion-content>
