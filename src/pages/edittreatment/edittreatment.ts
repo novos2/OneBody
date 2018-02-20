@@ -23,11 +23,20 @@ export class EdittreatmentPage implements OnInit{
   treatment:Treatment;
   listTreatments: Treatment[];
   index:number;
+  user:string;
+  adminFlag:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams,private alertCtrl:AlertController,
               private authService:AuthService,
               private loadingCtrl: LoadingController,
               private treatmentService:TreatmentService,
               private sms: SMS) {
+    this.user = this.authService.getActiveUser().email;
+    if(this.user=='test@test.com'){
+      this.adminFlag=true;
+    }
+    else {
+      this.adminFlag=false;
+    }
   }
   ngOnInit(){
     this.treatment=this.navParams.get('treatment');
@@ -48,7 +57,7 @@ export class EdittreatmentPage implements OnInit{
         if(this.treatmentService.checkForEditTreatmentIfEmployeeIsntOccupiedDuringThisTime(this.listTreatments,this.treatment.employeeName,this.treatment.patientName,value.treatmentStartDate.slice(0,10),value.treatmentStartDate.slice(11,16),value.treatmentEndDate.slice(11,16))) {
           if(this.treatmentService.checkForEditIfRoomIsAvailableDuringThisTime(this.listTreatments,this.treatment.employeeName,this.treatment.patientName,value.treatmentStartDate.slice(0,10),value.treatmentStartDate.slice(11,16),value.treatmentEndDate.slice(11,16),value.treatmentRoom)) {
             this.treatmentService.updateTreatment(this.index, value.treatmentType, this.treatment.employeeName, this.treatment.patientName, value.treatmentStartDate, value.treatmentEndDate, value.treatmentRoom, value.notes);
-            let phone = this.treatmentService.getPhoneByName(value.patientName);
+            //let phone = this.treatmentService.getPhoneByName(value.patientName);
             //this.sms.send(phone,             "שלום,"+"\nטיפול שונה עבורך לתאריך: "+value.treatmentStartDate.slice(0,10)+"\nבין השעות: "+value.treatmentStartDate.slice(11,16)+"-"+value.treatmentEndDate.slice(11,16)+"\nנשמח לראותך,"+"\nהמכון לטיפולי רפואה משלימה - One Body");
             this.loadItems();
             this.saveTreatments();
@@ -162,4 +171,29 @@ export class EdittreatmentPage implements OnInit{
     alert.present();
 
   }
+  private onDeleteTreatment() {
+    const alert=this.alertCtrl.create({
+      title:'!אזהרה',
+      message:'?האם הינך בטוח שברצונך למחוק',
+      buttons:[{text:'ביטול'},{
+        text:'אישור',
+        handler:data=>{
+          this.index=this.treatmentService.getIndexByName(this.treatment.employeeName,this.treatment.patientName,this.treatment.treatmentStartDate);
+          //let phone = this.treatmentService.getPhoneByName(this.treatment.patientName);
+          /*          this.sms.send(phone,            "שלום,"+"\nהטיפול שנקבע עבורך בתאריך: "+this.treatment.treatmentStartDate.slice(0,10)+"\nבין השעות: "+this.treatment.treatmentStartDate.slice(11,16)+"-"+this.treatment.treatmentEndDate.slice(11,16)+"\nבוטל."+"לתיאום מחדש אנא צור קשר עימנו."+"\nבתודה מראש,"+"\nהמכון לטיפולי רפואה משלימה - One Body");*/
+
+          //        "שלום,"+"\nהטיפול שנקבע עבורך בתאריך: "+this.treatment.treatmentStartDate.slice(0,10)+"\n בין השעות: "+this.treatment.treatmentStartDate.slice(11,16)+"-"+this.treatment.treatmentEndDate.slice(11,16)+" בוטל."+"\nבתודה מראש,"+"\nהמכון לטיפולי רפואה משלימה - One Body"
+
+          this.treatmentService.removeItem(this.index);
+          this.loadItems();
+          this.saveTreatments();
+          this.successWindow("טיפול נמחק בהצלחה");
+          this.navCtrl.popToRoot();
+        }
+      }],
+      cssClass:"alertDanger"
+    });
+    alert.present();
+  }
+
 }

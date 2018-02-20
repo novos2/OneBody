@@ -4,6 +4,8 @@ import * as moment from 'moment';
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
 import {Treatments} from "../treatments/treatments";
+import {AuthService} from "../../services/auth";
+import {EmployeeService} from "../../services/employee";
 @IonicPage()
 @Component({
   selector: 'page-homescreen',
@@ -15,12 +17,24 @@ export class Homescreen{
   notes:boolean;
   listEmpty:boolean;
   filterTreatmentFlag:boolean;
+  user:string;
+  flagIsAdmin:boolean;
   listTreatments:Treatment[];
   filteredTreatmentList: Treatment[];
-  constructor(private alertCtrl: AlertController,private treatmentService:TreatmentService,private navCtrl:NavController,) {
+  constructor(private alertCtrl: AlertController,private treatmentService:TreatmentService,
+              private navCtrl:NavController,
+              private authService:AuthService,
+              private empService:EmployeeService) {
     this.notes=false;
     this.filterTreatmentFlag=false;
     this.today=moment().format();
+     this.user = this.authService.getActiveUser().email;
+    if(this.user=='test@test.com'){
+      this.flagIsAdmin=true;
+    }
+    else {
+      this.flagIsAdmin=false;
+    }
   }
 
 
@@ -36,22 +50,42 @@ export class Homescreen{
   }
   selectData(date: string){
     let modifiedDate = date.slice(0,10);
-    this.filteredTreatmentList=this.listTreatments.filter(obj=> obj.treatmentStartDate.slice(0,10)==modifiedDate).sort((tr1,tr2)=>{
-      let date1=tr1.treatmentStartDate.slice(11,16);
-      let date2 = tr2.treatmentStartDate.slice(11,16);
-      if(date1<date2)
-        return -1;
-      else if(date1==date2){
-        return 0;
+    if(this.flagIsAdmin) {
+      this.filteredTreatmentList = this.listTreatments.filter(obj => obj.treatmentStartDate.slice(0, 10) == modifiedDate).sort((tr1, tr2) => {
+        let date1 = tr1.treatmentStartDate.slice(11, 16);
+        let date2 = tr2.treatmentStartDate.slice(11, 16);
+        if (date1 < date2)
+          return -1;
+        else if (date1 == date2) {
+          return 0;
+        }
+        else {
+          return 1;
+        }
+      });
+      if (this.filteredTreatmentList.length == 0) {
+        this.listEmpty = true;
       }
-      else{
-        return 1;
-      }
-    });
-    if(this.filteredTreatmentList.length==0){
-      this.listEmpty=true;
+      this.filterTreatmentFlag = true;
     }
-    this.filterTreatmentFlag=true;
+    else{
+      this.filteredTreatmentList = this.listTreatments.filter(obj => obj.treatmentStartDate.slice(0, 10) == modifiedDate && this.empService.findEmpNameByFireBaseMail(obj.employeeName)).sort((tr1, tr2) => {
+        let date1 = tr1.treatmentStartDate.slice(11, 16);
+        let date2 = tr2.treatmentStartDate.slice(11, 16);
+        if (date1 < date2)
+          return -1;
+        else if (date1 == date2) {
+          return 0;
+        }
+        else {
+          return 1;
+        }
+      });
+      if (this.filteredTreatmentList.length == 0) {
+        this.listEmpty = true;
+      }
+      this.filterTreatmentFlag = true;
+    }
   }
   zeroDay(){
     this.myDate= moment().format();
@@ -94,5 +128,8 @@ export class Homescreen{
       buttons: ['חזרה']
     });
     alert.present();
+  }
+  private isAdmin(){
+    return this.authService.isAdmin;
   }
 }

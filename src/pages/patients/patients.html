@@ -15,7 +15,7 @@
 </ion-header>
 
 
-<ion-content padding class="content">
+<ion-content >
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -24,6 +24,7 @@
       refreshingText="מעדכן...">
     </ion-refresher-content>
   </ion-refresher>
+  <ion-content padding class="backImg">
   <ion-grid>
     <ion-row>
       <ion-col text-center>
@@ -122,4 +123,5 @@
       </ion-list>
     </ion-grid>
   </div>
+  </ion-content>
 </ion-content>

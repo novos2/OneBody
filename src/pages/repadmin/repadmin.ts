@@ -19,6 +19,8 @@ import {TreatmentService} from "../../services/treatment";
 export class Repadmin {
   showHidePatientSMS:boolean;
   showHideEmpSMS:boolean;
+  user:string;
+  adminFlag:boolean;
   listPatients: Patient[];
   listEmployees: Employee[];
   listTreatments:Treatment[];
@@ -32,6 +34,13 @@ export class Repadmin {
               private treatmentService:TreatmentService) {
     this.showHidePatientSMS=false;
     this.showHideEmpSMS=false;
+    this.user = this.authService.getActiveUser().email;
+    if(this.user=='test@test.com'){
+      this.adminFlag=true;
+    }
+    else {
+      this.adminFlag=false;
+    }
   }
 
   ionViewDidLoad() {

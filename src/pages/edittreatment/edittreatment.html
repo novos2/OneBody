@@ -8,22 +8,22 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="backImg">
   <form [formGroup]="treatmentForm" (ngSubmit)="onSubmit()">
     <ion-list>
       <ion-item>
-        <ion-label >הכנס סוג טיפול</ion-label>
+        <ion-label >סוג טיפול</ion-label>
         <ion-textarea
           type="text"
           formControlName="treatmentType"
         ></ion-textarea>
         </ion-item>
         <ion-item>
-          <ion-label>בחר תאריך ושעת התחלת טיפול</ion-label>
+          <ion-label>תחילת טיפול</ion-label>
           <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY"  formControlName="treatmentStartDate" ></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label>בחר תאריך ושעת סיום טיפול</ion-label>
+          <ion-label>סיום טיפול</ion-label>
           <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY"     formControlName="treatmentEndDate" ></ion-datetime>
         </ion-item>
         <ion-item>
@@ -49,4 +49,17 @@
       block
       [disabled]="!treatmentForm.valid">עריכת טיפול</button>
   </form>
+
+  <ion-buttons class="editButtons" *ngIf="adminFlag==true">
+    <button
+      ion-button
+      round
+      icon-right
+      color="danger"
+      margin-left
+      (click)="onDeleteTreatment()">
+      <ion-icon name="trash"></ion-icon>
+      מחיקה
+    </button>
+  </ion-buttons>
 </ion-content>

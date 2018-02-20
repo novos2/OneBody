@@ -106,37 +106,9 @@ export class Treatments implements OnInit{
     });
     alert.present();
   }
-  private isAdmin(){
-    return this.authService.isAdmin;
-  }
+
   onLoadEditTreatment(){
     this.index=this.treatmentService.getIndexByName(this.treatment.employeeName,this.treatment.patientName,this.treatment.treatmentStartDate);
     this.navCtrl.push(EdittreatmentPage, { treatment: this.treatment, index: this.index});
   }
-
-  private onDeleteTreatment() {
-    const alert=this.alertCtrl.create({
-      title:'!אזהרה',
-      message:'?האם הינך בטוח שברצונך למחוק',
-      buttons:[{text:'ביטול'},{
-        text:'אישור',
-        handler:data=>{
-          this.index=this.treatmentService.getIndexByName(this.treatment.employeeName,this.treatment.patientName,this.treatment.treatmentStartDate);
-          //let phone = this.treatmentService.getPhoneByName(this.treatment.patientName);
-          /*          this.sms.send(phone,            "שלום,"+"\nהטיפול שנקבע עבורך בתאריך: "+this.treatment.treatmentStartDate.slice(0,10)+"\nבין השעות: "+this.treatment.treatmentStartDate.slice(11,16)+"-"+this.treatment.treatmentEndDate.slice(11,16)+"\nבוטל."+"לתיאום מחדש אנא צור קשר עימנו."+"\nבתודה מראש,"+"\nהמכון לטיפולי רפואה משלימה - One Body");*/
-
-          //        "שלום,"+"\nהטיפול שנקבע עבורך בתאריך: "+this.treatment.treatmentStartDate.slice(0,10)+"\n בין השעות: "+this.treatment.treatmentStartDate.slice(11,16)+"-"+this.treatment.treatmentEndDate.slice(11,16)+" בוטל."+"\nבתודה מראש,"+"\nהמכון לטיפולי רפואה משלימה - One Body"
-
-          this.treatmentService.removeItem(this.index);
-          this.saveTreatments();
-          this.loadList();
-          this.successWindow("טיפול נמחק בהצלחה");
-          this.navCtrl.popToRoot();
-        }
-      }],
-      cssClass:"alertDanger"
-    });
-    alert.present();
   }
-
-}

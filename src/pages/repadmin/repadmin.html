@@ -19,8 +19,11 @@
 
 </ion-header>
 
-
-<ion-content padding>
+<ion-content padding *ngIf="adminFlag==false" class="backImg">
+  <br>
+  <h1>אין הרשאה מתאימה לצפיה בדף זה</h1>
+</ion-content>
+<ion-content padding *ngIf="adminFlag==true" class="backImg">
 
   <ion-list >
     <ion-list-header>

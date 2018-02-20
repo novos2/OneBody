@@ -32,6 +32,8 @@ export class RegistrationEmployee implements OnInit{
   treatmentEndDate: string;
   employeeName:string;
   patientName:string;
+  user:string;
+  adminFlag:boolean;
   searchQuery: string = '';
   constructor(private empService: EmployeeService,
               private authService: AuthService,
@@ -50,6 +52,13 @@ export class RegistrationEmployee implements OnInit{
     this.showHideTreatmentForm=false;
     this.showHidePatientList=false;
     this.showHidePatientForm=false;
+    this.user = this.authService.getActiveUser().email;
+    if(this.user=='test@test.com'){
+      this.adminFlag=true;
+    }
+    else {
+      this.adminFlag=false;
+    }
   }
   ngOnInit() {
 
@@ -238,6 +247,7 @@ export class RegistrationEmployee implements OnInit{
     this.listTreatments=this.treatmentService.getItems();
   }
   onLoadEmployee(employee: Employee, index: number) {
+    if(this.adminFlag)
     this.navCtrl.push(Employees, {employee: employee, index: index});
   }
   onLoadPatient(patient: Patient, index: number) {

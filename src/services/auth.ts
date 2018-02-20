@@ -21,10 +21,14 @@ export class AuthService {
   }
 
   isAdmin(){
-    const user = firebase.auth().currentUser.email;
+    let user = firebase.auth().currentUser.email;
     if(user=='test@test.com'){
+      console.log("i'm admin");
       return true;
     }
-    else return false;
+    else {
+      console.log("i'm not admin");
+      return false;
+    }
   }
 }

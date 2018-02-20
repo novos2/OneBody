@@ -9,8 +9,10 @@ import {AlertController} from "ionic-angular";
 export class EmployeeService {
   private employees: Employee[] = [];
    listItems: Employee[];
-
+  userMail:string;
   constructor(private http: Http, private authService: AuthService,private alertCtrl:AlertController) {
+    this.userMail = this.authService.getActiveUser().email;
+    this.loadEmp();
   }
 
   addItem(employeeID: number,employeeName: string,employeePhone: string,employeeGender:string,employeeMail: string,employeeDOB: Date) {
@@ -109,6 +111,37 @@ export class EmployeeService {
           return n.employeeName;
         }
       }
+    }
+      findEmpNameByFireBaseMail(empName:string){
+      for(let n of this.listItems){
+        if(n.employeeMail==this.userMail&&n.employeeName==empName)
+        {
+          return true;
+        }
+      }
+      return false;
+    }
+    loadEmp(){
+      this.authService.getActiveUser().getToken()
+        .then(
+          (token: string) => {
+            this.fetchList(token)
+              .subscribe(
+                (list: Employee[]) => {
+                  //loading.dismiss();
+                  if (list) {
+                    this.listItems = list;
+                  } else {
+                    this.listItems = [];
+                  }
+                },
+                error => {
+                  //loading.dismiss();
+                  this.handleError(error.json().error);
+                }
+              );
+          }
+        );
     }
    checkIfExists(list:Employee[],x:number){
     for(let n of list){

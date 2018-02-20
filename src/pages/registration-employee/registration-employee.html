@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content class = "content" padding dir="rtl">
+<ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -25,6 +25,7 @@
       refreshingText="מעדכן...">
     </ion-refresher-content>
   </ion-refresher>
+  <ion-content class="backImg" padding dir="rtl">
   <ion-list>
     <ion-list-header>
       <ion-icon name="add" class="iconClass" item-left (click)="changeShowTreatmentForm()"></ion-icon>
@@ -208,7 +209,7 @@
     </div>
   </ion-list>
   <br>
-  <ion-list>
+  <ion-list *ngIf="adminFlag==true">
     <ion-list-header>
       <ion-icon name="person-add" class="iconClass" item-left (click)="changeShowStatusForm()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusForm()">הוספת עובד</h1>
@@ -321,4 +322,5 @@
       </ion-item-sliding>
     </div>
   </ion-list>
+</ion-content>
 </ion-content>
