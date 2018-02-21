@@ -9,7 +9,7 @@ import {EmployeeService} from "../../services/employee";
 import {Employee} from "../../models/employee";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
-
+import * as HighCharts from 'highcharts';
 
 @IonicPage()
 @Component({
@@ -47,6 +47,25 @@ export class Repadmin {
     this.loadPatient();
     this.loadEmployees();
     this.loadTreatments();
+    var myChart = HighCharts.chart('container', {
+      chart: {
+        type: 'spline'
+      },
+      title: {
+        text: 'Fruit Consumption'
+      },
+      xAxis: {
+        categories: ['Apples', 'Bananas', 'Oranges']
+      },
+      yAxis: {
+        title: {
+          text: 'Fruit eaten'
+        }
+      },
+      series: [{
+        name: 'Jane',
+        data: (function () {
+          var data = []; for (let i = 0; i <= 5; i += 1) { data.push({ x: i, y: Math.floor(Math.random() * 10) + 0 }); } return data; }()) }, { name: 'John', data: (function () { var data = []; for (let i = 0; i <= 5; i += 1) { data.push({ x: i, y: Math.floor(Math.random() * 10) + 0 }); } return data; }()) }] });
   }
   changeShowStatusPatientForm(){
     this.showHidePatientSMS = !this.showHidePatientSMS;
