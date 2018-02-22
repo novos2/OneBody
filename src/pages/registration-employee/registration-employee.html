@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding dir="rtl" class="backImg">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -25,7 +25,6 @@
       refreshingText="מעדכן...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-content class="backImg" padding dir="rtl">
   <ion-list>
     <ion-list-header>
       <ion-icon name="add" class="iconClass" item-left (click)="changeShowTreatmentForm()"></ion-icon>
@@ -322,5 +321,11 @@
       </ion-item-sliding>
     </div>
   </ion-list>
-</ion-content>
+  <ion-buttons>
+    <button ion-button
+      round
+      (click)="onLoadReports()">
+      דוחות
+    </button>
+  </ion-buttons>
 </ion-content>

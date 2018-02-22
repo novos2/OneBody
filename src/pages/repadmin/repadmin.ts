@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams} from "ionic-angular";
 import {NgForm} from "@angular/forms";
 import {Patient} from "../../models/patient";
@@ -16,14 +16,14 @@ import * as HighCharts from 'highcharts';
   selector: 'page-repadmin',
   templateUrl: 'repadmin.html',
 })
-export class Repadmin {
+export class Repadmin implements OnInit{
   showHidePatientSMS:boolean;
   showHideEmpSMS:boolean;
   user:string;
   adminFlag:boolean;
   listPatients: Patient[];
   listEmployees: Employee[];
-  listTreatments:Treatment[];
+  listTreatments:Treatment[]=[];
   constructor(private navCtrl: NavController,
               private navParams: NavParams,
               private alertCtrl:AlertController,
@@ -41,31 +41,22 @@ export class Repadmin {
     else {
       this.adminFlag=false;
     }
-  }
 
+  }
+  ngOnInit() {
+    this.listTreatments=this.navParams.get('treatments');
+    this.listEmployees=this.navParams.get('employees');
+    //console.log("list treatments is "+this.listTreatments);
+
+  }
   ionViewDidLoad() {
     this.loadPatient();
     this.loadEmployees();
     this.loadTreatments();
-    var myChart = HighCharts.chart('container', {
-      chart: {
-        type: 'spline'
-      },
-      title: {
-        text: 'Fruit Consumption'
-      },
-      xAxis: {
-        categories: ['Apples', 'Bananas', 'Oranges']
-      },
-      yAxis: {
-        title: {
-          text: 'Fruit eaten'
-        }
-      },
-      series: [{
-        name: 'Jane',
-        data: (function () {
-          var data = []; for (let i = 0; i <= 5; i += 1) { data.push({ x: i, y: Math.floor(Math.random() * 10) + 0 }); } return data; }()) }, { name: 'John', data: (function () { var data = []; for (let i = 0; i <= 5; i += 1) { data.push({ x: i, y: Math.floor(Math.random() * 10) + 0 }); } return data; }()) }] });
+    //this.listTreatments=this.treatmentService.getItems();
+    if(this.adminFlag==true) {
+      this.reportA();
+    }
   }
   changeShowStatusPatientForm(){
     this.showHidePatientSMS = !this.showHidePatientSMS;
@@ -76,7 +67,6 @@ export class Repadmin {
   sendSMSToAllPatients(form: NgForm){
     this.loadPatient();
     for(let n of this.listPatients){
-      console.log("test " + n);
       this.sms.send(n.patientPhone.toString(),form.value.smsText);
     }
     form.reset();
@@ -87,7 +77,6 @@ export class Repadmin {
   sendSMSToAllEmployees(form:NgForm){
     this.loadEmployees();
     for(let n of this.listEmployees){
-      console.log("test " + n);
       this.sms.send(n.employeePhone.toString(),form.value.smsText);
     }
     form.reset();
@@ -192,4 +181,69 @@ export class Repadmin {
     });
     alert.present();
   }
+    private reportA()
+    {
+
+      let employeeNames={categories: []};
+      for(let n of this.listEmployees){
+        employeeNames.categories.push(n.employeeName);
+      }
+
+      /*for (var i in this.listTreatments) {
+        xAxiss.categories[i].push(this.listTreatments[i].employeeName);
+      }*/
+     // let xAxis=this.xAxis;
+      //console.log(this.listTreatments);
+      /*for (let i = 0; i < this.listTreatments.length ; i++) {
+        xAxis[i].categories.push(this.listTreatments[i].employeeName);
+      }*/
+
+
+      //let xAxis=this.treatmentService.reportA();
+      //this.loadTreatments();
+      var myChart = HighCharts.chart('container', {
+        chart: {
+          type: 'spline'
+        },
+        title: {
+          text: 'Fruit Consumption'
+        },
+        xAxis: employeeNames
+              //xAxiss
+          /*categories:(function () {
+            var categories = [];
+            for (let i = 0; i <this.listTreatments.length; i++) {
+              categories.push(this.listTreatments[i].employeeName);
+
+            }
+            return categories;
+          }())*/
+        ,
+        yAxis: {
+          title: {
+            text: 'Fruit eaten'
+          }
+        },
+        series: [{
+          name: 'Jane',
+          data: (function () {
+            var data = [];
+            for (let i = 0; i <= 10; i += 1) {
+              data.push({x: i, y: Math.floor(Math.random() * 10) + 0});
+            }
+            return data;
+          }())
+        }, {
+          name: 'John', data: (function () {
+            var data = [];
+            for (let i = 0; i <= 10; i += 1) {
+              data.push({x: i, y: Math.floor(Math.random() * 10) + 0});
+            }
+            return data;
+          }())
+        }]
+      });
+
+    }
+
 }

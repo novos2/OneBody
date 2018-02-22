@@ -28,6 +28,8 @@ export class Employees implements OnInit {
   filterPastTreatmentFlag:boolean;
   myDate= moment().format();
   index: number;
+
+
   constructor(public navParams: NavParams,
               private empService: EmployeeService,
               private authService: AuthService,
@@ -38,6 +40,7 @@ export class Employees implements OnInit {
               private sms: SMS,
               private call:CallNumber) {
     this.flag=false;
+
   }
   ngOnInit() {
     this.employee = this.navParams.get('employee');

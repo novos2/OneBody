@@ -59,7 +59,7 @@
       block
       [disabled]="!employeeForm.valid">עריכת עובד</button>
   </form>
-  <ion-buttons class="editButtons">
+  <ion-buttons class="editButtons" *ngIf="adminFlag==true">
   <button
     ion-button
     icon-right

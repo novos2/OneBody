@@ -22,10 +22,19 @@ export class EditemployeePage implements OnInit{
   employee:Employee;
   listEmployees: Employee[];
   index:number;
+  user:string;
+  adminFlag:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService:AuthService,
               private empService:EmployeeService,
               private alertCtrl:AlertController,
               private loadingCtrl: LoadingController) {
+    this.user = this.authService.getActiveUser().email;
+    if(this.user=='test@test.com'){
+      this.adminFlag=true;
+    }
+    else {
+      this.adminFlag=false;
+    }
   }
   ionViewDidLoad(){
     this.loadEmployees();

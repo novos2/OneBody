@@ -41,6 +41,7 @@ export class Homescreen{
 
   ionViewDidLoad(){
     this.loadTreatments();
+
   }
   doRefresh(refresher) {
     this.loadTreatments();

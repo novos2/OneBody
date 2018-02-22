@@ -11,6 +11,7 @@ import {PatientService} from "../../services/patient";
 import {Patients} from "../patients/patients";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
+import {Repadmin} from "../repadmin/repadmin";
 //import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
 @Component({
@@ -34,6 +35,7 @@ export class RegistrationEmployee implements OnInit{
   patientName:string;
   user:string;
   adminFlag:boolean;
+  userMail:string;
   searchQuery: string = '';
   constructor(private empService: EmployeeService,
               private authService: AuthService,
@@ -59,6 +61,7 @@ export class RegistrationEmployee implements OnInit{
     else {
       this.adminFlag=false;
     }
+    this.userMail = this.authService.getActiveUser().email;
   }
   ngOnInit() {
 
@@ -245,15 +248,21 @@ export class RegistrationEmployee implements OnInit{
     this.listEmployees = this.empService.getItems();
     this.listPatients=this.patientService.getItems();
     this.listTreatments=this.treatmentService.getItems();
+    //console.log("list in load items "+this.listTreatments);
   }
   onLoadEmployee(employee: Employee, index: number) {
-    if(this.adminFlag)
+    if(this.adminFlag||employee.employeeMail==this.userMail)
     this.navCtrl.push(Employees, {employee: employee, index: index});
   }
   onLoadPatient(patient: Patient, index: number) {
+    if(this.adminFlag)
     this.navCtrl.push(Patients, {patient: patient, index: index});
   }
-
+  onLoadReports(){
+    //if(this.adminFlag)
+    this.loadItems();
+    this.navCtrl.push(Repadmin,{treatments:this.listTreatments,employees:this.listEmployees});
+  }
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: '!שגיאה',
@@ -411,4 +420,5 @@ export class RegistrationEmployee implements OnInit{
     });
     alert.present();
   }
+
 }
