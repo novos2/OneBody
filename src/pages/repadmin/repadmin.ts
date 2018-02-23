@@ -415,9 +415,15 @@ export class Repadmin implements OnInit {
           }
         },
         series: [{
+          showInLegend: false,
           name: 'כמות',
           data: this.countedTreatmentsEmp
-        }]
+        }],
+        tooltip: {
+          formatter: function() {
+            return this.x + '- ' + this.y;
+          }
+        }
       });
     }
   }
@@ -446,9 +452,15 @@ export class Repadmin implements OnInit {
           }
         },
         series: [{
+          showInLegend: false,
           name: 'כמות',
           data: this.countedTreatmentsEmp
-        }]
+        }],
+        tooltip: {
+          formatter: function() {
+            return this.x + '- ' + this.y;
+          }
+        }
       });
     }
   }
@@ -483,9 +495,15 @@ export class Repadmin implements OnInit {
           }
         },
         series: [{
+          showInLegend: false,
           name: 'כמות',
           data: this.treatmenyByTypeOnlyNumbers,
-        }]
+        }],
+        tooltip: {
+          formatter: function() {
+            return this.x + '- ' + this.y;
+          }
+        }
       });
     }
   }
@@ -509,15 +527,22 @@ export class Repadmin implements OnInit {
           }
         },
         series: [{
+          showInLegend: false,
           name: 'כמות',
           data: this.treatmenyByTypeOnlyNumbers,
-        }]
+        }],
+        tooltip: {
+          formatter: function() {
+            return this.x + '- ' + this.y;
+          }
+        }
       });
     }
   }
 
   private changeShowContainer3(){
     this.changeShowContainerZ=!this.changeShowContainerZ;
+
    // if(this.changeShowContainerZ)
     this.reportCYearly();
   }
@@ -543,9 +568,15 @@ export class Repadmin implements OnInit {
           }
         },
         series: [{
+          showInLegend: false,
           name: 'כמות',
           data: this.countedTreatmentsOverall,
-        }]
+        }],
+        tooltip: {
+          formatter: function() {
+            return this.x + '- ' + this.y;
+          }
+        }
       });
 
     }

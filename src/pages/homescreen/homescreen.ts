@@ -67,6 +67,9 @@ export class Homescreen{
       if (this.filteredTreatmentList.length == 0) {
         this.listEmpty = true;
       }
+      else{
+        this.listEmpty=false;
+      }
       this.filterTreatmentFlag = true;
     }
     else{
@@ -84,6 +87,9 @@ export class Homescreen{
       });
       if (this.filteredTreatmentList.length == 0) {
         this.listEmpty = true;
+      }
+      else{
+        this.listEmpty=false;
       }
       this.filterTreatmentFlag = true;
     }
