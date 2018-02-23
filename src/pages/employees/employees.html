@@ -29,17 +29,6 @@
       <ion-col text-center>
         <h1>{{ employee.employeeName}}</h1>
       </ion-col>
-      <ion-buttons class="editButtons">
-        <button
-                ion-button
-                icon-right
-                round
-                color="secondary"
-                (click)="onEditEmployee()">
-          <ion-icon name="create" ></ion-icon>
-          עריכה
-        </button>
-      </ion-buttons>
     </ion-row>
     <ion-list padding>
       <ion-col>
@@ -60,7 +49,7 @@
             תאריך לידה:{{employee.employeeDOB}}
           </ion-item>
         </ion-row>
-        <ion-buttons align-items-end>
+        <ion-buttons align-items-end style="padding-right: auto">
           <button
             ion-button
             round
@@ -74,6 +63,15 @@
             class="otherIconClass"
             (click)="onCallNumber()">
             <ion-icon name="call"></ion-icon>
+          </button>
+          <button
+            ion-button
+            icon-right
+            round
+            color="secondary"
+            (click)="onEditEmployee()">
+            <ion-icon name="create" ></ion-icon>
+            עריכה
           </button>
         </ion-buttons>
       </ion-col>

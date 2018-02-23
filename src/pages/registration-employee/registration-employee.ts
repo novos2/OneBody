@@ -167,20 +167,6 @@ export class RegistrationEmployee implements OnInit{
               this.saveTreatments();
               this.successWindow("טיפול נוסף בהצלחה");
               this.showHideTreatmentForm=false;
-/*            let mail= this.treatmentService.getMailByName(this.patientName);
-            let email = {
-              to: mail,
-              subject: 'טיפול נקבע עבורך',
-              body: 'How are you? Nice greetings from Leipzig',
-              isHtml: true
-            };
-            this.emailComposer.isAvailable().then((available: boolean) =>{
-              if(available) {
-                //Now we know we can send
-                this.emailComposer.open(email);
-              }
-            });*/
-
           }
           else{
             this.handleError("חדר זה תפוס בשעות אלו");
@@ -200,7 +186,6 @@ export class RegistrationEmployee implements OnInit{
   }
 
   onAddPatient(form: NgForm) {
-    //this.loadList();
     if(!this.patientService.checkIfExists(this.listPatients,form.value.patientID)) {
       this.patientService.addItem(form.value.patientID, form.value.patientName,
         form.value.patientGender,form.value.patientAddress, form.value.patientPhone, form.value.patientMail,form.value.patientDOB);
@@ -248,7 +233,6 @@ export class RegistrationEmployee implements OnInit{
     this.listEmployees = this.empService.getItems();
     this.listPatients=this.patientService.getItems();
     this.listTreatments=this.treatmentService.getItems();
-    //console.log("list in load items "+this.listTreatments);
   }
   onLoadEmployee(employee: Employee, index: number) {
     if(this.adminFlag||employee.employeeMail==this.userMail)
@@ -258,11 +242,11 @@ export class RegistrationEmployee implements OnInit{
     if(this.adminFlag)
     this.navCtrl.push(Patients, {patient: patient, index: index});
   }
-  onLoadReports(){
+  /*onLoadReports(){
     //if(this.adminFlag)
     this.loadItems();
     this.navCtrl.push(Repadmin,{treatments:this.listTreatments,employees:this.listEmployees});
-  }
+  }*/
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: '!שגיאה',
@@ -286,6 +270,18 @@ export class RegistrationEmployee implements OnInit{
                 //loading.dismiss();
                 if (list) {
                   this.listEmployees = list;
+                  this.listEmployees.sort((name1, name2) => {
+                    let nameX = name1.employeeName;
+                    let nameY = name2.employeeName;
+                    if (nameX < nameY)
+                      return -1;
+                    else if (nameX == nameY) {
+                      return 0;
+                    }
+                    else {
+                      return 1;
+                    }
+                  });
                 } else {
                   this.listEmployees = [];
                 }
@@ -360,6 +356,18 @@ export class RegistrationEmployee implements OnInit{
                 //loading.dismiss();
                 if (list) {
                   this.listPatients = list;
+                  this.listPatients.sort((name1, name2) => {
+                    let nameX = name1.patientName;
+                    let nameY = name2.patientName;
+                    if (nameX < nameY)
+                      return -1;
+                    else if (nameX == nameY) {
+                      return 0;
+                    }
+                    else {
+                      return 1;
+                    }
+                  });
                 } else {
                   this.listPatients = [];
                 }

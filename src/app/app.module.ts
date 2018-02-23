@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import {RegistrationPatient} from '../pages/registration-patient/registration-patient';
 import {Tabs} from '../pages/tabs/tabs';
-import {Marketing} from '../pages/marketing/marketing';
 import {Employees} from '../pages/employees/employees';
 import {Treatments} from '../pages/treatments/treatments';
 import {Repadmin} from "../pages/repadmin/repadmin";
@@ -20,14 +19,11 @@ import {EmployeeService} from "../services/employee";
 import {Patients} from "../pages/patients/patients";
 import {CallNumber} from "@ionic-native/call-number";
 import {Homescreen} from "../pages/homescreen/homescreen";
-//import {Calendar} from "@ionic-native/calendar";
 import {TreatmentService} from "../services/treatment";
-//import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
 import { EditemployeePage} from "../pages/editemployee/editemployee";
 import {EditpatientPage} from "../pages/editpatient/editpatient";
 import {EdittreatmentPage} from "../pages/edittreatment/edittreatment";
-
 @NgModule({
   declarations: [
     MyApp,
@@ -37,7 +33,6 @@ import {EdittreatmentPage} from "../pages/edittreatment/edittreatment";
     EditemployeePage,
     EditpatientPage,
     EdittreatmentPage,
-    Marketing,
     Employees,
     Patients,
     Repadmin,
@@ -62,7 +57,6 @@ import {EdittreatmentPage} from "../pages/edittreatment/edittreatment";
     EditemployeePage,
     EditpatientPage,
     EdittreatmentPage,
-    Marketing,
     Employees,
     Repadmin,
     Treatments,

@@ -20,17 +20,6 @@
       <ion-col text-center>
         <h2>{{ treatment.patientName}}</h2>
       </ion-col>
-      <ion-buttons class="editButtons">
-        <button
-                ion-button
-                round
-                icon-right
-                color="secondary"
-                (click)="onLoadEditTreatment()">
-          <ion-icon name="create" ></ion-icon>
-          עריכה
-        </button>
-      </ion-buttons>
     </ion-row>
     <ion-list padding>
       <ion-col>
@@ -53,6 +42,16 @@
           <ion-item>
             הערות:{{treatment.notes}}
           </ion-item>
+          <button
+            ion-button
+            round
+            icon-right
+            style="margin-right: auto"
+            color="secondary"
+            (click)="onLoadEditTreatment()">
+            <ion-icon name="create" ></ion-icon>
+            עריכה
+          </button>
         </ion-row>
       </ion-col>
     </ion-list>

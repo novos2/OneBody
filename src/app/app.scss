@@ -23,8 +23,11 @@ font-face{
   font-family: Roboto;
 }
 .sidemenu{
-  background-color: #2e94ab;
+  background:linear-gradient(to top,#3cb371 0%, #ffffff 100%);
 }
 .backImg {
   background:linear-gradient(to top,#3cb371 0%, #ffffff 100%);
+}
+.rtlAlert {
+  direction: rtl;
 }

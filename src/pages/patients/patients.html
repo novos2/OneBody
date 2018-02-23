@@ -15,8 +15,8 @@
 </ion-header>
 
 
-<ion-content >
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+<ion-content padding class="backImg">
+  <ion-refresher (ionRefresh)="doRefresh($event)" >
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="גלול מטה לעדכון"
@@ -24,25 +24,13 @@
       refreshingText="מעדכן...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-content padding class="backImg">
   <ion-grid>
     <ion-row>
       <ion-col text-center>
         <h1>{{ patient.patientName}}</h1>
       </ion-col>
-      <ion-buttons class="editButtons">
-        <button *ngIf="isAdmin()"
-                ion-button
-                round
-                icon-right
-                color="secondary"
-                (click)="onEditPatient()">
-          <ion-icon name="create" ></ion-icon>
-          עריכה
-        </button>
-      </ion-buttons>
     </ion-row>
-    <ion-list padding>
+    <ion-list>
       <ion-col>
         <ion-row>
           <ion-item>
@@ -61,7 +49,7 @@
             תאריך לידה:{{patient.patientDOB}}
           </ion-item>
         </ion-row>
-        <ion-buttons align-items-end>
+        <ion-buttons align-items-end style="padding-right: auto">
           <button
             ion-button
             round
@@ -75,6 +63,15 @@
             (click)="onCallNumber()">
             <ion-icon name="call"></ion-icon>
           </button>
+          <button *ngIf="isAdmin()"
+                  ion-button
+                  round
+                  icon-right
+                  color="secondary"
+                  (click)="onEditPatient()">
+            <ion-icon name="create" ></ion-icon>
+            עריכה
+          </button>
         </ion-buttons>
       </ion-col>
     </ion-list>
@@ -86,7 +83,7 @@
         <h2>טיפולים עתידיים</h2>
       </ion-col>
     </ion-row>
-    <ion-list padding>
+    <ion-list>
       <ion-searchbar (ionInput)="searchFutureEmployees($event)" animated="true"></ion-searchbar>
       <ion-col>
         <ion-row>
@@ -108,7 +105,7 @@
           <h2>טיפולי עבר</h2>
         </ion-col>
       </ion-row>
-      <ion-list padding>
+      <ion-list>
         <ion-searchbar (ionInput)="searchPastEmployees($event)" animated="true"></ion-searchbar>
         <ion-col>
           <ion-row>
@@ -124,4 +121,4 @@
     </ion-grid>
   </div>
   </ion-content>
-</ion-content>
+

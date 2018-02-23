@@ -1,19 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, MenuController } from 'ionic-angular';
-
-/*import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';*/
-
-
+import {Platform, NavController, MenuController, AlertController} from 'ionic-angular';
 import { Tabs } from "../pages/tabs/tabs";
 import { Signin } from "../pages/signin/signin";
 import { Signup } from "../pages/signup/signup";
 import { AuthService } from "../services/auth";
 import firebase from 'firebase';
-import {RegistrationPatient} from "../pages/registration-patient/registration-patient";
-import {Marketing} from "../pages/marketing/marketing";
-import {RegistrationEmployee} from "../pages/registration-employee/registration-employee";
-
 
 
 @Component({
@@ -23,14 +14,12 @@ export class MyApp {
   rootPage: any ;//= Tabs;
   signinPage = Signin;
   signupPage = Signup;
-  patientPage=RegistrationPatient;
-  marketingPage=Marketing;
-  employeesPage=RegistrationEmployee;
   isAuthenticated = false;
   @ViewChild('nav') nav: NavController;
 
   constructor(platform: Platform,
               private menuCtrl: MenuController,
+              private alertCtrl:AlertController,
               private authService: AuthService
             ) {
     firebase.initializeApp({
@@ -63,5 +52,15 @@ export class MyApp {
     this.authService.logout();
     this.menuCtrl.close();
     this.nav.setRoot(Signin);
+  }
+  onAbout() {
+    let alert = this.alertCtrl.create({
+      title: 'אודות',
+      message: '<p><h5 > מערכת One Body פותחה במסגרת פרויקט גמר בתואר ראשון בחוג למערכות מידע באוניברסיטת חיפה.</h5></p><br><p><h5 > כל הזכויות שמורות למפתחי המערכת: דימה ברוכין ועמית נובומינסקי 2018&copy; </h5></p>',
+      buttons: ['אישור'],
+      cssClass: 'rtlAlert'
+    });
+    alert.present();
+    this.menuCtrl.close();
   }
 }
