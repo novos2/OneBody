@@ -33,7 +33,7 @@
     <div class = "showTreatmentForm" *ngIf="showHideTreatmentForm==true">
       <form #d="ngForm" (ngSubmit)="onAddTreatment(d)" >
         <ion-item>
-          <ion-label >הכנס סוג טיפול</ion-label>
+          <ion-label >* הכנס סוג טיפול</ion-label>
           <ion-textarea
             type="text"
             name="treatmentType"
@@ -41,28 +41,28 @@
             required
           ></ion-textarea>
         </ion-item>
-        <ion-item><ion-label>בחר עובד</ion-label>
-          <ion-select [(ngModel)]="employeeName" multiple="false"  required name="employeeName" >
+        <ion-item><ion-label>* בחר עובד</ion-label>
+          <ion-select [(ngModel)]="employeeName" multiple="false"  required name="employeeName">
             <ion-option *ngFor="let e of listEmployees" [value]="e.employeeName">
               {{ e.employeeName}}
             </ion-option>
           </ion-select></ion-item>
-        <ion-item><ion-label>בחר מטופל</ion-label>
+        <ion-item><ion-label>* בחר מטופל</ion-label>
           <ion-select [(ngModel)]="patientName" multiple="false"  required name="patientName">
             <ion-option *ngFor="let p of listPatients" [value]="p.patientName">
               {{ p.patientName}}
             </ion-option>
           </ion-select></ion-item>
         <ion-item>
-          <ion-label>בחר תאריך ושעת התחלת טיפול</ion-label>
+          <ion-label>* בחר תאריך ושעת התחלת טיפול</ion-label>
           <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentStartDate"   required name="treatmentStartDate" ></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label>בחר תאריך ושעת סיום טיפול</ion-label>
+          <ion-label>* בחר תאריך ושעת סיום טיפול</ion-label>
           <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentEndDate"    required name="treatmentEndDate" ></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label >מספר חדר</ion-label>
+          <ion-label >* מספר חדר</ion-label>
           <ion-select [(ngModel)]="treatmentRoom" name="treatmentRoom" required >
             <ion-option value="1" >1</ion-option>
             <ion-option value="2" >2</ion-option>
@@ -97,7 +97,7 @@
       <form #f="ngForm" (ngSubmit)="onAddPatient(f)" >
         <ion-list>
           <ion-item>
-            <ion-label stacked>מספר תעודת זהות</ion-label>
+            <ion-label stacked>* מספר תעודת זהות</ion-label>
             <ion-input
               type="tel"
               name="patientID"
@@ -110,7 +110,7 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked>שם פרטי ושם משפחה</ion-label>
+            <ion-label stacked>* שם פרטי ושם משפחה</ion-label>
             <ion-input
               type="text"
               name="patientName"
@@ -119,14 +119,14 @@
               required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked >מין</ion-label>
+            <ion-label stacked >* מין</ion-label>
             <ion-select [(ngModel)]="patientGender" name="patientGender">
               <ion-option value="זכר"  >זכר</ion-option>
               <ion-option value="נקבה" >נקבה</ion-option>
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-label stacked>כתובת</ion-label>
+            <ion-label stacked>* כתובת</ion-label>
             <ion-input
               type="text"
               name="patientAddress"
@@ -135,7 +135,7 @@
               required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked>טלפון</ion-label>
+            <ion-label stacked>* טלפון</ion-label>
             <ion-input
               type="tel"
               name="patientPhone"
@@ -218,7 +218,7 @@
       <form #f="ngForm" (ngSubmit)="onAddEmployee(f)" >
         <ion-list>
           <ion-item>
-            <ion-label stacked>מספר תעודת זהות</ion-label>
+            <ion-label stacked>* מספר תעודת זהות</ion-label>
             <ion-input
               type="tel"
               name="employeeID"
@@ -230,7 +230,7 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked>שם פרטי ושם משפחה</ion-label>
+            <ion-label stacked>* שם פרטי ושם משפחה</ion-label>
             <ion-input
               type="text"
               name="employeeName"
@@ -239,7 +239,7 @@
               required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked>טלפון</ion-label>
+            <ion-label stacked>* טלפון</ion-label>
             <ion-input
               type="tel"
               name="employeePhone"
@@ -251,14 +251,14 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked >מין</ion-label>
+            <ion-label stacked >* מין</ion-label>
             <ion-select [(ngModel)]="employeeGender" name="employeeGender">
               <ion-option value="זכר"  >זכר</ion-option>
               <ion-option value="נקבה" >נקבה</ion-option>
             </ion-select>
           </ion-item>
           <ion-item>
-            <ion-label stacked>דוא"ל</ion-label>
+            <ion-label stacked>* דוא"ל</ion-label>
             <ion-input
               type="email"
               name="employeeMail"

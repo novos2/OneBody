@@ -165,19 +165,19 @@ export class RegistrationEmployee implements OnInit{
               form.reset();
               this.loadItems();
               this.saveTreatments();
-              this.successWindow("טיפול נוסף בהצלחה");
+              this.successWindow("הטיפול נוסף בהצלחה והודעה נשלחה למטופל");
               this.showHideTreatmentForm=false;
           }
           else{
-            this.handleError("חדר זה תפוס בשעות אלו");
+            this.handleError("חדר "+form.value.treatmentRoom+" תפוס בשעות אלו");
           }
         }
         else{
-          this.handleError("עובד זה נמצא בטיפול בשעות אלו");
+          this.handleError(this.employeeName+" נמצא בטיפול בשעות אלו");
         }
       }
       else{
-        this.handleError("שעת תחילת טיפול גדולה משעת סיום טיפול");
+        this.handleError("שעת תחילת טיפול מאוחרת משעת סיום טיפול");
       }
     }
     else{

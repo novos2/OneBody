@@ -20,9 +20,11 @@
 
 </ion-content>
 <ion-content padding *ngIf="adminFlag==true" class="backImg">
+  <button ion-button icon-right (click)="picker.open()">
   <ion-label>
-    <ion-datetime  [hidden]="showDate==true" float-left type="datetime-local" displayFormat="MMMM-YYYY"  [(ngModel)]="selectedDate" class="align" (ionChange)="selectDateFunc(selectedDate)" pickerFormat="YYYY MMMM"></ion-datetime>
+    <ion-datetime  [hidden]="showDate==true" #picker float-start type="datetime-local" displayFormat="MMMM-YYYY"  [(ngModel)]="selectedDate" class="align" (ionChange)="selectDateFunc(selectedDate)" pickerFormat="YYYY MMMM"></ion-datetime>
   </ion-label>
+  </button>
   <ion-list >
     <ion-list-header>
       <ion-icon name="mail" class="iconClass" item-left (click)="changeShowStatusPatientForm()"></ion-icon>
