@@ -16,11 +16,13 @@
 
 <ion-content padding *ngIf="adminFlag==false" class="backImg">
   <br>
-  <h1>אין הרשאה מתאימה לצפיה בדף זה</h1>
+  <h1>אין הרשאה לצפיה בדף זה</h1>
 
 </ion-content>
 <ion-content padding *ngIf="adminFlag==true" class="backImg">
-
+  <ion-label>
+    <ion-datetime  [hidden]="showDate==true" float-left type="datetime-local" displayFormat="MMMM-YYYY"  [(ngModel)]="selectedDate" class="align" (ionChange)="selectDateFunc(selectedDate)" pickerFormat="YYYY MMMM"></ion-datetime>
+  </ion-label>
   <ion-list >
     <ion-list-header>
       <ion-icon name="mail" class="iconClass" item-left (click)="changeShowStatusPatientForm()"></ion-icon>
@@ -77,27 +79,26 @@
       </form></div>
   </ion-list>
   <br>
-  <ion-datetime  [hidden]="showDate==true" float-left type="datetime-local" displayFormat="MMMM-YYYY"  [(ngModel)]="selectedDate" class="align" (ionChange)="selectDateFunc(selectedDate)" pickerFormat="YYYY MMMM"></ion-datetime>
-  <ion-list>
+    <ion-list>
     <ion-list-header>
       <ion-icon name="logo-buffer" class="iconClassRep" item-left (click)="changeShowStatusReport()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusReport()">דוחות</h1>
     </ion-list-header>
     <div *ngIf="showHideReports==true">
       <ion-item (click)="changeShowContainer4()">
-        דו"ח כמות טיפולים לעובדים בחודש
+         מספר טיפולים לעובד בחודש
       </ion-item>
     <ion-item (click)="changeShowContainer1()">
-      דו"ח כמות טיפולים לעובדים בשנה
+       מספר טיפולים לעובד בשנה
     </ion-item>
       <ion-item (click)="changeShowContainer5()">
-        דו"ח כמות סוגי טיפול בחודש
+        מספר טיפולים בחודש לפי סוג
       </ion-item>
     <ion-item (click)="changeShowContainer2()">
-      דו"ח כמות סוגי טיפול בשנה
+      מספר טיפולים בשנה לפי סוג
     </ion-item>
     <ion-item (click)="changeShowContainer3()">
-      דו"ח כמות טיפולים כוללת בשנה
+      מספר טיפולים בשנה
     </ion-item>
     </div>
   </ion-list>

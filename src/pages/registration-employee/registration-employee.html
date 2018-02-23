@@ -41,13 +41,13 @@
             required
           ></ion-textarea>
         </ion-item>
-        <ion-item><ion-label>בחר מטפל</ion-label>
+        <ion-item><ion-label>בחר עובד</ion-label>
           <ion-select [(ngModel)]="employeeName" multiple="false"  required name="employeeName" >
             <ion-option *ngFor="let e of listEmployees" [value]="e.employeeName">
               {{ e.employeeName}}
             </ion-option>
           </ion-select></ion-item>
-        <ion-item><ion-label>בחר לקוח</ion-label>
+        <ion-item><ion-label>בחר מטופל</ion-label>
           <ion-select [(ngModel)]="patientName" multiple="false"  required name="patientName">
             <ion-option *ngFor="let p of listPatients" [value]="p.patientName">
               {{ p.patientName}}
@@ -62,7 +62,7 @@
           <ion-datetime pickerFormat="DD MMMM YYYY HH:mm" displayFormat="HH:mm ,MMMM-DD-YYYY" [(ngModel)]="treatmentEndDate"    required name="treatmentEndDate" ></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label >מס' חדר</ion-label>
+          <ion-label >מספר חדר</ion-label>
           <ion-select [(ngModel)]="treatmentRoom" name="treatmentRoom" required >
             <ion-option value="1" >1</ion-option>
             <ion-option value="2" >2</ion-option>
@@ -97,7 +97,7 @@
       <form #f="ngForm" (ngSubmit)="onAddPatient(f)" >
         <ion-list>
           <ion-item>
-            <ion-label stacked>מספר זהות</ion-label>
+            <ion-label stacked>מספר תעודת זהות</ion-label>
             <ion-input
               type="tel"
               name="patientID"
@@ -218,7 +218,7 @@
       <form #f="ngForm" (ngSubmit)="onAddEmployee(f)" >
         <ion-list>
           <ion-item>
-            <ion-label stacked>מספר זהות</ion-label>
+            <ion-label stacked>מספר תעודת זהות</ion-label>
             <ion-input
               type="tel"
               name="employeeID"
@@ -321,11 +321,4 @@
       </ion-item-sliding>
     </div>
   </ion-list>
-  <!--<ion-buttons>
-    <button ion-button
-      round
-      (click)="onLoadReports()">
-      דוחות
-    </button>
-  </ion-buttons>-->
 </ion-content>

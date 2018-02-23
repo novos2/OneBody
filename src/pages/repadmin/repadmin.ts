@@ -403,19 +403,19 @@ export class Repadmin implements OnInit {
           type: 'bar'
         },
         title: {
-          text: 'כמות טיפולים עבור עובד בשנת ' + this.selectedYear.slice(0, 4),
-          cssClass: 'rtlMessage'
+          text: 'מספר טיפולים לעובד בשנת ' + this.selectedYear.slice(0, 4),
+          cssClass: 'titleMessage'
         },
         xAxis: employeeNames
         ,
         yAxis: {
           title: {
-            text: 'כמות טיפולים',
+            text: 'מספר טיפולים',
             cssClass: 'rtlMessage'
           }
         },
         series: [{
-          name: 'Amount',
+          name: 'כמות',
           data: this.countedTreatmentsEmp
         }]
       });
@@ -434,19 +434,19 @@ export class Repadmin implements OnInit {
           type: 'bar'
         },
         title: {
-          text: ' כמות טיפולים עבור עובד ב- '+this.selectedMonth.slice(5,7)+'-'+this.selectedMonth.slice(0,4),
-          cssClass: 'rtlMessage'
+          text: ' מספר טיפולים לעובד ב- '+this.selectedMonth.slice(5,7)+'-'+this.selectedMonth.slice(0,4),
+          cssClass: 'titleMessage'
         },
         xAxis: employeeNames
         ,
         yAxis: {
           title: {
-            text: 'כמות טיפולים',
+            text: 'מספר טיפולים',
             cssClass: 'rtlMessage'
           }
         },
         series: [{
-          name: 'Amount',
+          name: 'כמות',
           data: this.countedTreatmentsEmp
         }]
       });
@@ -471,19 +471,19 @@ export class Repadmin implements OnInit {
           type: 'bar'
         },
         title: {
-          text: ' כמות סוגי טיפול בשנת '+this.selectedYear.slice(0,4),
-          cssClass: 'rtlMessage'
+          text: ' מספר טיפולים בשנת '+this.selectedYear.slice(0,4)+' לפי סוג',
+          cssClass: 'titleMessage'
         },
         xAxis: {categories:this.treatmentByTypeOnlyNames}
         ,
         yAxis: {
           title: {
-            text: 'כמות טיפולים',
+            text: 'מספר טיפולים',
             cssClass: 'rtlMessage'
           }
         },
         series: [{
-          name: 'Amount',
+          name: 'כמות',
           data: this.treatmenyByTypeOnlyNumbers,
         }]
       });
@@ -497,19 +497,19 @@ export class Repadmin implements OnInit {
           type: 'bar'
         },
         title: {
-          text: ' כמות סוגי טיפול ב- '+this.selectedMonth.slice(5,7)+'-'+this.selectedMonth.slice(0,4),
-          cssClass: 'rtlMessage'
+          text: ' מספר טיפולים ב- '+this.selectedMonth.slice(5,7)+'-'+this.selectedMonth.slice(0,4)+' לפי סוג',
+          cssClass: 'titleMessage'
         },
         xAxis: {categories:this.treatmentByTypeOnlyNames}
         ,
         yAxis: {
           title: {
-            text: 'כמות טיפולים',
+            text: 'מספר טיפולים',
             cssClass: 'rtlMessage'
           }
         },
         series: [{
-          name: 'Amount',
+          name: 'כמות',
           data: this.treatmenyByTypeOnlyNumbers,
         }]
       });
@@ -530,20 +530,20 @@ export class Repadmin implements OnInit {
           type: 'bar'
         },
         title: {
-          text: ' כמות טיפולים בשנת '+this.selectedYear.slice(0,4),
-          cssClass: 'rtlMessage'
+          text: ' מספר טיפולים בשנת '+this.selectedYear.slice(0,4),
+          cssClass: 'titleMessage'
         },
         xAxis: {categories:['1','2','3','4','5','6','7','8','9','10','11','12']},
         cssClass: 'rtlMessage'
         ,
         yAxis: {
           title: {
-            text: 'כמות טיפולים',
+            text: 'מספר טיפולים',
             cssClass: 'rtlMessage'
           }
         },
         series: [{
-          name: 'Amount',
+          name: 'כמות',
           data: this.countedTreatmentsOverall,
         }]
       });
