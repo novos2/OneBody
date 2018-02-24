@@ -1,17 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from "ionic-angular";
+import {AlertController, LoadingController, NavController, NavParams} from "ionic-angular";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth";
 import {Patient} from "../../models/patient";
 import {PatientService} from "../../services/patient";
 
-/**
- * Generated class for the EditpatientPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-@IonicPage()
+
 @Component({
   selector: 'page-editpatient',
   templateUrl: 'editpatient.html',

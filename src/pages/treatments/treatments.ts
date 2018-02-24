@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavParams,NavController} from 'ionic-angular';
+import {AlertController,LoadingController, NavParams,NavController} from 'ionic-angular';
 import {Employee} from "../../models/employee";
 import {EmployeeService} from "../../services/employee";
 import {AuthService} from "../../services/auth";
@@ -9,7 +9,7 @@ import {EdittreatmentPage} from "../edittreatment/edittreatment";
 
 
 
-@IonicPage()
+
 @Component({
   selector: 'page-treatments',
   templateUrl: 'treatments.html',

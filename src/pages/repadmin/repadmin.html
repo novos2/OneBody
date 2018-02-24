@@ -20,6 +20,14 @@
 
 </ion-content>
 <ion-content padding *ngIf="adminFlag==true" class="backImg">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="גלול מטה לעדכון"
+      refreshingSpinner="circles"
+      refreshingText="מעדכן...">
+    </ion-refresher-content>
+  </ion-refresher>
   <button ion-button class="dateBtn" round small style="background-color: #85cfc0" float-left icon-right (click)="picker.open()">‏
     <ion-label>
     <ion-datetime  [hidden]="showDate==true" #picker float-start type="datetime-local" displayFormat="MMMM-YYYY"  [(ngModel)]="selectedDate" class="align" (ionChange)="selectDateFunc(selectedDate)" pickerFormat="YYYY MMMM"></ion-datetime>

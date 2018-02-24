@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage} from 'ionic-angular';
+
 
 
 import {RegistrationEmployee} from "../registration-employee/registration-employee";
@@ -9,7 +9,7 @@ import {AuthService} from "../../services/auth";
 
 
 
-@IonicPage()
+
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html',

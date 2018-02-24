@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from "ionic-angular";
+import {AlertController,NavController, NavParams} from "ionic-angular";
 import {NgForm} from "@angular/forms";
 import {Patient} from "../../models/patient";
 import {PatientService} from "../../services/patient";
@@ -11,7 +11,7 @@ import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
 import * as HighCharts from 'highcharts';
 import * as moment from "moment";
-@IonicPage()
+
 @Component({
   selector: 'page-repadmin',
   templateUrl: 'repadmin.html',
@@ -77,8 +77,14 @@ export class Repadmin implements OnInit {
     this.loadPatient();
     this.loadEmployees();
     this.loadTreatments();
+    this.count=0;
   }
-
+  doRefresh(refresher) {
+    this.loadTreatments();
+    setTimeout(() => {
+      refresher.complete();
+    }, 500);
+  }
 
   changeShowStatusPatientForm() {
     this.showHidePatientSMS = !this.showHidePatientSMS;
@@ -319,11 +325,12 @@ export class Repadmin implements OnInit {
     this.countedTreatmentsOverall[10]=k;
     this.countedTreatmentsOverall[11]=l;
   }
+
   private countTreatmentTypeYearly(year:string){
     this.loadTreatments();
     this.treatmentByTypeOnlyNames=[];
     this.treatmenyByTypeOnlyNumbers=[];
-    let prevType='';
+    this.sortedTreatmentsByType=[];
     this.sortedTreatmentsByType=this.listTreatments.filter(obj => obj.treatmentStartDate.slice(0, 4) == year).sort((tr1, tr2) => {
       let date1 = tr1.treatmentType;
       let date2 = tr2.treatmentType;
@@ -336,25 +343,24 @@ export class Repadmin implements OnInit {
         return 1;
       }
     });
-    this.count=1;
+    let count=0;
+    let treatmentType:any=this.sortedTreatmentsByType[0].treatmentType;
     for(let n of this.sortedTreatmentsByType){
-      if(prevType!=n.treatmentType){
-        this.treatmenyByTypeOnlyNumbers.push(this.prevCount);
-        this.treatmentByTypeOnlyNames.push(prevType);
-        this.count = 1;
+      if(treatmentType!=n.treatmentType){
+        this.treatmenyByTypeOnlyNumbers.push(count);
+        this.treatmentByTypeOnlyNames.push(treatmentType);
+        count=0;
       }
-      this.prevCount=this.count;
-      this.count++;
-      prevType=n.treatmentType;
+      count++;
+      treatmentType=n.treatmentType;
     }
-    this.treatmentByTypeOnlyNames=this.treatmentByTypeOnlyNames.slice(1,this.treatmentByTypeOnlyNames.length);
-    this.treatmenyByTypeOnlyNumbers=this.treatmenyByTypeOnlyNumbers.slice(1,this.treatmenyByTypeOnlyNumbers.length);
+    this.treatmentByTypeOnlyNames.push(this.sortedTreatmentsByType[this.sortedTreatmentsByType.length-1].treatmentType);
+    this.treatmenyByTypeOnlyNumbers.push(count);
   }
   private countTreatmentTypeMonthly(year:string){
     this.loadTreatments();
     this.treatmentByTypeOnlyNames=[];
     this.treatmenyByTypeOnlyNumbers=[];
-    let prevType='';
     this.sortedTreatmentsByType=this.listTreatments.filter(obj => obj.treatmentStartDate.slice(0, 7) == year).sort((tr1, tr2) => {
       let date1 = tr1.treatmentType;
       let date2 = tr2.treatmentType;
@@ -367,19 +373,19 @@ export class Repadmin implements OnInit {
         return 1;
       }
     });
-    this.count=1;
+    let count=0;
+    let treatmentType:any=this.sortedTreatmentsByType[0].treatmentType;
     for(let n of this.sortedTreatmentsByType){
-      if(prevType!=n.treatmentType){
-        this.treatmenyByTypeOnlyNumbers.push(this.prevCount);
-        this.treatmentByTypeOnlyNames.push(prevType);
-        this.count = 1;
+      if(treatmentType!=n.treatmentType){
+        this.treatmenyByTypeOnlyNumbers.push(count);
+        this.treatmentByTypeOnlyNames.push(treatmentType);
+        count=0;
       }
-      this.prevCount=this.count;
-      this.count++;
-      prevType=n.treatmentType;
+      count++;
+      treatmentType=n.treatmentType;
     }
-    this.treatmentByTypeOnlyNames=this.treatmentByTypeOnlyNames.slice(1,this.treatmentByTypeOnlyNames.length);
-    this.treatmenyByTypeOnlyNumbers=this.treatmenyByTypeOnlyNumbers.slice(1,this.treatmenyByTypeOnlyNumbers.length);
+    this.treatmentByTypeOnlyNames.push(this.sortedTreatmentsByType[this.sortedTreatmentsByType.length-1].treatmentType);
+    this.treatmenyByTypeOnlyNumbers.push(count);
   }
   private changeShowContainer1(){
     this.changeShowContainerX=!this.changeShowContainerX;

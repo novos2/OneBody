@@ -1,23 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {AuthService} from "../../services/auth";
 import {PatientService} from "../../services/patient";
 import {Patient} from "../../models/patient";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
 import {Treatments} from "../treatments/treatments";
-import {EditemployeePage} from "../editemployee/editemployee";
 import {EditpatientPage} from "../editpatient/editpatient";
 import * as moment from "moment";
 import {CallNumber} from "@ionic-native/call-number";
 import {SMS} from "@ionic-native/sms";
-/**
- * Generated class for the Patients page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-@IonicPage()
+
 @Component({
   selector: 'page-patients',
   templateUrl: 'patients.html',

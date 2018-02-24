@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage,NavController} from 'ionic-angular';
+import {AlertController,NavController} from 'ionic-angular';
 import * as moment from 'moment';
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
 import {Treatments} from "../treatments/treatments";
 import {AuthService} from "../../services/auth";
 import {EmployeeService} from "../../services/employee";
-@IonicPage()
+
 @Component({
   selector: 'page-homescreen',
   templateUrl: 'homescreen.html',

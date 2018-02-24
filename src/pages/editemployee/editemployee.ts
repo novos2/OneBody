@@ -1,18 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from "ionic-angular";
+import {AlertController, LoadingController, NavController, NavParams} from "ionic-angular";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Employee} from "../../models/employee";
 import {AuthService} from "../../services/auth";
 import {EmployeeService} from "../../services/employee";
 
 
-/**
- * Generated class for the EditemployeePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-@IonicPage()
+
+
 @Component({
   selector: 'page-editemployee',
   templateUrl: 'editemployee.html',

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavParams,NavController} from 'ionic-angular';
+import {AlertController, LoadingController, NavParams,NavController} from 'ionic-angular';
 import {Employee} from "../../models/employee";
 import {EmployeeService} from "../../services/employee";
 import {AuthService} from "../../services/auth";
@@ -12,7 +12,7 @@ import {Treatments} from "../treatments/treatments";
 import {SMS} from "@ionic-native/sms";
 import {CallNumber} from "@ionic-native/call-number";
 
-@IonicPage()
+
 @Component({
   selector: 'page-employees',
   templateUrl: 'employees.html',

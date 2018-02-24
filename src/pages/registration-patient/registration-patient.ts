@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController,NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController,NavParams} from 'ionic-angular';
 import {PatientService} from "../../services/patient";
 import { NgForm } from "@angular/forms";
 import {Patient} from "../../models/patient";
 import {AuthService} from "../../services/auth";
 import {Patients} from "../patients/patients";
-@IonicPage()
+
 @Component({
   selector: 'page-registration-patient',
   templateUrl: 'registration-patient.html',

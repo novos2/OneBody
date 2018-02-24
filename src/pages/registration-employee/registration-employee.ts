@@ -11,8 +11,6 @@ import {PatientService} from "../../services/patient";
 import {Patients} from "../patients/patients";
 import {Treatment} from "../../models/treatment";
 import {TreatmentService} from "../../services/treatment";
-import {Repadmin} from "../repadmin/repadmin";
-//import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
 @Component({
   selector: 'page-registration-employee',
@@ -226,7 +224,6 @@ export class RegistrationEmployee implements OnInit{
     this.saveEmployees();
     this.ionViewDidLoad();
     this.successWindow("עובד נמחק בהצלחה");
-    //this.navCtrl.popToRoot();
   }
 
   private loadItems() {
@@ -242,11 +239,6 @@ export class RegistrationEmployee implements OnInit{
     if(this.adminFlag)
     this.navCtrl.push(Patients, {patient: patient, index: index});
   }
-  /*onLoadReports(){
-    //if(this.adminFlag)
-    this.loadItems();
-    this.navCtrl.push(Repadmin,{treatments:this.listTreatments,employees:this.listEmployees});
-  }*/
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: '!שגיאה',
@@ -270,18 +262,6 @@ export class RegistrationEmployee implements OnInit{
                 //loading.dismiss();
                 if (list) {
                   this.listEmployees = list;
-                  this.listEmployees.sort((name1, name2) => {
-                    let nameX = name1.employeeName;
-                    let nameY = name2.employeeName;
-                    if (nameX < nameY)
-                      return -1;
-                    else if (nameX == nameY) {
-                      return 0;
-                    }
-                    else {
-                      return 1;
-                    }
-                  });
                 } else {
                   this.listEmployees = [];
                 }
@@ -356,18 +336,6 @@ export class RegistrationEmployee implements OnInit{
                 //loading.dismiss();
                 if (list) {
                   this.listPatients = list;
-                  this.listPatients.sort((name1, name2) => {
-                    let nameX = name1.patientName;
-                    let nameY = name2.patientName;
-                    if (nameX < nameY)
-                      return -1;
-                    else if (nameX == nameY) {
-                      return 0;
-                    }
-                    else {
-                      return 1;
-                    }
-                  });
                 } else {
                   this.listPatients = [];
                 }

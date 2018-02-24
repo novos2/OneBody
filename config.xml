@@ -19,10 +19,9 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
-    <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
-    <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="SplashScreenDelay" value="4000" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
     <platform name="android">
         <allow-intent href="market:*" />
         <splash density="land-ldpi" src="resources/android/splash/drawable-land-ldpi-screen.png" />
@@ -90,7 +89,7 @@
     <allow-navigation href="http://192.168.1.43:8100" />
     <allow-navigation href="http://192.168.1.25:8101" />
     <allow-navigation href="http://192.168.1.25:8100" />
-    <engine name="android" spec="^6.2.2" />
     <engine name="browser" spec="^4.1.0" />
-    <engine name="ios" spec="^4.4.0" />
+    <engine name="ios" spec="~4.5.4" />
+    <engine name="android" spec="~7.0.0" />
 </widget>

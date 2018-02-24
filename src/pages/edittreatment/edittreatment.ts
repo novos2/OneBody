@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from "ionic-angular";
+import {AlertController, LoadingController, NavController, NavParams} from "ionic-angular";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Treatment} from "../../models/treatment";
 import {AuthService} from "../../services/auth";
@@ -7,13 +7,7 @@ import {TreatmentService} from "../../services/treatment";
 import {SMS} from "@ionic-native/sms";
 
 
-/**
- * Generated class for the EdittreatmentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-@IonicPage()
+
 @Component({
   selector: 'page-edittreatment',
   templateUrl: 'edittreatment.html',
