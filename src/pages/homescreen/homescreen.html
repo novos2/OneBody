@@ -26,10 +26,10 @@
   </ion-refresher>
   <div class="title">
     <ion-label>
-      <button ion-button   (click)="picker.open()">
-    <ion-datetime  #picker type="datetime-local" displayFormat="MMMM-DD-YYYY"  [(ngModel)]="myDate"  (ionChange)="selectData(myDate)" pickerFormat="YYYY MMMM DD"></ion-datetime>
+      <button ion-button round small style="background-color:#85cfc0" float-left icon-right (click)="picker.open()">
+        <ion-datetime #picker type="datetime-local" displayFormat="MMMM-DD-YYYY" [(ngModel)]="myDate" class="align" (ionChange)="selectData(myDate)" pickerFormat="YYYY MMMM DD"></ion-datetime>
       </button>
-      <button ion-button round float-right round icon-only color="primary" clear class="zeroButton"(click)="zeroDay()" icon-left>אפס יום<ion-icon md="md-refresh-circle"></ion-icon></button>
+      <button ion-button round style="color: #85cfc0" float-right icon-only clear class="zeroButton"(click)="zeroDay()" icon-left>אפס יום<ion-icon md="md-refresh-circle"></ion-icon></button>
     </ion-label>
   </div>
   <div class="showFilteredTreatment" *ngIf="filterTreatmentFlag==true">

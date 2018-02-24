@@ -20,12 +20,12 @@
 
 </ion-content>
 <ion-content padding *ngIf="adminFlag==true" class="backImg">
-  <button  item-left  ion-button icon-right (click)="picker.open()">
-  <ion-label>
+  <button ion-button class="dateBtn" round small style="background-color: #85cfc0" float-left icon-right (click)="picker.open()">‏
+    <ion-label>
     <ion-datetime  [hidden]="showDate==true" #picker float-start type="datetime-local" displayFormat="MMMM-YYYY"  [(ngModel)]="selectedDate" class="align" (ionChange)="selectDateFunc(selectedDate)" pickerFormat="YYYY MMMM"></ion-datetime>
   </ion-label>
   </button>
-  <ion-list >
+  <ion-list>
     <ion-list-header>
       <ion-icon name="mail" class="iconClass" item-left (click)="changeShowStatusPatientForm()"></ion-icon>
       <h1 class="listHeader" (click)="changeShowStatusPatientForm()">שליחת הודעה למטופלים</h1>
@@ -90,36 +90,34 @@
       <ion-item (click)="changeShowContainer4()">
          מספר טיפולים לעובד בחודש
       </ion-item>
+      <div [hidden]="changeShowContainerW==true">
+        <div  id="container4" style="display: block;"></div>
+      </div>
     <ion-item (click)="changeShowContainer1()">
        מספר טיפולים לעובד בשנה
     </ion-item>
+      <div [hidden]="changeShowContainerX==true">
+        <div id="container" style="display: block;"	></div>
+      </div>
       <ion-item (click)="changeShowContainer5()">
         מספר טיפולים בחודש לפי סוג
       </ion-item>
+      <div [hidden]="changeShowContainerV==true">
+        <div id="container5" style="display: block;"></div>
+      </div>
     <ion-item (click)="changeShowContainer2()">
       מספר טיפולים בשנה לפי סוג
     </ion-item>
+      <div [hidden]="changeShowContainerY==true">
+        <div id="container2" style="display: block;"></div>
+      </div>
     <ion-item (click)="changeShowContainer3()">
       מספר טיפולים בשנה
     </ion-item>
     </div>
+      <div [hidden]="changeShowContainerZ==true">
+        <div  id="container3" style="display: block;"></div>
+      </div>
   </ion-list>
-  <br>
-  <div [hidden]="changeShowContainerX==true">
-  <div id="container" style="display: block;"	></div>
-  </div>
-  <div [hidden]="changeShowContainerW==true">
-    <div  id="container4" style="display: block;"></div>
-  </div>
-  <div [hidden]="changeShowContainerY==true">
-  <div id="container2" style="display: block;"></div>
-  </div>
-  <div [hidden]="changeShowContainerV==true">
-    <div id="container5" style="display: block;"></div>
-  </div>
-  <div [hidden]="changeShowContainerZ==true">
-  <div  id="container3" style="display: block;"></div>
-  </div>
-
-</ion-content>
+ </ion-content>
 
