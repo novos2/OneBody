@@ -153,6 +153,7 @@
               name="patientMail"
               placeholder="Mail@mail.com"
               ngModel
+              pattern="[a-z0-9!#$%'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
             ></ion-input>
           </ion-item>
           <ion-item>
@@ -190,14 +191,14 @@
             <button
               ion-button
               round
-              class="iconClass"
+              class="iconClassButton"
               (click)="onSendSMSPatient(item)"><ion-icon name="mail"></ion-icon>
               שליחת הודעה
             </button>
             <button
               ion-button
               round
-              class="otherIconClass"
+              class="otherIconClassButton"
                (click)="onCallNumber(item)">
               <ion-icon name="call"></ion-icon>
               התקשר
@@ -265,6 +266,7 @@
               placeholder="Mail@mail.com"
               required
               ngModel
+              pattern="[a-z0-9!#$%'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
             ></ion-input>
           </ion-item>
           <ion-item>
@@ -303,7 +305,7 @@
             <button
             ion-button
             round
-            class="iconClass"
+            class="iconClassButton"
             (click)="onSendSMSEmployee(item)"><ion-icon name="mail"></ion-icon>
               שליחת הודעה
             </button>
@@ -311,7 +313,7 @@
             <button
               ion-button
               round
-              class="otherIconClass"
+              class="otherIconClassButton"
                (click)="onCallNumber(item)">
               <ion-icon name="call"></ion-icon>
               התקשר
